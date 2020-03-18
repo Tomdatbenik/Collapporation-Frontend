@@ -1,9 +1,9 @@
 <template>
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
-      <v-btn @click="facebookLogin">Sign in with <b>Facebook</b></v-btn>
+      <v-btn @click="facebookLogin" disabled>Sign in with <b>Facebook</b></v-btn>
       <v-btn @click="googleLogin">Sign in with <b>Google</b></v-btn>
-      <v-btn @click="githubLogin">Sign in with <b>Github</b></v-btn>
+      <v-btn @click="githubLogin" disabled>Sign in with <b>Github</b></v-btn>
     </v-layout>
   </v-container>
 </template>
