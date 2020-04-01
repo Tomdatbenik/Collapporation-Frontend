@@ -20,8 +20,8 @@
           <span class="font-italic" id="app-subtitle">app</span>
           <span class="font-weight-bold">oration</span>
         </div>
-        <div class="d-flex ml-auto align-center">
-          test
+        <div class="d-flex ml-auto align-center font-weight-bold">
+          Login
         </div>
       </div>
     </v-container>

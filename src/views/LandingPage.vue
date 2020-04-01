@@ -1,23 +1,27 @@
 <template>
-  <div class="landing-page fill-height wave-container">
-    <v-container fill-height>
+  <div class="landing-page fill-height wave-container d-flex flex-column">
+    <v-container class="d-flex flex-fill">
       <v-layout row wrap align-center>
-        <div class="d-flex flex-column">
-          <h1>Getting Started</h1>
-          <p>
-            The platform to bring developers together with your application
-            ideas.
-          </p>
-          <v-btn rounded>test</v-btn>
+        <div class="d-flex flex-row align-center">
+          <div class="d-flex flex-column pa-3">
+            <h1 class="display-2 font-weight-bold mb-4">Getting Started</h1>
+            <p class="font-weight-light headline">
+              The platform to bring developers together with your application
+              ideas.
+            </p>
+            <v-btn class="text-capitalize" width="50%" rounded>Start Now</v-btn>
+          </div>
+          <div class="pa-3 flex-fill">
+            <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
+          </div>
         </div>
       </v-layout>
     </v-container>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240">
+    <svg viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        fill="#FFF"
-        fill-opacity="1"
-        d="M0,128L60,122.7C120,117,240,107,360,106.7C480,107,600,117,720,144C840,171,960,213,1080,213.3C1200,213,1320,171,1380,149.3L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-      ></path>
+        d="M1440 73.7884L1392 84.6899C1344 95.5913 1248 130.692 1152 112.5C1056 94.5807 960 22.6879 864 15.6701C768 8.37977 660 84.6899 564 84.6899C468 84.6899 384 8.37977 288 1.08943C192 -5.92837 96 22.6879 48 37.473L0 51.9856V161H48C96 161 192 161 288 161C384 161 480 161 576 161C672 161 768 161 864 161C960 161 1056 161 1152 161C1248 161 1344 161 1392 161H1440V73.7884Z"
+        fill="white"
+      />
     </svg>
   </div>
 </template>
@@ -46,8 +50,6 @@ export default {
 }
 .wave-container > svg {
   display: block;
-  position: absolute;
-  bottom: 0;
 }
 
 @keyframes animateWave {
