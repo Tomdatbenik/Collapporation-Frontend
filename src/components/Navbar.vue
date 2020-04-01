@@ -20,7 +20,7 @@
           <span class="font-italic" id="app-subtitle">app</span>
           <span class="font-weight-bold">oration</span>
         </div>
-        <div class="d-flex ml-auto align-center font-weight-bold">
+        <div class="d-flex ml-auto align-center font-weight-bold nav-item">
           Login
         </div>
       </div>
@@ -49,5 +49,15 @@ export default {};
     #47aee0 56.02%,
     #5b86e5 99.44%
   );
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
 </style>

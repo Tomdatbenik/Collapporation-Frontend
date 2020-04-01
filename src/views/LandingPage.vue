@@ -9,7 +9,12 @@
               The platform to bring developers together with your application
               ideas.
             </p>
-            <v-btn class="text-capitalize" width="50%" rounded>Start Now</v-btn>
+            <v-btn
+              class="text-capitalize cyan--text text--lighten-1"
+              width="50%"
+              rounded
+              >Start Now</v-btn
+            >
           </div>
           <div class="pa-3 flex-fill">
             <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
@@ -32,7 +37,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/scss/variables.scss";
+
 .landing-page {
   background: linear-gradient(
     90deg,
