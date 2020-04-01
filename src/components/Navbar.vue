@@ -1,9 +1,9 @@
 <template>
   <v-app-bar app class="app-bar" flat>
     <v-container class="pa-0">
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row white--text">
         <div
-          class="headline mb-0 ml-4 .d-sm-none white--text d-flex align-center"
+          class="headline mb-0 ml-4 .d-sm-none d-flex align-center"
           id="app-title"
         >
           <v-img
