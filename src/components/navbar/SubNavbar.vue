@@ -35,8 +35,8 @@ export default {
         },
 
         {
-          name: "yoink",
-          link: "/yoink",
+          name: "feed",
+          link: "/feed",
           icon: "mdi-eye-outline"
         }
       ]

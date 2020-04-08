@@ -90,28 +90,4 @@ export default {
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
-
-.notification-bubble-notifications {
-  position: absolute;
-  top: -5px;
-  right: 0;
-  border-radius: 50px;
-  padding: 2px;
-  width: 15px;
-  height: 15px;
-  font-size: 10px;
-  color: black;
-}
-
-.notification-bubble-chat {
-  position: absolute;
-  top: -5px;
-  right: -3px;
-  border-radius: 50px;
-  padding: 2px;
-  width: 15px;
-  height: 15px;
-  font-size: 10px;
-  color: black;
-}
 </style>

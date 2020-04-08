@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    Home Page
+    Feed
   </v-container>
 </template>
 
