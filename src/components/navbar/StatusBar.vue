@@ -8,7 +8,7 @@
         class="notification-bubble-chat d-flex align-center justify-center"
         style="background-color: #EEFF41"
       >
-        20
+        0
       </div>
     </div>
     <div class="d-flex align-center mx-2" style="position: relative">
