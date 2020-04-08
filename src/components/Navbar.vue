@@ -3,7 +3,7 @@
     <v-container class="pa-0">
       <div class="d-flex flex-row white--text">
         <div
-          class="headline mb-0 ml-4 .d-sm-none d-flex align-center"
+          class="headline mb-0 .d-sm-none d-flex align-center"
           id="app-title"
         >
           <v-img
@@ -56,8 +56,12 @@ export default {};
   -o-user-select: none;
 }
 
+.nav-item {
+  font-size: 20px;
+}
+
 .nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
 </style>

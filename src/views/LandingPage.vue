@@ -1,10 +1,12 @@
 <template>
   <div class="landing-page fill-height wave-container d-flex flex-column">
     <v-container class="d-flex flex-fill">
-      <v-layout row wrap align-center>
+      <div class="d-flex align-center">
         <div class="d-flex flex-row align-center">
-          <div class="d-flex flex-column pa-3">
-            <h1 class="display-2 font-weight-bold mb-4">Getting Started</h1>
+          <div class="d-flex flex-column">
+            <h1 class="display-2 font-weight-bold mb-4  pr-10">
+              Getting Started
+            </h1>
             <p class="font-weight-light headline">
               The platform to bring developers together with your application
               ideas.
@@ -16,11 +18,11 @@
               >Start Now</v-btn
             >
           </div>
-          <div class="pa-3 flex-fill">
+          <div class="pa-3 flex-fill hidden-sm-and-down">
             <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
           </div>
         </div>
-      </v-layout>
+      </div>
     </v-container>
     <svg viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

@@ -5,16 +5,19 @@ import SubNavbar from "../components/SubNavbar.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "LandingPage",
     component: LandingPage
   },
   {
-    path: "/home",
-    name: "Home",
-    component: SubNavbar
+    path: "/",
+    name: "SubNavBar",
+    component: SubNavbar,
+    children: [{
+      path: "home",
+      name: "Home"
+    }]
   }
 ];
 
