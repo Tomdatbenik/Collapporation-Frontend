@@ -24,13 +24,12 @@
             </div>
           </router-link>
           <div
-            v-if="false"
             class="d-flex ml-auto align-center font-weight-bold nav-item white--text"
             @click.stop="showLoginDialog = true"
           >
             Login
           </div>
-          <div v-else class="d-flex ml-auto align-center">
+          <div class="d-flex ml-auto align-center">
             <status-bar></status-bar>
           </div>
         </div>
