@@ -1,45 +1,47 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import LandingPage from "@/views/LandingPage.vue";
-import SubNavbar from "@/components/navbar/SubNavbar.vue";
-import Home from "@/views/Home.vue";
-import Feed from "@/views/Feed.vue";
-import Profile from "@/views/Profile/Profile.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import LandingPage from '@/views/LandingPage.vue'
+import SubNavbar from '@/components/navbar/SubNavbar.vue'
+import Home from '@/views/Home.vue'
+import Feed from '@/views/Feed.vue'
+import Profile from '@/views/Profile/Profile.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const routes = [{
-    path: "/",
-    name: "Landing",
+const routes = [
+  {
+    path: '/',
+    name: 'Landing',
     component: LandingPage
   },
   {
-    path: "/",
-    name: "Sub",
+    path: '/',
+    name: 'Sub',
     component: SubNavbar,
-    children: [{
-        path: "home",
-        name: "Home",
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
         component: Home
       },
       {
-        path: "feed",
-        name: "Feed",
+        path: 'feed',
+        name: 'Feed',
         component: Feed
       },
       {
-        path: "/profile/:id",
-        name: "profile",
+        path: '/profile/:id',
+        name: 'profile',
         component: Profile
       }
     ]
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router
