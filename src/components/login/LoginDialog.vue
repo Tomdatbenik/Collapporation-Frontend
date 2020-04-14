@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import GoogleLoginButton from "@/components/login/GoogleLoginButton.vue";
-import FacebookLoginButton from "@/components/login/FacebookLoginButton.vue";
-import GithubLoginButton from "@/components/login/GithubLoginButton.vue";
-import firebase from "firebase";
+import GoogleLoginButton from '@/components/login/GoogleLoginButton.vue'
+import FacebookLoginButton from '@/components/login/FacebookLoginButton.vue'
+import GithubLoginButton from '@/components/login/GithubLoginButton.vue'
+import firebase from 'firebase'
 
 export default {
-  name: "LoginDialog",
+  name: 'LoginDialog',
   components: {
     GoogleLoginButton,
     FacebookLoginButton,
@@ -54,60 +54,57 @@ export default {
   computed: {
     show: {
       get() {
-        return this.value;
+        return this.value
       },
       set(value) {
-        this.$emit("input", value);
+        this.$emit('input', value)
       }
     }
   },
   mounted() {
-    firebase.auth().useDeviceLanguage();
-    this.fetchInformation();
+    firebase.auth().useDeviceLanguage()
+    this.fetchInformation()
   },
   methods: {
     googleLogin() {
-      console.log("clicked");
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      console.log('clicked')
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     facebookLogin() {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.FacebookAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     githubLogin() {
-      const provider = new firebase.auth.GithubAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.GithubAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     fetchInformation() {
       firebase
         .auth()
         .getRedirectResult()
-        .then(function(result) {
-          console.log(result);
-          if (result.credential) {
-            var token = result.credential.accessToken;
-            console.log(token);
-          }
-
-          var user = result.user;
-          console.log(user);
+        .then(result => {
+          console.log(result)
+          firebase
+            .auth()
+            .currentUser.getIdToken(true)
+            .then(idToken => {
+              console.log(idToken)
+              this.$store.dispatch('authenticate', idToken)
+            })
         })
         .catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode + ": " + errorMessage);
-
-          var email = error.email;
-
-          var credential = error.credential;
-
-          console.log(email + " " + credential);
-        });
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode + ': ' + errorMessage)
+          var email = error.email
+          var credential = error.credential
+          console.log(email + ' ' + credential)
+        })
     }
   }
-};
+}
 </script>
