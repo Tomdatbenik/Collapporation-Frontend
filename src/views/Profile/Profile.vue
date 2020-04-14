@@ -72,12 +72,12 @@
             </v-card-title>
             <div class="d-flex flex-row align-start pa-2">
               <v-img
-                max-width="200px"
-                height="200px"
+                max-width="25%"
+                height="auto"
                 :src="require('@/assets/bg-profile.jpg')"
                 class="ma-2"
               ></v-img>
-              <div>
+              <div class="flex-fill">
                 <div
                   class="ml-3 display-4 font-weight-medium d-flex flex-column"
                   style="color: #696969"
