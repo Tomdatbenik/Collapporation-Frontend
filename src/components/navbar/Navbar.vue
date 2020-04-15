@@ -2,7 +2,9 @@
   <div>
     <v-app-bar app class="app-bar" flat>
       <v-container class="pa-0">
-        <div class="d-flex flex-row white--text align-center">
+        <div
+          class="d-flex flex-row white--text align-center justify-space-between"
+        >
           <router-link to="/home" class="d-flex" style="text-decoration: none">
             <div
               class="headline mb-0 .d-sm-none d-flex align-center"
@@ -23,13 +25,14 @@
               <span class="font-weight-bold">oration</span>
             </div>
           </router-link>
-          <div
-            class="d-flex ml-auto align-center font-weight-bold nav-item white--text"
-            @click.stop="showLoginDialog = true"
-          >
-            Login
-          </div>
-          <div class="d-flex ml-auto align-center">
+
+          <div class="d-flex align-center">
+            <div
+              class="d-flex align-center font-weight-bold nav-item white--text mr-10"
+              @click.stop="showLoginDialog = true"
+            >
+              Login
+            </div>
             <status-bar></status-bar>
           </div>
         </div>
@@ -40,21 +43,21 @@
 </template>
 
 <script>
-import LoginDialog from "@/components/login/LoginDialog.vue";
-import StatusBar from "@/components/navbar/StatusBar.vue";
+import LoginDialog from '@/components/login/LoginDialog.vue'
+import StatusBar from '@/components/navbar/StatusBar.vue'
 
 export default {
-  name: "NavBar",
+  name: 'NavBar',
   data() {
     return {
       showLoginDialog: false
-    };
+    }
   },
   components: {
     LoginDialog,
     StatusBar
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

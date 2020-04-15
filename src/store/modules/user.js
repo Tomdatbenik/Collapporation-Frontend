@@ -1,3 +1,4 @@
+/*eslint quote-props: ["error", "as-needed"]*/
 import axios from 'axios'
 
 export default {
@@ -14,10 +15,8 @@ export default {
   actions: {
     authenticate({ commit }, credential) {
       axios
-        .post('http://localhost:8102/token-service/token/new', null, {
-          headers: {
-            idToken: credential
-          }
+        .get('http://localhost:8102/token-service/token/new', null, {
+          headers: { idToken: credential }
         })
         .then(data => {
           console.log(data)
