@@ -30,6 +30,7 @@ export default {
 
 body {
   background-color: #f9f9f9;
+  color: #4d4d4d !important;
 }
 
 @media (min-width: 1904px) {
