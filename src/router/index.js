@@ -5,41 +5,49 @@ import SubNavbar from "@/components/navbar/SubNavbar.vue";
 import Home from "@/views/Home.vue";
 import Feed from "@/views/Feed.vue";
 import Profile from "@/views/Profile/Profile.vue";
+import AddProject from "@/views/AddProject.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     name: "Landing",
-    component: LandingPage
+    component: LandingPage,
   },
   {
     path: "/",
     name: "Sub",
     component: SubNavbar,
-    children: [{
+    children: [
+      {
         path: "home",
         name: "Home",
-        component: Home
+        component: Home,
       },
       {
         path: "feed",
         name: "Feed",
-        component: Feed
+        component: Feed,
       },
       {
         path: "/profile/:id",
         name: "profile",
-        component: Profile
-      }
-    ]
-  }
+        component: Profile,
+      },
+      {
+        path: "/add-project",
+        name: "Add Project",
+        component: AddProject,
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
