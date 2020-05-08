@@ -8,7 +8,7 @@
                         src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
                 >
                     <div class="status-label font-weight-medium">
-                        Concept
+                        {{ status }}
                     </div>
                 </v-img>
             </v-col>
@@ -16,12 +16,12 @@
                 <v-row no-gutters class="fill-height">
                     <v-col cols="12">
                         <v-card-title class="display-3 text-color-grey font-weight-medium">
-                            Tropical Island
+                            {{ title }}
                         </v-card-title>
                     </v-col>
                     <v-col class="d-none d-sm-flex" sm="9">
                         <v-card-text class="small-description font-weight-light">
-                            Tropical Island is the next level weather app for all tropical islands in the entire world.
+                            {{ smallDescription }}
                         </v-card-text>
                     </v-col>
                     <v-col class="d-none d-sm-flex flex-column" sm="3">
@@ -34,7 +34,7 @@
                                     Created by
                                 </div>
                                 <div>
-                                    Vincent
+                                    {{ createdBy }}
                                 </div>
                             </div>
                         </v-card-actions>
@@ -47,15 +47,15 @@
                                     Created at
                                 </div>
                                 <div>
-                                    10-11-2019
+                                    {{ getDateString }}
                                 </div>
                             </div>
                         </v-card-actions>
                     </v-col>
                     <v-col cols="12" align-self="end">
                         <v-card-text>
-                            <TagChip v-for="(text, index) in chips" :key="index" :text="text"/>
-                            <like-button/>
+                            <TagChip v-for="(text, index) in tags" :key="index" :text="text"/>
+                            <like-button :likes="likes"/>
                         </v-card-text>
                     </v-col>
                 </v-row>
@@ -71,9 +71,19 @@
     export default {
         name: "FeedItem",
         components: {LikeButton, TagChip},
-        data() {
-            return {
-                chips: [ "Javascript", "HTML", "CSS" ]
+        props: {
+            title: String,
+            smallDescription: String,
+            image: String,
+            createdBy: String,
+            createdAt: Date,
+            tags: Array,
+            likes: Number,
+            status: String
+        },
+        computed: {
+            getDateString() {
+                return this.createdAt.getDate() + "-" + (this.createdAt.getMonth() + 1)  + "-" + this.createdAt.getFullYear();
             }
         }
     };
