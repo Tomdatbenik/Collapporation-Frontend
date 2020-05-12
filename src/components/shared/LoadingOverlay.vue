@@ -7,7 +7,6 @@
         color="blue-400"
       ></v-progress-circular>
     </v-overlay>
-    {{ loading }}
   </div>
 </template>
 
