@@ -39,7 +39,6 @@
 import GoogleLoginButton from '@/components/login/GoogleLoginButton.vue'
 import FacebookLoginButton from '@/components/login/FacebookLoginButton.vue'
 import GithubLoginButton from '@/components/login/GithubLoginButton.vue'
-import { mapActions } from 'vuex'
 import firebase from 'firebase'
 
 export default {
@@ -62,12 +61,7 @@ export default {
       }
     }
   },
-  mounted() {
-    firebase.auth().useDeviceLanguage()
-    this.fetchInformation()
-  },
   methods: {
-    ...mapActions('user', ['authenticate']),
     googleLogin() {
       console.log('clicked')
       const provider = new firebase.auth.GoogleAuthProvider()
@@ -82,30 +76,6 @@ export default {
     githubLogin() {
       const provider = new firebase.auth.GithubAuthProvider()
       firebase.auth().signInWithRedirect(provider)
-    },
-
-    fetchInformation() {
-      firebase
-        .auth()
-        .getRedirectResult()
-        .then(result => {
-          console.log(result)
-          firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then(idToken => {
-              console.log(idToken)
-              this.authenticate(idToken)
-            })
-        })
-        .catch(function(error) {
-          var errorCode = error.code
-          var errorMessage = error.message
-          console.log(errorCode + ': ' + errorMessage)
-          var email = error.email
-          var credential = error.credential
-          console.log(email + ' ' + credential)
-        })
     }
   }
 }
