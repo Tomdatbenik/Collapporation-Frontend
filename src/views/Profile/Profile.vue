@@ -133,29 +133,25 @@
               </v-tab>
             </v-tabs>
 
-            <v-tabs-items v-model="tab" class="transparent-body">
-              <v-tab-item
-                v-for="item in items"
-                :key="item.name"
-                class="transparent-body"
-              >
+            <v-tabs-items v-model="tab" class="transparent">
+              <v-tab-item v-for="item in items" :key="item.name">
                 <v-card
                   v-for="project in item.projects"
                   :key="project.name"
-                  class="my-6 transparent-body"
+                  color="transparent"
                   flat
                 >
-                  <div class="d-flex flex-no-wrap justify-start">
-                    <v-avatar size="50" class="mr-10">
-                      <img :src="project.img" />
-                    </v-avatar>
-                    <div class="d-flex flex-column justify-center">
-                      <div>
-                        <a href="">{{ project.name }}</a>
-                      </div>
-                      <div>{{ project.bio }}</div>
-                    </div>
-                  </div>
+                  <v-card-text class="pa-0">
+                    <v-card-title
+                      class="headline pa-0 pt-6 pb-4"
+                      v-text="project.name"
+                    ></v-card-title>
+
+                    <v-card-subtitle
+                      v-text="project.bio"
+                      class="pa-0"
+                    ></v-card-subtitle>
+                  </v-card-text>
                 </v-card>
               </v-tab-item>
             </v-tabs-items>
@@ -179,7 +175,8 @@ export default {
             {
               name: "Facebook",
               img: "https://randomuser.me/api/portraits/lego/1.jpg",
-              bio: "lorem ipsum babyyyyyyyyyyyyyyyyyyyyiiiiiiiiiiiiisssy"
+              bio:
+                "Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so. "
             }
           ]
         },
@@ -190,12 +187,14 @@ export default {
             {
               name: "Facebook",
               img: "https://randomuser.me/api/portraits/lego/1.jpg",
-              bio: "lorem ipsum babyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+              bio:
+                "Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so"
             },
             {
               name: "Google",
               img: "https://randomuser.me/api/portraits/lego/1.jpg",
-              bio: "lorem ipsum2 babyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+              bio:
+                "Stronger unpacked felicity to of mistaken. Fanny at wrong table ye in. Be on easily cannot innate in lasted months on. Differed and and felicity steepest mrs age outweigh. Opinions learning likewise daughter now age outweigh. Raptures stanhill my greatest mistaken or exercise he on although. Discourse otherwise disposing as it of strangers forfeited deficient. "
             }
           ]
         }
@@ -216,9 +215,5 @@ a {
   &:hover {
     color: #4098d7;
   }
-}
-
-.transparent-body {
-  background: #f9f9f9;
 }
 </style>
