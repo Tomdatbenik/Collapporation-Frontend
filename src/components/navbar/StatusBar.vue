@@ -44,7 +44,7 @@
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item class="d-flex flex-row">
+        <v-list-item class="d-flex flex-row" @click="handleLogout">
           <v-icon color="grey" class="d-flex justify-start mr-2">
             mdi-logout
           </v-icon>
@@ -58,6 +58,9 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import { mapActions, mapMutations } from 'vuex'
+
 export default {
   name: 'StatusBar',
   data() {
@@ -79,6 +82,23 @@ export default {
           link: '/home'
         }
       ]
+    }
+  },
+  methods: {
+    ...mapActions('user', ['logout']),
+    ...mapMutations('user', {
+      loading: 'SET_LOADING'
+    }),
+    handleLogout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.logout()
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
