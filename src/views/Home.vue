@@ -1,26 +1,47 @@
 <template>
   <v-container>
-    <v-card tile>
-      <v-tabs v-model="tab" color="#696969" centered >
-        <v-tab style="color: #696969"><v-icon class="pr-1">mdi-fire</v-icon>HOT</v-tab>
-        <v-tab style="color: #696969"><v-icon class="pr-1">mdi-trending-up</v-icon>TRENDING</v-tab>
-        <v-tab style="color: #696969"><v-icon class="pr-1">mdi-clock-outline</v-icon>FRESH</v-tab>
+    <v-card tile width="100%">
+      <v-tabs @change="resetFeed" v-model="tab" color="#696969" centered>
+        <v-tab style="color: #696969">
+          <v-icon class="pr-1">mdi-fire</v-icon>
+          HOT
+        </v-tab>
+        <v-tab style="color: #696969">
+          <v-icon class="pr-1">mdi-trending-up</v-icon>
+          TRENDING
+        </v-tab>
+        <v-tab style="color: #696969">
+          <v-icon class="pr-1">mdi-clock-outline</v-icon>
+          FRESH
+        </v-tab>
       </v-tabs>
     </v-card>
 
     <v-tabs-items class="transparent" v-model="tab">
       <v-tab-item v-for="index in 3" :key="index">
-        <FeedItem v-for="(item, index) in feedItems"
-                  :key="index"
-                  :title="item.title"
-                  :small-description="item.smallDescription"
-                  :image="item.image"
-                  :created-by="item.createdBy"
-                  :created-at="item.createdAt"
-                  :tags="item.tags"
-                  :likes="item.likes"
-                  :status="item.status"
-        />
+        <div>
+          <feed-item
+            v-for="(item, index) in feedItems"
+            :key="index"
+            :id="item.id"
+            :title="item.title"
+            :small-description="item.smallDescription"
+            :image="item.image"
+            :created-by="item.owner.username"
+            :created-at="new Date(item.created)"
+            :tags="item.tags"
+            :likes="item.likes"
+            :status="item.status"
+          />
+          <infinite-loading :identifier="infiniteId" @infinite="updateFeed">
+            <div slot="error" slot-scope="{ trigger }">
+              <p class="mb-2">
+                Oops, something went wrong.
+              </p>
+              <a class="btn-try-infinite" @click="trigger">Retry</a>
+            </div>
+          </infinite-loading>
+        </div>
       </v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -28,33 +49,50 @@
 
 <script>
 import FeedItem from "../components/feed/FeedItem";
+import InfiniteLoading from "vue-infinite-loading";
+import axios from "axios";
+
 export default {
-  components: {FeedItem},
+  components: { FeedItem, InfiniteLoading },
   data() {
     return {
       tab: null,
-      feedItems: [
-        {
-          image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-          title: "Tropical Island",
-          smallDescription: "Tropical Island is the next level weather app for all tropical islands in the entire world.",
-          createdBy: "Vincent",
-          createdAt: new Date(),
-          tags: ["Javascript", "CSS", "HTML"],
-          likes: 20,
-          status: "Concept"
-        },
-        {
-          image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-          title: "Tropical Island",
-          smallDescription: "Tropical Island is the next level weather app for all tropical islands in the entire world.",
-          createdBy: "Vincent",
-          createdAt: new Date(),
-          tags: ["Javascript", "CSS", "HTML"],
-          likes: 20,
-          status: "Project"
-        }
-      ]
+      feedItems: [],
+      page: 0,
+      size: 12,
+      infiniteId: +new Date()
+    };
+  },
+  methods: {
+    updateFeed: function($state) {
+      let self = this;
+      let apicall = axios.create();
+      apicall
+        .get(
+          "http://localhost:8102/project-service/projectfeed/all?page=" +
+            self.page +
+            "&size=" +
+            self.size
+        )
+        .then(response => {
+          for (let i = 0; i < response.data.length; i++) {
+            self.feedItems.push(response.data[i]);
+          }
+          $state.loaded();
+          self.page++;
+          if (response.data.length < self.size) {
+            $state.complete();
+          }
+        })
+        .catch(error => {
+          window.console.log(error);
+          $state.error();
+        });
+    },
+    resetFeed: function() {
+      this.page = 0;
+      this.feedItems = [];
+      this.infiniteId += 1;
     }
   }
 };
