@@ -39,6 +39,7 @@
 import GoogleLoginButton from '@/components/login/GoogleLoginButton.vue'
 import FacebookLoginButton from '@/components/login/FacebookLoginButton.vue'
 import GithubLoginButton from '@/components/login/GithubLoginButton.vue'
+import { mapActions } from 'vuex'
 import firebase from 'firebase'
 
 export default {
@@ -66,6 +67,7 @@ export default {
     this.fetchInformation()
   },
   methods: {
+    ...mapActions('user', ['authenticate']),
     googleLogin() {
       console.log('clicked')
       const provider = new firebase.auth.GoogleAuthProvider()
@@ -93,7 +95,7 @@ export default {
             .currentUser.getIdToken(true)
             .then(idToken => {
               console.log(idToken)
-              this.$store.dispatch('authenticate', idToken)
+              this.authenticate(idToken)
             })
         })
         .catch(function(error) {
