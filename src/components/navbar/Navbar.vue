@@ -27,13 +27,15 @@
           </router-link>
 
           <div class="d-flex align-center">
-            <div
-              class="d-flex align-center font-weight-bold nav-item white--text mr-10"
+            <v-btn
+              text
               @click.stop="showLoginDialog = true"
+              v-if="!loggedIn"
+              color="white"
             >
               Login
-            </div>
-            <status-bar></status-bar>
+            </v-btn>
+            <status-bar v-if="loggedIn"></status-bar>
           </div>
         </div>
       </v-container>
@@ -45,6 +47,7 @@
 <script>
 import LoginDialog from '@/components/login/LoginDialog.vue'
 import StatusBar from '@/components/navbar/StatusBar.vue'
+import { authComputed } from '@/store/helpers.js'
 
 export default {
   name: 'NavBar',
@@ -56,6 +59,9 @@ export default {
   components: {
     LoginDialog,
     StatusBar
+  },
+  computed: {
+    ...authComputed
   }
 }
 </script>
@@ -85,7 +91,7 @@ export default {
 }
 
 .nav-item {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .nav-item:hover {
