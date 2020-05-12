@@ -26,7 +26,6 @@ export default {
   },
   actions: {
     authenticate({ commit }, credential) {
-      commit('SET_LOADING', true)
       axios
         .get('http://localhost:8102/token-service/token/new', {
           headers: { idToken: credential }
@@ -42,6 +41,11 @@ export default {
           commit('SET_ERROR', error)
           commit('SET_LOADING', false)
         })
+    },
+    logout({ commit }) {
+      commit('CLEAR_USER_DATA')
+      commit('SET_ERROR', null)
+      commit('SET_LOADING', false)
     }
   },
   getters: {
