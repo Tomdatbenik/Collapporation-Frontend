@@ -38,10 +38,23 @@ const routes = [
   }
 ]
 
+// add meta tag to route to secure that path
+// meta: { requiresAuth: true }
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // Enable whenever the authentication flow works
+  // const loggedIn = localStorage.getItem("user");
+
+  // if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+  //   next("/");
+  // }
+  next()
 })
 
 export default router
