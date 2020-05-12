@@ -169,39 +169,39 @@ export default {
       tab: null,
       items: [
         {
-          name: "Own projects",
-          icon: "mdi-account",
+          name: 'Own projects',
+          icon: 'mdi-account',
           projects: [
             {
-              name: "Facebook",
-              img: "https://randomuser.me/api/portraits/lego/1.jpg",
+              name: 'Facebook',
+              img: 'https://randomuser.me/api/portraits/lego/1.jpg',
               bio:
-                "Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so. "
+                'Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so. '
             }
           ]
         },
         {
-          name: "Collaporations",
-          icon: "mdi-account-group",
+          name: 'Collaporations',
+          icon: 'mdi-account-group',
           projects: [
             {
-              name: "Facebook",
-              img: "https://randomuser.me/api/portraits/lego/1.jpg",
+              name: 'Facebook',
+              img: 'https://randomuser.me/api/portraits/lego/1.jpg',
               bio:
-                "Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so"
+                'Extremely we promotion remainder eagerness enjoyment an. Ham her demands removal brought minuter raising invited gay. Contented consisted continual curiosity contained get sex. Forth child dried in in aware do. You had met they song how feel lain evil near. Small she avoid six yet table china. And bed make say been then dine mrs. To household rapturous fulfilled attempted on so'
             },
             {
-              name: "Google",
-              img: "https://randomuser.me/api/portraits/lego/1.jpg",
+              name: 'Google',
+              img: 'https://randomuser.me/api/portraits/lego/1.jpg',
               bio:
-                "Stronger unpacked felicity to of mistaken. Fanny at wrong table ye in. Be on easily cannot innate in lasted months on. Differed and and felicity steepest mrs age outweigh. Opinions learning likewise daughter now age outweigh. Raptures stanhill my greatest mistaken or exercise he on although. Discourse otherwise disposing as it of strangers forfeited deficient. "
+                'Stronger unpacked felicity to of mistaken. Fanny at wrong table ye in. Be on easily cannot innate in lasted months on. Differed and and felicity steepest mrs age outweigh. Opinions learning likewise daughter now age outweigh. Raptures stanhill my greatest mistaken or exercise he on although. Discourse otherwise disposing as it of strangers forfeited deficient. '
             }
           ]
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
