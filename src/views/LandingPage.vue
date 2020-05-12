@@ -18,9 +18,9 @@
               >Start Now</v-btn
             >
           </div>
-          <div class="pa-3 flex-fill hidden-sm-and-down">
+          <!-- <div class="pa-3 flex-fill hidden-sm-and-down">
             <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
-          </div>
+          </div> -->
         </div>
       </div>
     </v-container>
@@ -35,12 +35,12 @@
 
 <script>
 export default {
-  name: "LandingPage"
-};
+  name: 'LandingPage'
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/variables.scss";
+@import '@/scss/variables.scss';
 
 .landing-page {
   background: linear-gradient(
