@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-container class="mt-sm-6 ">
+    <v-container class="mt-sm-6" v-if="user">
       <v-row class="d-flex justify-center justify-sm-start">
         <v-col sm="3" cols="12" class="order-2 order-sm-1 pa-3 pa-sm-0">
           <div class="user-attributes d-flex flex-column">
             <v-avatar
               color="black"
-              size="300"
+              size="225"
               class="elevation-1 mb-12 align-self-center d-none d-sm-flex"
             >
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -95,27 +95,14 @@
           <div class="user-information mb-12">
             <div class="user-information__details mb-12">
               <h1 class="display-4 user-information__details_title pb-2">
-                Roy Appeldoorn
+                {{ user.username }}
               </h1>
               <h2 class="headline font-weight-light blue-500--text">
-                Software Engineer
+                {{ user.functionTitle }}
               </h2>
             </div>
             <div class="user-information__bio">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Asperiores magni, nisi eum ratione quae odit ducimus iusto
-              doloremque veritatis voluptatem eveniet officia ipsum. Qui quidem
-              rem amet dolorum error facilis temporibus tenetur? Reiciendis
-              voluptates porro aliquid voluptas nesciunt sint assumenda numquam
-              quos deleniti laboriosam excepturi eum sunt magnam facere dolorum
-              amet laudantium, fugit quis distinctio minima libero tenetur
-              pariatur. Odio quasi delectus voluptatum rerum nostrum
-              perspiciatis molestias quia vel laboriosam! Iusto aspernatur,
-              voluptas impedit corrupti ab dolorum commodi recusandae voluptate
-              eveniet quidem nobis distinctio repellendus quos corporis pariatur
-              possimus voluptatem animi fuga tenetur harum eum, ea ad id qui?
-              Dolor, dolores possimus nisi suscipit modi sint harum quidem
-              facere obcaecati quisquam itaque quos rem!
+              {{ user.bio }}
             </div>
           </div>
 
@@ -163,9 +150,12 @@
 </template>
 
 <script>
+import API from '@/service/api.js'
+
 export default {
   data() {
     return {
+      user: null,
       tab: null,
       items: [
         {
@@ -200,6 +190,16 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    API.getProfile(this.$route.params.id)
+      .then(result => {
+        console.log(result.data)
+        this.user = result.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
