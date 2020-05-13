@@ -1,4 +1,5 @@
 import axios from 'axios'
+import API from '@/service/Api.js'
 
 export default {
   namespaced: true,
@@ -11,7 +12,7 @@ export default {
     SET_USER_DATA(state, userData) {
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData))
-      // axios.defaults.headers.common['collapporationToken'] =
+      axios.defaults.headers.common['collapporationToken'] = userData
     },
     CLEAR_USER_DATA() {
       localStorage.removeItem('user')
@@ -26,10 +27,7 @@ export default {
   },
   actions: {
     authenticate({ commit }, credential) {
-      axios
-        .get('http://localhost:8102/token-service/token/new', {
-          headers: { idToken: credential }
-        })
+      API.getNewToken(credential)
         .then(response => {
           console.log(response)
           commit('SET_USER_DATA', response.data)
