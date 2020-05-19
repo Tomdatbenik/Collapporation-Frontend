@@ -27,6 +27,8 @@
         :key="collapporator.id"
         color="secondary"
         class="ma-2"
+        close
+        @click:close="removeCollapporator(collapporator)"
         >{{ collapporator.name }}
       </v-chip>
     </v-row>
@@ -53,6 +55,14 @@ export default {
     addCollapporator() {
       this.projectCollapporators.push(this.collapporator);
       this.collapporator = undefined;
+      this.update();
+    },
+    removeCollapporator(collapporator) {
+      for (let i = 0; i < this.projectCollapporators.length; i++) {
+        if (this.projectCollapporators[i] === collapporator) {
+          this.projectCollapporators.splice(i, 1);
+        }
+      }
       this.update();
     },
     update() {

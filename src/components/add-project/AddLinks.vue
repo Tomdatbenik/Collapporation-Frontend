@@ -32,6 +32,8 @@
         :key="link"
         color="secondary"
         class="ma-2"
+        close
+        @click:close="removeLink(link)"
         >{{ link }}
       </v-chip>
     </v-row>
@@ -58,6 +60,14 @@ export default {
     addLink() {
       this.projectLinks.push(this.linkName);
       this.linkName = "";
+      this.update();
+    },
+    removeLink(link) {
+      for (let i = 0; i < this.projectLinks.length; i++) {
+        if (this.projectLinks[i] === link) {
+          this.projectLinks.splice(i, 1);
+        }
+      }
       this.update();
     },
     update() {

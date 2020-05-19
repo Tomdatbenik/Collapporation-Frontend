@@ -32,6 +32,8 @@
         :key="tag"
         color="secondary"
         class="ma-2"
+        close
+        @click:close="removeTag(tag)"
         >{{ tag }}
       </v-chip>
     </v-row>
@@ -58,6 +60,14 @@ export default {
     addTag() {
       this.projectTags.push(this.tagName);
       this.tagName = "";
+      this.update();
+    },
+    removeTag(tag) {
+      for (let i = 0; i < this.projectTags.length; i++) {
+        if (this.projectTags[i] === tag) {
+          this.projectTags.splice(i, 1);
+        }
+      }
       this.update();
     },
     update() {
