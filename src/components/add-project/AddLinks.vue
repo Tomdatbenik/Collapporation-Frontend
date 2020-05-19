@@ -22,6 +22,7 @@
           label="Link"
           filled
           clearable
+          :rules="[rules.url]"
           class="mx-10"
         ></v-text-field>
       </AddToProjectDialog>
@@ -54,11 +55,17 @@ export default {
       linkName: "",
       projectLinks: this.links,
       showAddDialog: false,
+      rules: {
+        url: (value) => {
+          const pattern = /^(https:\/\/|http:\/\/)?([w]{3}[.])?([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/; //eslint-disable-line no-useless-escape
+          return pattern.test(value) || "Invalid URL.";
+        },
+      },
     };
   },
   methods: {
     addLink() {
-      this.projectLinks.push(this.linkName);
+      this.projectLinks.push(this.linkName.toLowerCase());
       this.linkName = "";
       this.update();
     },

@@ -13,6 +13,7 @@
           accept="image/png, image/jpeg, image/bmp"
           v-model="projectImage"
           class="mx-10"
+          :rules="[rules.required]"
           @change="update"
         ></v-file-input
       ></v-col>
@@ -35,8 +36,11 @@ export default {
   },
   data() {
     return {
-      projectImage: this.image,
-      url: null,
+      projectImage: this.image || null,
+      url: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
     };
   },
   mounted() {

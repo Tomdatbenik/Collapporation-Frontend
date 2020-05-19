@@ -11,6 +11,7 @@
       label="Title"
       filled
       clearable
+      :rules="[rules.required]"
       class="mx-10"
       @change="update"
     ></v-text-field>
@@ -22,7 +23,10 @@ export default {
   props: ["title"],
   data() {
     return {
-      projectTitle: this.title,
+      projectTitle: this.title || "",
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
     };
   },
   methods: {

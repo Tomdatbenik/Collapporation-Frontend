@@ -13,6 +13,7 @@
       no-resize
       rows="5"
       class="mx-10"
+      :rules="[rules.required, rules.counter]"
       @change="update"
     ></v-textarea>
   </div>
@@ -23,7 +24,11 @@ export default {
   props: ["smallDescription"],
   data() {
     return {
-      projectSmallDescription: this.smallDescription,
+      projectSmallDescription: this.smallDescription || "",
+      rules: {
+        required: (value) => !!value || "Required.",
+        counter: (value) => value.length <= 255 || "Max 255 characters.",
+      },
     };
   },
   methods: {
