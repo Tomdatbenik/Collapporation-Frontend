@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import TagChip from "./TagChip";
-import LikeButton from "./LikeButton";
-import FollowButton from "./FollowButton";
+import TagChip from './TagChip'
+import LikeButton from '../buttons/LikeButton'
+import FollowButton from '../buttons/FollowButton'
 export default {
-  name: "FeedItem",
+  name: 'FeedItem',
   components: { FollowButton, LikeButton, TagChip },
   props: {
     id: String,
@@ -91,14 +91,14 @@ export default {
     getDateString() {
       return (
         this.createdAt.getDate() +
-        "-" +
+        '-' +
         (this.createdAt.getMonth() + 1) +
-        "-" +
+        '-' +
         this.createdAt.getFullYear()
-      );
+      )
     }
   }
-};
+}
 </script>
 
 <style scoped>
