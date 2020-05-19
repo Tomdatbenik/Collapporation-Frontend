@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import FeedItem from "../components/feed/FeedItem";
-import InfiniteLoading from "vue-infinite-loading";
-import axios from "axios";
+import FeedItem from '../components/feed/FeedItem'
+import InfiniteLoading from 'vue-infinite-loading'
+import axios from 'axios'
 
 export default {
   components: { FeedItem, InfiniteLoading },
@@ -61,41 +61,41 @@ export default {
       page: 0,
       size: 12,
       infiniteId: +new Date()
-    };
+    }
   },
   methods: {
     updateFeed: function($state) {
-      let self = this;
-      let apicall = axios.create();
+      let self = this
+      let apicall = axios.create()
       apicall
-        .get(
-          "http://localhost:8102/project-service/projectfeed/all?page=" +
-            self.page +
-            "&size=" +
-            self.size
-        )
-        .then(response => {
-          for (let i = 0; i < response.data.length; i++) {
-            self.feedItems.push(response.data[i]);
+        .get('http://localhost:8102/project-service/projectfeed/all', {
+          params: {
+            size: self.size,
+            page: self.page
           }
-          $state.loaded();
-          self.page++;
+        })
+        .then(response => {
+          self.page++
+          for (let i = 0; i < response.data.length; i++) {
+            self.feedItems.push(response.data[i])
+          }
+          $state.loaded()
           if (response.data.length < self.size) {
-            $state.complete();
+            $state.complete()
           }
         })
         .catch(error => {
-          window.console.log(error);
-          $state.error();
-        });
+          window.console.log(error)
+          $state.error()
+        })
     },
     resetFeed: function() {
-      this.page = 0;
-      this.feedItems = [];
-      this.infiniteId += 1;
+      this.page = 0
+      this.feedItems = []
+      this.infiniteId += 1
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>
