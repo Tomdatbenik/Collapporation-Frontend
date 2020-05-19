@@ -14,161 +14,41 @@
           </v-row>
           <v-row no-gutters justify="center">
             <div v-if="currentStep.number === 1" style="width: 80%;">
-              <p class="mx-10">
-                The title will be shown as header in the feed. Pick something
-                that describes your project best in a few words. This title will
-                also be used in filtering for keywords.
-              </p>
-              <v-text-field
-                v-model="project.title"
-                label="Title"
-                filled
-                clearable
-                class="mx-10"
-              ></v-text-field>
+              <AddTitle :title="this.project.title" @updated="updateTitle" />
             </div>
 
             <div v-if="currentStep.number === 2" style="width: 80%">
-              <v-row no-gutters
-                ><v-col cols="7"
-                  ><p class="mx-10">
-                    This image will be shown in the feed. Pick something
-                    attractive to lure as many collapporators as possible.
-                  </p>
-                  <v-file-input
-                    v-model="project.image"
-                    class="mx-10"
-                  ></v-file-input
-                ></v-col>
-                <v-col cols="5">
-                  <div
-                    class="mr-10"
-                    style="width: 20vw; height: 20vh; background-color: grey;"
-                  ></div> </v-col
-              ></v-row>
+              <AddImage :image="this.project.image" @updated="updateImage" />
             </div>
 
             <div v-if="currentStep.number === 3" style="width: 80%;">
-              <p class="mx-10">
-                This description will be shown in the feed. Describe your
-                project in a few lines to enthuse other collapporators.
-              </p>
-              <v-textarea
-                v-model="project.smallDescription"
-                label="Small description"
-                filled
-                clearable
-                no-resize
-                rows="5"
-                class="mx-10"
-              ></v-textarea>
+              <AddSmallDescription
+                :smallDescription="this.project.smallDescription"
+                @updated="updateSmallDescription"
+              />
             </div>
 
             <div v-if="currentStep.number === 4" style="width: 80%;">
-              <v-row no-gutters
-                ><p class="mx-10">
-                  The tags will be shown in the feed. These tags describe the
-                  catagories or used techniques of the concept. Tags will also
-                  be used in filtering.
-                </p></v-row
-              >
-              <v-row no-gutters
-                ><v-chip
-                  @click="showAddDialog = true"
-                  color="secondary"
-                  class="ma-2"
-                  >+ ADD TAG</v-chip
-                >
-                <AddToProjectDialog
-                  title="Add Tags"
-                  v-model="showAddDialog"
-                  v-on:add="addTag"
-                >
-                  <v-text-field
-                    slot="content"
-                    v-model="tagName"
-                    label="Tag name"
-                    filled
-                    clearable
-                    class="mx-10"
-                  ></v-text-field>
-                </AddToProjectDialog>
-              </v-row>
-              <v-row no-gutters>
-                <v-chip
-                  v-for="tag in project.tags"
-                  :key="tag"
-                  color="secondary"
-                  class="ma-2"
-                  >{{ tag }}
-                </v-chip>
-              </v-row>
+              <AddTags :tags="this.project.tags" @updated="updateTags" />
             </div>
 
             <div v-if="currentStep.number === 5" style="width: 80%;">
-              <v-row no-gutters
-                ><p class="mx-10">
-                  The links will be shown in your project page. Include links of
-                  your github page or additional resources.
-                </p></v-row
-              >
-              <v-row no-gutters
-                ><v-chip
-                  @click="showAddDialog = true"
-                  color="secondary"
-                  class="ma-2"
-                  >+ ADD LINK</v-chip
-                >
-                <AddToProjectDialog
-                  title="Add Links"
-                  v-model="showAddDialog"
-                  v-on:add="addLink"
-                >
-                  <v-text-field
-                    slot="content"
-                    v-model="linkName"
-                    label="Link"
-                    filled
-                    clearable
-                    class="mx-10"
-                  ></v-text-field>
-                </AddToProjectDialog>
-              </v-row>
-              <v-row no-gutters>
-                <v-chip
-                  v-for="link in project.links"
-                  :key="link"
-                  color="secondary"
-                  class="ma-2"
-                  >{{ link }}
-                </v-chip>
-              </v-row>
+              <AddLinks :links="this.project.links" @updated="updateLinks" />
             </div>
 
             <div v-if="currentStep.number === 6" style="width: 80%;">
-              <p class="mx-10">
-                The markdown description is where you put an extensive
-                description of what your project is about. You can provide
-                additional information on the idea behind the concept, design
-                choices, used techniques together with images.
-              </p>
-              <v-textarea
-                v-model="project.description"
-                label="Description"
-                filled
-                clearable
-                no-resize
-                rows="10"
-                class="mx-10"
-              ></v-textarea>
+              <AddMarkdownDescription
+                :description="this.project.description"
+                @updated="updateDescription"
+              />
             </div>
 
-            <div v-if="currentStep.number === 7">
-              Collapporators stuf enzo
+            <div v-if="currentStep.number === 7" style="width: 80%;">
+              <AddCollapporators @updated="updateCollapporators" />
             </div>
 
-            <div v-if="currentStep.number === 8">
-              Overview stuf enzo
+            <div v-if="currentStep.number === 8" style="width: 80%;">
+              {{ this.project }}
             </div>
           </v-row>
           <v-row class="mt-10" no-gutters justify="center">
@@ -241,18 +121,25 @@
 </template>
 
 <script>
-// import AddTagsDialog from "@/components/add-project/AddTagsDialog.vue";
-import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
+import AddTitle from "@/components/add-project/AddTitle.vue";
+import AddImage from "@/components/add-project/AddImage.vue";
+import AddSmallDescription from "@/components/add-project/AddSmallDescription.vue";
+import AddTags from "@/components/add-project/AddTags.vue";
+import AddLinks from "@/components/add-project/AddLinks.vue";
+import AddMarkdownDescription from "@/components/add-project/AddMarkdownDescription.vue";
+import AddCollapporators from "@/components/add-project/AddCollapporators.vue";
 export default {
   components: {
-    // AddTagsDialog,
-    AddToProjectDialog,
+    AddTitle,
+    AddImage,
+    AddSmallDescription,
+    AddTags,
+    AddLinks,
+    AddMarkdownDescription,
+    AddCollapporators,
   },
   data() {
     return {
-      tagName: "",
-      linkName: "",
-      showAddDialog: false,
       steps: [
         { number: 1, title: "Title" },
         { number: 2, title: "Image" },
@@ -265,8 +152,8 @@ export default {
       ],
       currentStep: { number: 1, title: "Title" },
       project: {
-        title: { type: String, value: "" },
-        image: { type: String },
+        title: { type: String },
+        image: { type: File },
         smallDescription: { type: String },
         tags: { type: Array },
         links: { type: Array },
@@ -277,7 +164,7 @@ export default {
   },
   created() {
     this.project.title = "";
-    this.project.image = "";
+    this.project.image = undefined;
     this.project.smallDescription = "";
     this.project.tags = [];
     this.project.links = [];
@@ -285,13 +172,26 @@ export default {
     this.project.collapporators = [];
   },
   methods: {
-    addTag() {
-      this.project.tags.push(this.tagName);
-      this.tagName = "";
+    updateTitle(value) {
+      this.project.title = value;
     },
-    addLink() {
-      this.project.links.push(this.linkName);
-      this.linkName = "";
+    updateImage(value) {
+      this.project.image = value;
+    },
+    updateSmallDescription(value) {
+      this.project.smallDescription = value;
+    },
+    updateTags(value) {
+      this.project.tags = value;
+    },
+    updateLinks(value) {
+      this.project.links = value;
+    },
+    updateDescription(value) {
+      this.project.description = value;
+    },
+    updateCollapporators(value) {
+      this.project.collapporators = value;
     },
     saveProject() {
       console.log(this.project);
