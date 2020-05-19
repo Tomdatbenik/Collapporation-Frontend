@@ -51,6 +51,7 @@
               {{ this.project }}
             </div>
           </v-row>
+
           <v-row class="mt-10" no-gutters justify="center">
             <v-btn v-if="currentStep.number === 1" rounded width="20vw"
               >CANCEL</v-btn
@@ -152,13 +153,13 @@ export default {
       ],
       currentStep: { number: 1, title: "Title" },
       project: {
-        title: { type: String },
-        image: { type: File },
-        smallDescription: { type: String },
-        tags: { type: Array },
-        links: { type: Array },
-        description: { type: String },
-        collapporators: { type: Array },
+        title: String,
+        image: File,
+        smallDescription: String,
+        tags: Array,
+        links: Array,
+        description: String,
+        collapporators: Array,
       },
     };
   },
@@ -168,7 +169,7 @@ export default {
     this.project.smallDescription = "";
     this.project.tags = [];
     this.project.links = [];
-    this.project.description = [];
+    this.project.description = "";
     this.project.collapporators = [];
   },
   methods: {
