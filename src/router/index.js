@@ -3,12 +3,12 @@ import VueRouter from "vue-router";
 import LandingPage from "@/views/LandingPage.vue";
 import SubNavbar from "@/components/navbar/SubNavbar.vue";
 import Home from "@/views/Home.vue";
-import Feed from "@/views/Feed.vue";
 import Profile from "@/views/Profile/Profile.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     name: "Landing",
     component: LandingPage
@@ -17,15 +17,11 @@ const routes = [{
     path: "/",
     name: "Sub",
     component: SubNavbar,
-    children: [{
+    children: [
+      {
         path: "home",
         name: "Home",
         component: Home
-      },
-      {
-        path: "feed",
-        name: "Feed",
-        component: Feed
       },
       {
         path: "/profile/:id",
