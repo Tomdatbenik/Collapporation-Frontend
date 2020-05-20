@@ -69,10 +69,20 @@ export default {
     next() {
       this.$emit("next");
     },
-    update() {
+    async update() {
       if (this.$refs.form.validate()) {
         this.url = URL.createObjectURL(this.projectImage);
         this.$emit("updated", this.projectImage);
+
+        // await fetch(this.url)
+        //   .then(function(response) {
+        //     return response.blob();
+        //   })
+        //   .then(function(blob) {
+        //     console.log(blob);
+        //   });
+      } else {
+        this.url = "";
       }
     },
   },
