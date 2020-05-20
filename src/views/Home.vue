@@ -32,6 +32,7 @@
             :tags="item.tags"
             :likes="item.likes"
             :status="item.status"
+            @like-clicked="updateLike"
           />
           <infinite-loading :identifier="infiniteId" @infinite="updateFeed">
             <div slot="error" slot-scope="{ trigger }">
@@ -75,11 +76,11 @@ export default {
           }
         })
         .then(response => {
-          self.page++
           for (let i = 0; i < response.data.length; i++) {
             self.feedItems.push(response.data[i])
           }
           $state.loaded()
+          self.page++
           if (response.data.length < self.size) {
             $state.complete()
           }
@@ -93,6 +94,9 @@ export default {
       this.page = 0
       this.feedItems = []
       this.infiniteId += 1
+    },
+    updateLike: function(id) {
+      console.log(id)
     }
   }
 }
