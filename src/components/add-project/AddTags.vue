@@ -13,17 +13,29 @@
       <AddToProjectDialog
         title="Add Tags"
         v-model="showAddDialog"
-        v-on:add="addTag"
+        :add="addTag"
       >
-        <v-text-field
-          autofocus
-          slot="content"
-          v-model="tagName"
-          label="Tag name"
-          filled
-          clearable
-          class="mx-10"
-        ></v-text-field>
+        <v-form slot="content" ref="form" v-model="valid"
+          ><v-text-field
+            autofocus
+            v-model="tagName"
+            label="Tag name"
+            filled
+            :rules="[rules.required, rules.unique]"
+            clearable
+            class="mx-10"
+          ></v-text-field
+        ></v-form>
+        <div slot="buttons">
+          <v-btn
+            @click="addTag"
+            :disabled="!valid"
+            color="teal lighten-2"
+            rounded
+            class="ml-3"
+            >ADD</v-btn
+          >
+        </div>
       </AddToProjectDialog>
     </v-row>
     <v-row no-gutters>
@@ -36,6 +48,17 @@
         @click:close="removeTag(tag)"
         >{{ tag }}
       </v-chip>
+    </v-row>
+    <v-row class="mt-10" no-gutters justify="center">
+      <v-btn @click="previous" rounded width="20vw">PREVIOUS</v-btn>
+      <v-btn
+        color="teal lighten-2"
+        rounded
+        width="20vw"
+        class="ml-3"
+        @click="next"
+        >NEXT</v-btn
+      >
     </v-row>
   </div>
 </template>
@@ -51,16 +74,37 @@ export default {
   },
   data() {
     return {
+      valid: false,
       tagName: "",
       projectTags: this.tags,
       showAddDialog: false,
+      rules: {
+        required: (value) => !!value || "Required.",
+        unique: (value) => {
+          let existing = false;
+          if (value) {
+            this.projectTags.forEach((tag) => {
+              if (tag.toLowerCase() === value.toLowerCase()) {
+                existing = true;
+              }
+            });
+          }
+          return !existing || "This tag already exists.";
+        },
+      },
     };
   },
   methods: {
     addTag() {
-      this.projectTags.push(this.tagName);
+      if (
+        this.rules.unique(this.tagName) === true &&
+        this.rules.required(this.tagName) === true
+      ) {
+        this.projectTags.push(this.tagName);
+
+        this.update();
+      }
       this.tagName = "";
-      this.update();
     },
     removeTag(tag) {
       for (let i = 0; i < this.projectTags.length; i++) {
@@ -69,6 +113,12 @@ export default {
         }
       }
       this.update();
+    },
+    previous() {
+      this.$emit("previous");
+    },
+    next() {
+      this.$emit("next");
     },
     update() {
       this.$emit("updated", this.projectTags);

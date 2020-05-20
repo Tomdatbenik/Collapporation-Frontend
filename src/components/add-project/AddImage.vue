@@ -6,16 +6,17 @@
           This image will be shown in the feed. Pick something attractive to
           lure as many collapporators as possible.
         </p>
-        <v-file-input
-          label="Image"
-          autofocus
-          prepend-icon="mdi-camera"
-          accept="image/png, image/jpeg, image/bmp"
-          v-model="projectImage"
-          class="mx-10"
-          :rules="[rules.required]"
-          @change="update"
-        ></v-file-input
+        <v-form ref="form" v-model="valid">
+          <v-file-input
+            label="Image"
+            autofocus
+            prepend-icon="mdi-camera"
+            accept="image/png, image/jpeg, image/bmp"
+            v-model="projectImage"
+            class="mx-10"
+            :rules="[rules.required]"
+            @change="update"
+          ></v-file-input></v-form
       ></v-col>
       <v-col cols="5">
         <div
@@ -25,6 +26,18 @@
           <img v-if="url" :src="url" style="width: 100%; heigth: 100%;" />
         </div>
       </v-col>
+    </v-row>
+    <v-row class="mt-10" no-gutters justify="center">
+      <v-btn @click="previous" rounded width="20vw">PREVIOUS</v-btn>
+      <v-btn
+        :disabled="!valid"
+        color="teal lighten-2"
+        rounded
+        width="20vw"
+        class="ml-3"
+        @click="next"
+        >NEXT</v-btn
+      >
     </v-row>
   </div>
 </template>
@@ -36,6 +49,7 @@ export default {
   },
   data() {
     return {
+      valid: false,
       projectImage: this.image || null,
       url: "",
       rules: {
@@ -49,9 +63,17 @@ export default {
     }
   },
   methods: {
+    previous() {
+      this.$emit("previous");
+    },
+    next() {
+      this.$emit("next");
+    },
     update() {
-      this.url = URL.createObjectURL(this.projectImage);
-      this.$emit("updated", this.projectImage);
+      if (this.$refs.form.validate()) {
+        this.url = URL.createObjectURL(this.projectImage);
+        this.$emit("updated", this.projectImage);
+      }
     },
   },
 };

@@ -15,10 +15,8 @@
       </v-row>
 
       <v-row class="pb-5" no-gutters justify="center">
-        <v-btn rounded @click.stop="cancel()">CLOSE</v-btn>
-        <v-btn @click="add()" color="teal lighten-2" rounded class="ml-3"
-          >ADD</v-btn
-        >
+        <v-btn rounded @click="cancel">CLOSE</v-btn>
+        <slot name="buttons"></slot>
       </v-row>
     </v-card>
   </v-dialog>

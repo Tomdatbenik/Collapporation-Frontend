@@ -14,74 +14,69 @@
           </v-row>
           <v-row no-gutters justify="center">
             <div v-if="currentStep.number === 1" style="width: 80%;">
-              <AddTitle :title="this.project.title" @updated="updateTitle" />
+              <AddTitle
+                :title="this.project.title"
+                @updated="updateTitle"
+                @next="nextStep"
+              />
             </div>
 
             <div v-if="currentStep.number === 2" style="width: 80%">
-              <AddImage :image="this.project.image" @updated="updateImage" />
+              <AddImage
+                :image="this.project.image"
+                @updated="updateImage"
+                @next="nextStep"
+                @previous="previousStep"
+              />
             </div>
 
             <div v-if="currentStep.number === 3" style="width: 80%;">
               <AddSmallDescription
                 :smallDescription="this.project.smallDescription"
                 @updated="updateSmallDescription"
+                @next="nextStep"
+                @previous="previousStep"
               />
             </div>
 
             <div v-if="currentStep.number === 4" style="width: 80%;">
-              <AddTags :tags="this.project.tags" @updated="updateTags" />
+              <AddTags
+                :tags="this.project.tags"
+                @updated="updateTags"
+                @next="nextStep"
+                @previous="previousStep"
+              />
             </div>
 
             <div v-if="currentStep.number === 5" style="width: 80%;">
-              <AddLinks :links="this.project.links" @updated="updateLinks" />
+              <AddLinks
+                :links="this.project.links"
+                @updated="updateLinks"
+                @next="nextStep"
+                @previous="previousStep"
+              />
             </div>
 
             <div v-if="currentStep.number === 6" style="width: 80%;">
               <AddMarkdownDescription
                 :description="this.project.description"
                 @updated="updateDescription"
+                @next="nextStep"
+                @previous="previousStep"
               />
             </div>
 
             <div v-if="currentStep.number === 7" style="width: 80%;">
-              <AddCollapporators @updated="updateCollapporators" />
+              <AddCollapporators
+                @updated="updateCollapporators"
+                @next="nextStep"
+                @previous="previousStep"
+              />
             </div>
 
             <div v-if="currentStep.number === 8" style="width: 80%;">
-              {{ this.project }}
+              <AddOverview :project="this.project" />
             </div>
-          </v-row>
-
-          <v-row class="mt-10" no-gutters justify="center">
-            <v-btn v-if="currentStep.number === 1" rounded width="20vw"
-              >CANCEL</v-btn
-            >
-            <v-btn
-              v-else
-              @click="currentStep = steps[currentStep.number - 2]"
-              rounded
-              width="20vw"
-              >PREVIOUS</v-btn
-            >
-            <v-btn
-              v-if="currentStep.number !== 8"
-              color="teal lighten-2"
-              rounded
-              width="20vw"
-              class="ml-3"
-              @click="currentStep = steps[currentStep.number]"
-              >NEXT</v-btn
-            >
-            <v-btn
-              v-else
-              color="teal lighten-2"
-              rounded
-              width="20vw"
-              class="ml-3"
-              @click="saveProject()"
-            >
-              FINISH
-            </v-btn>
           </v-row>
         </v-card>
       </v-col>
@@ -129,6 +124,8 @@ import AddTags from "@/components/add-project/AddTags.vue";
 import AddLinks from "@/components/add-project/AddLinks.vue";
 import AddMarkdownDescription from "@/components/add-project/AddMarkdownDescription.vue";
 import AddCollapporators from "@/components/add-project/AddCollapporators.vue";
+import AddOverview from "@/components/add-project/AddOverview.vue";
+
 export default {
   components: {
     AddTitle,
@@ -138,6 +135,7 @@ export default {
     AddLinks,
     AddMarkdownDescription,
     AddCollapporators,
+    AddOverview,
   },
   data() {
     return {
@@ -173,6 +171,12 @@ export default {
     this.project.collapporators = [];
   },
   methods: {
+    nextStep() {
+      this.currentStep = this.steps[this.currentStep.number];
+    },
+    previousStep() {
+      this.currentStep = this.steps[this.currentStep.number - 2];
+    },
     updateTitle(value) {
       this.project.title = value;
     },
@@ -194,8 +198,18 @@ export default {
     updateCollapporators(value) {
       this.project.collapporators = value;
     },
-    saveProject() {
-      console.log(this.project);
+    async saveProject() {
+      const url = URL.createObjectURL(this.project.image);
+      let image = undefined;
+      await fetch(url)
+        .then(function(response) {
+          return response.blob();
+        })
+        .then(function(blob) {
+          image = blob;
+        });
+      this.project.image = image;
+      //TODO save project
     },
   },
 };
