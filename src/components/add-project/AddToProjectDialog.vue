@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="show" max-width="500px">
     <v-card>
-      <v-card-title class="mt-10" color="#696969" style="width: 100%;">
+      <v-card-title class="mb-5" color="#696969" style="width: 100%;">
         {{ title }}
         <v-divider
           class="ml-3"
