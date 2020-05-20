@@ -2,11 +2,7 @@
   <v-card tile class="mt-4">
     <v-row no-gutters>
       <v-col cols="12" sm="3">
-        <v-img
-          height="100%"
-          class="white--text"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        >
+        <v-img height="100%" class="white--text" :src="this.image">
           <div class="status-label font-weight-medium">
             {{ status }}
           </div>
@@ -60,7 +56,7 @@
                 :text="text"
               />
               <follow-button />
-              <like-button :likes="likes" />
+              <like-button @clicked="likeClicked" :likes="likes" />
             </v-card-text>
           </v-col>
         </v-row>
@@ -96,6 +92,11 @@ export default {
         '-' +
         this.createdAt.getFullYear()
       )
+    }
+  },
+  methods: {
+    likeClicked() {
+      this.$emit('like-clicked', this.id)
     }
   }
 }
