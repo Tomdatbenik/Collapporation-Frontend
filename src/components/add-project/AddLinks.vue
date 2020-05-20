@@ -13,18 +13,29 @@
       <AddToProjectDialog
         title="Add Links"
         v-model="showAddDialog"
-        v-on:add="addLink"
+        :add="addLink"
       >
-        <v-text-field
-          autofocus
-          slot="content"
-          v-model="linkName"
-          label="Link"
-          filled
-          clearable
-          :rules="[rules.url]"
-          class="mx-10"
-        ></v-text-field>
+        <v-form slot="content" ref="form" v-model="valid">
+          <v-text-field
+            autofocus
+            v-model="linkName"
+            label="Link"
+            filled
+            clearable
+            :rules="[rules.url, rules.unique]"
+            class="mx-10"
+          ></v-text-field>
+        </v-form>
+        <div slot="buttons">
+          <v-btn
+            @click="addLink"
+            :disabled="!valid"
+            color="teal lighten-2"
+            rounded
+            class="ml-3"
+            >ADD</v-btn
+          >
+        </div>
       </AddToProjectDialog>
     </v-row>
     <v-row no-gutters>
@@ -52,13 +63,28 @@ export default {
   },
   data() {
     return {
+      valid: false,
       linkName: "",
       projectLinks: this.links,
       showAddDialog: false,
       rules: {
         url: (value) => {
-          const pattern = /^(https:\/\/|http:\/\/)?([w]{3}[.])?([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/; //eslint-disable-line no-useless-escape
+          const pattern = /^(https:\/\/|http:\/\/)?[w]{3}[.]([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/; //eslint-disable-line no-useless-escape
           return pattern.test(value) || "Invalid URL.";
+        },
+        unique: (value) => {
+          let existing = false;
+          if (value) {
+            const yeet = value.substr(0, value.indexof("//"));
+            console.log(yeet);
+
+            this.projectLinks.forEach((link) => {
+              if (link.toLowerCase() === value.toLowerCase()) {
+                existing = true;
+              }
+            });
+          }
+          return !existing || "This link already exists.";
         },
       },
     };
