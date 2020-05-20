@@ -1,5 +1,4 @@
-import axios from 'axios'
-import API from '@/service/Api.js'
+import API from '@/service/api.js'
 
 export default {
   namespaced: true,
@@ -12,7 +11,7 @@ export default {
     SET_USER_DATA(state, userData) {
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData))
-      axios.defaults.headers.common['collapporationToken'] = userData
+      // axios.defaults.headers.common['collapporationToken'] = userData
     },
     CLEAR_USER_DATA() {
       localStorage.removeItem('user')
