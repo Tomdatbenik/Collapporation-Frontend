@@ -1,10 +1,8 @@
 <template>
-  <v-chip @click="click" color="#EBE9E9" class="ml-1 like-button" v-if="liked">
-    <v-icon color="#696969" class="mr-2">mdi-thumb-up</v-icon> {{ likes }}
-  </v-chip>
+  <v-chip @click="click" color="#EBE9E9" class="ml-1 like-button" v-if="liked"> <v-icon color="#696969" class="mr-2">mdi-thumb-up</v-icon> {{ likes }} </v-chip>
   <v-chip @click="click" color="#EBE9E9" class="ml-1 like-button" v-else>
     <v-icon color="#696969" class="mr-2">mdi-thumb-up-outline</v-icon>
-    {{ likes }}
+    {{ likeCount }}
   </v-chip>
 </template>
 
@@ -16,12 +14,16 @@ export default {
   },
   data() {
     return {
-      liked: false
+      liked: false,
+      likeCount: this.likes
     }
   },
   methods: {
     click() {
       this.$emit('clicked')
+      if (this.liked) {
+        this.likeCount--
+      } else this.likeCount++
       this.liked = !this.liked
     }
   }
