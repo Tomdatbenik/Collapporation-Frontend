@@ -20,20 +20,7 @@
     <v-tabs-items class="transparent" v-model="tab">
       <v-tab-item v-for="index in 3" :key="index">
         <div>
-          <feed-item
-            v-for="(item, index) in feedItems"
-            :key="index"
-            :id="item.id"
-            :title="item.title"
-            :small-description="item.smallDescription"
-            :image="item.image"
-            :created-by="item.owner.username"
-            :created-at="new Date(item.created)"
-            :tags="item.tags"
-            :likes="item.likes"
-            :status="item.status"
-            @like-clicked="updateLike"
-          />
+          <feed-item v-for="(item, index) in feedItems" :key="index" :id="item.id" :title="item.title" :small-description="item.smallDescription" :image="item.image" :created-by="item.owner.username" :created-at="new Date(item.created)" :tags="item.tags" :likes="item.likes" :status="item.status" @like-clicked="updateLike" />
           <infinite-loading :identifier="infiniteId" @infinite="updateFeed">
             <div slot="error" slot-scope="{ trigger }">
               <p class="mb-2">
