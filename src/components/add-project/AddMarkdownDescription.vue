@@ -7,30 +7,29 @@
         the idea behind the concept, design choices, used techniques together
         with images.
       </p>
-      <v-switch
-        class="editPreviewSwitch"
-        v-model="togglePreview"
-        label="Preview"
-      ></v-switch>
+      <v-switch class="editPreviewSwitch" v-model="togglePreview"></v-switch>
     </v-row>
     <v-row>
-      <v-textarea
-        v-if="!togglePreview"
-        autofocus
-        v-model="projectDescription"
-        label="Description"
-        filled
-        clearable
-        no-resize
-        rows="10"
-        class="mx-10"
-        @change="update"
-      ></v-textarea>
-      <markdown-it-vue
+      <v-col v-if="!togglePreview" cols="12">
+        <v-textarea
+          autofocus
+          v-model="projectDescription"
+          label="Description"
+          filled
+          clearable
+          no-resize
+          rows="10"
+          class="mx-10"
+          @change="update"
+        ></v-textarea
+      ></v-col>
+      <v-col
+        cols="12"
         v-else
-        class="md-body"
-        :content="this.projectDescription"
-      />
+        class="mt-3 mb-10"
+        style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; height: 19em;"
+        ><markdown-it-vue class="md-body" :content="this.projectDescription"
+      /></v-col>
     </v-row>
     <v-row class="mt-10" no-gutters justify="center">
       <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
@@ -78,6 +77,12 @@ export default {
 <style scoped lang="scss">
 .editPreviewSwitch::before {
   content: "Edit";
+  color: black;
+  margin-right: 0.5em;
+}
+
+.editPreviewSwitch::after {
+  content: "Preview";
   color: black;
 }
 </style>
