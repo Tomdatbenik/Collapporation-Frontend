@@ -64,13 +64,12 @@
 </template>
 
 <script>
+// import { mapGetters, mapActions } from "vuex";
 import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
+
 export default {
   components: {
     AddToProjectDialog,
-  },
-  props: {
-    tags: Array,
   },
   data() {
     return {
