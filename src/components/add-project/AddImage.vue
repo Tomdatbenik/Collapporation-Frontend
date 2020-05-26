@@ -28,12 +28,12 @@
       </v-col>
     </v-row>
     <v-row class="mt-10" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="20vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
         rounded
-        width="20vw"
+        width="15vw"
         class="ml-3"
         @click="next"
         >NEXT</v-btn

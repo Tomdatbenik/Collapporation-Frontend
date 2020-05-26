@@ -16,16 +16,17 @@
           :rules="[rules.required]"
           class="mx-10"
           @change="update"
+          @click:clear="remove"
         ></v-text-field
       ></v-form>
     </div>
     <v-row class="mt-10" no-gutters justify="center">
-      <v-btn rounded width="20vw">CANCEL</v-btn>
+      <v-btn rounded width="15vw">CANCEL</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
         rounded
-        width="20vw"
+        width="15vw"
         class="ml-3"
         @click="next"
         >NEXT</v-btn
@@ -54,6 +55,10 @@ export default {
       if (this.$refs.form.validate()) {
         this.$emit("updated", this.projectTitle);
       }
+    },
+    remove() {
+      this.projectTitle = "";
+      this.$emit("updated", this.projectTitle);
     },
   },
 };

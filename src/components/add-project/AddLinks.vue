@@ -49,6 +49,17 @@
         >{{ link }}
       </v-chip>
     </v-row>
+    <v-row class="mt-10" no-gutters justify="center">
+      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn
+        color="teal lighten-2"
+        rounded
+        width="15vw"
+        class="ml-3"
+        @click="next"
+        >NEXT</v-btn
+      >
+    </v-row>
   </div>
 </template>
 
@@ -75,9 +86,6 @@ export default {
         unique: (value) => {
           let existing = false;
           if (value) {
-            const yeet = value.substr(0, value.indexof("//"));
-            console.log(yeet);
-
             this.projectLinks.forEach((link) => {
               if (link.toLowerCase() === value.toLowerCase()) {
                 existing = true;
@@ -102,6 +110,12 @@ export default {
         }
       }
       this.update();
+    },
+    previous() {
+      this.$emit("previous");
+    },
+    next() {
+      this.$emit("next");
     },
     update() {
       this.$emit("updated", this.projectLinks);

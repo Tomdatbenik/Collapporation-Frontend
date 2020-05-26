@@ -32,6 +32,17 @@
         :content="this.projectDescription"
       />
     </v-row>
+    <v-row class="mt-10" no-gutters justify="center">
+      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn
+        color="teal lighten-2"
+        rounded
+        width="15vw"
+        class="ml-3"
+        @click="next"
+        >NEXT</v-btn
+      >
+    </v-row>
   </div>
 </template>
 
@@ -47,11 +58,16 @@ export default {
   data() {
     return {
       togglePreview: false,
-      projectDescription:
-        "# allo dit is een coole markdown" || this.description,
+      projectDescription: this.description || "",
     };
   },
   methods: {
+    previous() {
+      this.$emit("previous");
+    },
+    next() {
+      this.$emit("next");
+    },
     update() {
       this.$emit("updated", this.projectDescription);
     },

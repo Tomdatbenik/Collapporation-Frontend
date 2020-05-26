@@ -150,25 +150,12 @@ export default {
         { number: 8, title: "Overview" },
       ],
       currentStep: { number: 1, title: "Title" },
-      project: {
-        title: String,
-        image: File,
-        smallDescription: String,
-        tags: Array,
-        links: Array,
-        description: String,
-        collapporators: Array,
-      },
     };
   },
-  created() {
-    this.project.title = "";
-    this.project.image = undefined;
-    this.project.smallDescription = "";
-    this.project.tags = [];
-    this.project.links = [];
-    this.project.description = "";
-    this.project.collapporators = [];
+  computed: {
+    project() {
+      return this.$store.getters.getAddProject;
+    },
   },
   methods: {
     nextStep() {
@@ -179,24 +166,34 @@ export default {
     },
     updateTitle(value) {
       this.project.title = value;
+      this.updateProject();
     },
     updateImage(value) {
       this.project.image = value;
+      this.updateProject();
     },
     updateSmallDescription(value) {
       this.project.smallDescription = value;
+      this.updateProject();
     },
     updateTags(value) {
       this.project.tags = value;
+      this.updateProject();
     },
     updateLinks(value) {
       this.project.links = value;
+      this.updateProject();
     },
     updateDescription(value) {
       this.project.description = value;
+      this.updateProject();
     },
     updateCollapporators(value) {
       this.project.collapporators = value;
+      this.updateProject();
+    },
+    updateProject() {
+      this.$store.dispatch("SaveAddProject", this.project);
     },
     async saveProject() {
       const url = URL.createObjectURL(this.project.image);
