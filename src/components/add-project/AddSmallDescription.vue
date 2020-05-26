@@ -8,7 +8,7 @@
       <v-form ref="form" v-model="valid">
         <v-textarea
           autofocus
-          v-model="projectSmallDescription"
+          v-model="smallDescription"
           label="Small description"
           filled
           clearable
@@ -36,12 +36,13 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  props: ["smallDescription"],
   data() {
     return {
       valid: false,
-      projectSmallDescription: this.smallDescription || "",
+      smallDescription: "",
       rules: {
         required: (value) => !!value || "Required.",
         counter: (value) =>
@@ -49,7 +50,14 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.smallDescription = this.project.smallDescription;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectSmallDescription"]),
     previous() {
       this.$emit("previous");
     },
@@ -57,7 +65,9 @@ export default {
       this.$emit("next");
     },
     update() {
-      this.$emit("updated", this.projectSmallDescription);
+      if (this.$refs.form.validate()) {
+        this.saveProjectSmallDescription(this.smallDescription);
+      }
     },
   },
 };

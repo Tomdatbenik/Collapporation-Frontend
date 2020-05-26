@@ -12,7 +12,7 @@
             autofocus
             prepend-icon="mdi-camera"
             accept="image/png, image/jpeg, image/bmp"
-            v-model="projectImage"
+            v-model="image"
             class="mx-10"
             :rules="[rules.required]"
             @change="update"
@@ -43,26 +43,30 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  props: {
-    image: File,
-  },
   data() {
     return {
       valid: false,
-      projectImage: this.image || null,
+      image: null,
       url: "",
       rules: {
         required: (value) => !!value || "Required.",
       },
     };
   },
-  mounted() {
-    if (this.image) {
-      this.url = URL.createObjectURL(this.projectImage);
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    if (this.project.image) {
+      this.image = this.project.image;
+      this.url = URL.createObjectURL(this.image);
     }
   },
   methods: {
+    ...mapActions("project", ["saveProjectImage"]),
     previous() {
       this.$emit("previous");
     },
@@ -71,8 +75,8 @@ export default {
     },
     async update() {
       if (this.$refs.form.validate()) {
-        this.url = URL.createObjectURL(this.projectImage);
-        this.$emit("updated", this.projectImage);
+        this.url = URL.createObjectURL(this.image);
+        this.saveProjectImage(this.image);
 
         // await fetch(this.url)
         //   .then(function(response) {
@@ -82,6 +86,7 @@ export default {
         //     console.log(blob);
         //   });
       } else {
+        this.saveProjectImage(null);
         this.url = "";
       }
     },

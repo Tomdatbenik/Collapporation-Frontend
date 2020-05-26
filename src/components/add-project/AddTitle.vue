@@ -9,7 +9,7 @@
       <v-form ref="form" v-model="valid">
         <v-text-field
           autofocus
-          v-model="projectTitle"
+          v-model="title"
           label="Title"
           filled
           clearable
@@ -36,29 +36,36 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  props: ["title"],
   data() {
     return {
       valid: false,
-      projectTitle: this.title || "",
+      title: "",
       rules: {
         required: (value) => !!value || "Required.",
       },
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.title = this.project.title;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectTitle"]),
     next() {
       this.$emit("next");
     },
     update() {
       if (this.$refs.form.validate()) {
-        this.$emit("updated", this.projectTitle);
+        this.saveProjectTitle(this.title);
       }
     },
     remove() {
-      this.projectTitle = "";
-      this.$emit("updated", this.projectTitle);
+      this.saveProjectTitle("");
     },
   },
 };
