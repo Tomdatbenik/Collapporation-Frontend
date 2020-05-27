@@ -36,18 +36,18 @@
           :to="item.link"
           class="d-flex flex-row"
         >
-          <v-icon color="grey" class="d-flex justify-start mr-2">{{
-            item.icon
-          }}</v-icon>
+          <v-icon color="grey" class="d-flex justify-start mr-2">
+            {{ item.icon }}
+          </v-icon>
           <v-list-item-title class="d-flex justify-start flex-fill grey--text">
             {{ item.title }}
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item class="d-flex flex-row">
-          <v-icon color="grey" class="d-flex justify-start mr-2"
-            >mdi-logout</v-icon
-          >
+        <v-list-item class="d-flex flex-row" @click="handleLogout">
+          <v-icon color="grey" class="d-flex justify-start mr-2">
+            mdi-logout
+          </v-icon>
           <v-list-item-title class="d-flex justify-start flex-fill grey--text">
             Logout
           </v-list-item-title>
@@ -58,30 +58,50 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import { mapActions, mapMutations } from 'vuex'
+
 export default {
-  name: "StatusBar",
+  name: 'StatusBar',
   data() {
     return {
       items: [
         {
-          title: "Profile",
-          icon: "mdi-account-outline",
-          link: "/profile/Tim"
+          title: 'Profile',
+          icon: 'mdi-account-outline',
+          link: '/profile/Tim'
         },
         {
-          title: "Settings",
-          icon: "mdi-cog-outline",
-          link: "/home"
+          title: 'Settings',
+          icon: 'mdi-cog-outline',
+          link: '/home'
         },
         {
-          title: "My groups",
-          icon: "mdi-account-group-outline",
-          link: "/home"
+          title: 'My groups',
+          icon: 'mdi-account-group-outline',
+          link: '/home'
         }
       ]
-    };
+    }
+  },
+  methods: {
+    ...mapActions('user', ['logout']),
+    ...mapMutations('user', {
+      loading: 'SET_LOADING'
+    }),
+    handleLogout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.logout()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

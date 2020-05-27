@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar tile class="">
+    <v-toolbar flat class="shadow">
       <v-container class="pa-0" fill-height>
         <v-btn
           color="teal lighten-2"
@@ -24,25 +24,29 @@
 
 <script>
 export default {
-  name: "SubNavbar",
+  name: 'SubNavbar',
   data() {
     return {
       listItems: [
         {
-          name: "Home",
-          link: "/home",
-          icon: "mdi-home-outline"
+          name: 'Home',
+          link: '/home',
+          icon: 'mdi-home-outline'
         },
 
         {
-          name: "feed",
-          link: "/feed",
-          icon: "mdi-eye-outline"
+          name: 'feed',
+          link: '/feed',
+          icon: 'mdi-eye-outline'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.shadow {
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.05);
+}
+</style>

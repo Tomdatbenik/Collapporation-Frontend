@@ -1,15 +1,17 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 //modules
-import project from "./project";
+import project from '@/store/modules/project.js'
+import user from '@/store/modules/user.js'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   modules: {
-    project,
-  },
-});
+    user,
+    project
+  }
+})
