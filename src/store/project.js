@@ -2,27 +2,39 @@ export default {
   namespaced: true,
   state: {
     addProject: {
-      title: { type: String, value: "" },
-      image: { type: File },
-      smallDescription: { type: String, value: "" },
-      tags: { type: Array, value: [] },
-      links: { type: Array, value: [] },
-      description: { type: String, value: "" },
-      collapporators: { type: Array, value: [] },
+      title: "",
+      image: null,
+      smallDescription: "",
+      tags: [],
+      links: [],
+      description: "",
+      collapporators: [],
     },
   },
   mutations: {
     SAVE_ADDPROJECT(state, addProject) {
       state.addProject = addProject;
     },
-    SAVE_PROJECT_TITLE(state, projectTitle) {
-      state.addProject.title = projectTitle;
+    SAVE_PROJECT_TITLE(state, title) {
+      state.addProject.title = title;
     },
-    SAVE_PROJECT_IMAGE(state, projectImage) {
-      state.addProject.image = projectImage;
+    SAVE_PROJECT_IMAGE(state, image) {
+      state.addProject.image = image;
     },
-    SAVE_PROJECT_SMALLDESCRIPTION(state, projectSmallDescription) {
-      state.addProject.smallDescription = projectSmallDescription;
+    SAVE_PROJECT_SMALLDESCRIPTION(state, smallDescription) {
+      state.addProject.smallDescription = smallDescription;
+    },
+    SAVE_PROJECT_TAGS(state, tags) {
+      state.addProject.tags = tags;
+    },
+    SAVE_PROJECT_LINKS(state, links) {
+      state.addProject.links = links;
+    },
+    SAVE_PROJECT_DESCRIPTION(state, description) {
+      state.addProject.description = description;
+    },
+    SAVE_PROJECT_COLLAPPORATORS(state, collapporators) {
+      state.addProject.collapporators = collapporators;
     },
   },
   getters: {
@@ -34,14 +46,26 @@ export default {
     saveAddProject({ commit }, addProject) {
       commit("SAVE_ADDPROJECT", addProject);
     },
-    saveProjectTitle({ commit }, projectTitle) {
-      commit("SAVE_PROJECT_TITLE", projectTitle);
+    saveProjectTitle({ commit }, title) {
+      commit("SAVE_PROJECT_TITLE", title);
     },
-    saveProjectImage({ commit }, projectImage) {
-      commit("SAVE_PROJECT_IMAGE", projectImage);
+    saveProjectImage({ commit }, image) {
+      commit("SAVE_PROJECT_IMAGE", image);
     },
-    saveProjectSmallDescription({ commit }, projectSmallDescription) {
-      commit("SAVE_PROJECT_SMALLDESCRIPTION", projectSmallDescription);
+    saveProjectSmallDescription({ commit }, smallDescription) {
+      commit("SAVE_PROJECT_SMALLDESCRIPTION", smallDescription);
+    },
+    saveProjectTags({ commit }, tags) {
+      commit("SAVE_PROJECT_TAGS", tags);
+    },
+    saveProjectLinks({ commit }, links) {
+      commit("SAVE_PROJECT_LINKS", links);
+    },
+    saveProjectDescription({ commit }, description) {
+      commit("SAVE_PROJECT_DESCRIPTION", description);
+    },
+    saveProjectCollapporators({ commit }, collapporators) {
+      commit("SAVE_PROJECT_COLLAPPORATORS", collapporators);
     },
   },
 };
