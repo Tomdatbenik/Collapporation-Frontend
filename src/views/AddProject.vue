@@ -74,7 +74,7 @@
                   : { color: 'grey' },
                 step.number < currentStep.number
                   ? { 'text-decoration': 'line-through' }
-                  : '',
+                  : ''
               ]"
             >
               {{ step.number }}. {{ step.title }}
@@ -87,15 +87,14 @@
 </template>
 
 <script>
-import AddTitle from "@/components/add-project/AddTitle.vue";
-import AddImage from "@/components/add-project/AddImage.vue";
-import AddSmallDescription from "@/components/add-project/AddSmallDescription.vue";
-import AddTags from "@/components/add-project/AddTags.vue";
-import AddLinks from "@/components/add-project/AddLinks.vue";
-import AddMarkdownDescription from "@/components/add-project/AddMarkdownDescription.vue";
-import AddCollapporators from "@/components/add-project/AddCollapporators.vue";
-import AddOverview from "@/components/add-project/AddOverview.vue";
-import { mapGetters } from "vuex";
+import AddTitle from '@/components/add-project/AddTitle.vue'
+import AddImage from '@/components/add-project/AddImage.vue'
+import AddSmallDescription from '@/components/add-project/AddSmallDescription.vue'
+import AddTags from '@/components/add-project/AddTags.vue'
+import AddLinks from '@/components/add-project/AddLinks.vue'
+import AddMarkdownDescription from '@/components/add-project/AddMarkdownDescription.vue'
+import AddCollapporators from '@/components/add-project/AddCollapporators.vue'
+import AddOverview from '@/components/add-project/AddOverview.vue'
 
 export default {
   components: {
@@ -106,48 +105,32 @@ export default {
     AddLinks,
     AddMarkdownDescription,
     AddCollapporators,
-    AddOverview,
+    AddOverview
   },
   data() {
     return {
       steps: [
-        { number: 1, title: "Title" },
-        { number: 2, title: "Image" },
-        { number: 3, title: "Small description" },
-        { number: 4, title: "Tags" },
-        { number: 5, title: "Links" },
-        { number: 6, title: "Markdown description" },
-        { number: 7, title: "Collapporators" },
-        { number: 8, title: "Overview" },
+        { number: 1, title: 'Title' },
+        { number: 2, title: 'Image' },
+        { number: 3, title: 'Small description' },
+        { number: 4, title: 'Tags' },
+        { number: 5, title: 'Links' },
+        { number: 6, title: 'Markdown description' },
+        { number: 7, title: 'Collapporators' },
+        { number: 8, title: 'Overview' }
       ],
-      currentStep: { number: 1, title: "Title" },
-    };
-  },
-  computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+      currentStep: { number: 1, title: 'Title' }
+    }
   },
   methods: {
     nextStep() {
-      this.currentStep = this.steps[this.currentStep.number];
+      this.currentStep = this.steps[this.currentStep.number]
     },
     previousStep() {
-      this.currentStep = this.steps[this.currentStep.number - 2];
-    },
-    async saveProject() {
-      const url = URL.createObjectURL(this.project.image);
-      let image = undefined;
-      await fetch(url)
-        .then(function(response) {
-          return response.blob();
-        })
-        .then(function(blob) {
-          image = blob;
-        });
-      this.project.image = image;
-      //TODO save project
-    },
-  },
-};
+      this.currentStep = this.steps[this.currentStep.number - 2]
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>
