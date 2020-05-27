@@ -2,12 +2,12 @@
   <div>
     <v-card>
       <v-card-title>{{
-        project.title ? project.title : "No title yet..."
+        project.title ? project.title : 'No title yet...'
       }}</v-card-title>
       <v-card-subtitle>{{
         project.smallDescription
           ? project.smallDescription
-          : "No small description yet..."
+          : 'No small description yet...'
       }}</v-card-subtitle>
       <v-row class="mx-1">
         <v-col cols="6" v-if="project.tags.length > 0"
@@ -66,34 +66,57 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import MarkdownItVue from "markdown-it-vue";
-import "markdown-it-vue/dist/markdown-it-vue.css";
+import API from '@/service/api.js'
+import { mapGetters } from 'vuex'
+import MarkdownItVue from 'markdown-it-vue'
+import 'markdown-it-vue/dist/markdown-it-vue.css'
 
 export default {
   components: {
-    MarkdownItVue,
+    MarkdownItVue
   },
   data() {
     return {
       valid: false,
       rules: {
-        required: (value) => !!value || "Required.",
-      },
-    };
+        required: value => !!value || 'Required.'
+      }
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   methods: {
     previous() {
-      this.$emit("previous");
+      this.$emit('previous')
     },
+    //TODO image omschrijven naar blob voordat deze verstuurd wordt
+    // async saveProject() {
+    //   const url = URL.createObjectURL(this.project.image)
+    //   let image = undefined
+    //   await fetch(url)
+    //     .then(function(response) {
+    //       return response.blob()
+    //     })
+    //     .then(function(blob) {
+    //       image = blob
+    //     })
+    //   this.project.image = image
+    //   //TODO save project
+    // }
     finish() {
-      console.log("yeet");
-    },
-  },
-};
+      //TODO check of alles goed is ingevuld
+      //TODO wat krijg ik terug van de backend?
+      API.addProject(this.project)
+        .then(result => {
+          console.log(result.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>
