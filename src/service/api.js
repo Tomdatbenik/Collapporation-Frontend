@@ -20,5 +20,10 @@ export default {
 
   getProfile(userId) {
     return api.get('user-service/user/' + userId)
+  },
+
+  addProject(project) {
+    console.log(project)
+    return api.post('project-service/project/create')
   }
 }
