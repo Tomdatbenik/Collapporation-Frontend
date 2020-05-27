@@ -42,6 +42,7 @@
                     text-size="10px"
                     text-color="#285E61"
                     height="20px"
+                    @clicked="tagClicked"
                   />
                   <tag-chip
                     color="rgba(255,255,255,0.9)"
@@ -51,6 +52,7 @@
                     text-size="10px"
                     text-color="#285E61"
                     height="20px"
+                    @clicked="tagClicked"
                   />
                 </v-col>
               </v-row>
@@ -144,6 +146,9 @@ export default {
     },
     updateLike() {
       console.log('Liked')
+    },
+    tagClicked(tagname) {
+      console.log(tagname)
     }
   }
 }
