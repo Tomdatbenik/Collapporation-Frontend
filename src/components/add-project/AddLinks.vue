@@ -40,7 +40,7 @@
     </v-row>
     <v-row no-gutters>
       <v-chip
-        v-for="link in projectLinks"
+        v-for="link in links"
         :key="link"
         color="secondary"
         class="ma-2"
@@ -64,19 +64,18 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
+
 export default {
   components: {
     AddToProjectDialog,
-  },
-  props: {
-    links: Array,
   },
   data() {
     return {
       valid: false,
       linkName: "",
-      projectLinks: this.links,
+      links: [],
       showAddDialog: false,
       rules: {
         url: (value) => {
@@ -86,7 +85,7 @@ export default {
         unique: (value) => {
           let existing = false;
           if (value) {
-            this.projectLinks.forEach((link) => {
+            this.links.forEach((link) => {
               if (link.toLowerCase() === value.toLowerCase()) {
                 existing = true;
               }
@@ -97,28 +96,34 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.links = this.project.links;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectLinks"]),
     addLink() {
-      this.projectLinks.push(this.linkName.toLowerCase());
+      if (this.$refs.form.validate) {
+        this.links.push(this.linkName.toLowerCase());
+        this.saveProjectLinks(this.links);
+      }
       this.linkName = "";
-      this.update();
     },
     removeLink(link) {
-      for (let i = 0; i < this.projectLinks.length; i++) {
-        if (this.projectLinks[i] === link) {
-          this.projectLinks.splice(i, 1);
+      for (let i = 0; i < this.links.length; i++) {
+        if (this.links[i] === link) {
+          this.links.splice(i, 1);
         }
       }
-      this.update();
+      this.saveProjectLinks(this.links);
     },
     previous() {
       this.$emit("previous");
     },
     next() {
       this.$emit("next");
-    },
-    update() {
-      this.$emit("updated", this.projectLinks);
     },
   },
 };

@@ -13,7 +13,7 @@
       <v-col v-if="!togglePreview" cols="12">
         <v-textarea
           autofocus
-          v-model="projectDescription"
+          v-model="description"
           label="Description"
           filled
           clearable
@@ -28,7 +28,7 @@
         v-else
         class="mt-3 mb-10"
         style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; height: 19em;"
-        ><markdown-it-vue class="md-body" :content="this.projectDescription"
+        ><markdown-it-vue class="md-body" :content="this.description"
       /></v-col>
     </v-row>
     <v-row class="mt-10" no-gutters justify="center">
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import MarkdownItVue from "markdown-it-vue";
 import "markdown-it-vue/dist/markdown-it-vue.css";
 
@@ -53,14 +54,20 @@ export default {
   components: {
     MarkdownItVue,
   },
-  props: ["description"],
   data() {
     return {
       togglePreview: false,
-      projectDescription: this.description || "",
+      description: "",
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.description = this.project.description;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectDescription"]),
     previous() {
       this.$emit("previous");
     },
@@ -68,7 +75,7 @@ export default {
       this.$emit("next");
     },
     update() {
-      this.$emit("updated", this.projectDescription);
+      this.saveProjectDescription(this.description);
     },
   },
 };

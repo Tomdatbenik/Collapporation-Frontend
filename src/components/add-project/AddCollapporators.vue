@@ -23,7 +23,7 @@
     </v-row>
     <v-row no-gutters>
       <v-chip
-        v-for="collapporator in projectCollapporators"
+        v-for="collapporator in collapporators"
         :key="collapporator.id"
         color="secondary"
         class="ma-2"
@@ -32,41 +32,62 @@
         >{{ collapporator.name }}
       </v-chip>
     </v-row>
+    <v-row class="mt-10" no-gutters justify="center">
+      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn
+        color="teal lighten-2"
+        rounded
+        width="15vw"
+        class="ml-3"
+        @click="next"
+        >NEXT</v-btn
+      >
+    </v-row>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
+
 export default {
   components: {
     AddToProjectDialog,
   },
-  props: {
-    collapporators: Array,
-  },
   data() {
     return {
-      collapporator: Object,
-      projectCollapporators: this.collapporators,
+      collapporator: null,
+      collapporators: [],
       showAddDialog: false,
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.collapporators = this.project.collapporator;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectCollapporators"]),
+
     addCollapporator() {
-      this.projectCollapporators.push(this.collapporator);
+      this.collapporators.push(this.collapporator);
       this.collapporator = undefined;
-      this.update();
+      this.saveProjectCollapporators(this.collapporators);
     },
     removeCollapporator(collapporator) {
-      for (let i = 0; i < this.projectCollapporators.length; i++) {
-        if (this.projectCollapporators[i] === collapporator) {
-          this.projectCollapporators.splice(i, 1);
+      for (let i = 0; i < this.collapporators.length; i++) {
+        if (this.collapporators[i] === collapporator) {
+          this.collapporators.splice(i, 1);
         }
       }
-      this.update();
+      this.saveProjectCollapporators(this.collapporators);
     },
-    update() {
-      this.$emit("updated", this.projectCollapporators);
+    previous() {
+      this.$emit("previous");
+    },
+    next() {
+      this.$emit("next");
     },
   },
 };

@@ -40,8 +40,8 @@
     </v-row>
     <v-row no-gutters>
       <v-chip
-        v-for="tag in projectTags"
-        :key="tag"
+        v-for="tag in tags"
+        :key="tag + '-key'"
         color="secondary"
         class="ma-2"
         close
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
 
 export default {
@@ -75,14 +75,14 @@ export default {
     return {
       valid: false,
       tagName: "",
-      projectTags: this.tags,
+      tags: [],
       showAddDialog: false,
       rules: {
         required: (value) => !!value || "Required.",
         unique: (value) => {
           let existing = false;
           if (value) {
-            this.projectTags.forEach((tag) => {
+            this.tags.forEach((tag) => {
               if (tag.toLowerCase() === value.toLowerCase()) {
                 existing = true;
               }
@@ -93,34 +93,34 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters("project", { project: "getAddProject" }),
+  },
+  created() {
+    this.tags = this.project.tags;
+  },
   methods: {
+    ...mapActions("project", ["saveProjectTags"]),
     addTag() {
-      if (
-        this.rules.unique(this.tagName) === true &&
-        this.rules.required(this.tagName) === true
-      ) {
-        this.projectTags.push(this.tagName);
-
-        this.update();
+      if (this.$refs.form.validate()) {
+        this.tags.push(this.tagName);
+        this.saveProjectTags(this.tags);
       }
       this.tagName = "";
     },
     removeTag(tag) {
-      for (let i = 0; i < this.projectTags.length; i++) {
-        if (this.projectTags[i] === tag) {
-          this.projectTags.splice(i, 1);
+      for (let i = 0; i < this.tags.length; i++) {
+        if (this.tags[i] === tag) {
+          this.tags.splice(i, 1);
         }
       }
-      this.update();
+      this.saveProjectTags(this.tags);
     },
     previous() {
       this.$emit("previous");
     },
     next() {
       this.$emit("next");
-    },
-    update() {
-      this.$emit("updated", this.projectTags);
     },
   },
 };
