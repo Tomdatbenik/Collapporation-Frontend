@@ -43,55 +43,55 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       valid: false,
       image: null,
-      url: "",
+      url: '',
       rules: {
-        required: (value) => !!value || "Required.",
-      },
-    };
+        required: value => !!value || 'Required.'
+      }
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   created() {
     if (this.project.image) {
-      this.image = this.project.image;
-      this.url = URL.createObjectURL(this.image);
+      this.image = this.project.image
+      this.url = URL.createObjectURL(this.project.image)
     }
   },
   methods: {
-    ...mapActions("project", ["saveProjectImage"]),
+    ...mapActions('project', ['saveProjectImage']),
     previous() {
-      this.$emit("previous");
+      this.$emit('previous')
     },
     next() {
-      this.$emit("next");
+      this.$emit('next')
     },
-    async update() {
+    update() {
       if (this.$refs.form.validate()) {
-        this.url = URL.createObjectURL(this.image);
-        this.saveProjectImage(this.image);
-
+        this.url = URL.createObjectURL(this.image)
+        this.saveProjectImage(this.image)
         // await fetch(this.url)
         //   .then(function(response) {
-        //     return response.blob();
+        //     return response.blob()
         //   })
         //   .then(function(blob) {
-        //     console.log(blob);
-        //   });
+        //     image = blob
+        //   })
+        // var file = new File([byteArrays], filename, {type: contentType, lastModified: Date.now()});
       } else {
-        this.saveProjectImage(null);
-        this.url = "";
+        this.saveProjectImage(null)
+        this.url = ''
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>
