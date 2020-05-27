@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import TagChip from './TagChip'
+import TagChip from '@/components/project/TagChip'
 import LikeButton from '../buttons/LikeButton'
 import FollowButton from '../buttons/FollowButton'
 export default {
