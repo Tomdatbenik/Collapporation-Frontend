@@ -30,16 +30,11 @@
             </div>
 
             <div v-if="currentStep.number === 5" style="width: 80%;">
-              <AddLinks
-                :links="this.project.links"
-                @next="nextStep"
-                @previous="previousStep"
-              />
+              <AddLinks @next="nextStep" @previous="previousStep" />
             </div>
 
             <div v-if="currentStep.number === 6" style="width: 80%;">
               <AddMarkdownDescription
-                :description="this.project.description"
                 @next="nextStep"
                 @previous="previousStep"
               />
@@ -50,7 +45,7 @@
             </div>
 
             <div v-if="currentStep.number === 8" style="width: 80%;">
-              <AddOverview :project="this.project" />
+              <AddOverview />
             </div>
           </v-row>
         </v-card>
