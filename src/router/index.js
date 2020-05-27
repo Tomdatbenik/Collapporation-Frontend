@@ -1,41 +1,60 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import LandingPage from "@/views/LandingPage.vue";
-import SubNavbar from "@/components/navbar/SubNavbar.vue";
-import Home from "@/views/Home.vue";
-import Profile from "@/views/Profile/Profile.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import LandingPage from '@/views/LandingPage.vue'
+import SubNavbar from '@/components/navbar/SubNavbar.vue'
+import Home from '@/views/Home.vue'
+import Feed from '@/views/Feed.vue'
+import Profile from '@/views/Profile/Profile.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Landing",
+    path: '/',
+    name: 'Landing',
     component: LandingPage
   },
   {
-    path: "/",
-    name: "Sub",
+    path: '/',
+    name: 'Sub',
     component: SubNavbar,
     children: [
       {
-        path: "home",
-        name: "Home",
+        path: 'home',
+        name: 'Home',
         component: Home
       },
       {
-        path: "/profile/:id",
-        name: "profile",
+        path: 'feed',
+        name: 'Feed',
+        component: Feed
+      },
+      {
+        path: '/profile/:id',
+        name: 'profile',
         component: Profile
       }
     ]
   }
-];
+]
+
+// add meta tag to route to secure that path
+// meta: { requiresAuth: true }
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+router.beforeEach((to, from, next) => {
+  // Enable whenever the authentication flow works
+  // const loggedIn = localStorage.getItem("user");
+
+  // if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+  //   next("/");
+  // }
+  next()
+})
+
+export default router

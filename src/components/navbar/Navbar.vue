@@ -2,7 +2,9 @@
   <div>
     <v-app-bar app class="app-bar" flat>
       <v-container class="pa-0">
-        <div class="d-flex flex-row white--text align-center">
+        <div
+          class="d-flex flex-row white--text align-center justify-space-between"
+        >
           <router-link to="/home" class="d-flex" style="text-decoration: none">
             <div
               class="headline mb-0 .d-sm-none d-flex align-center"
@@ -23,15 +25,17 @@
               <span class="font-weight-bold">oration</span>
             </div>
           </router-link>
-          <div
-            v-if="false"
-            class="d-flex ml-auto align-center font-weight-bold nav-item white--text"
-            @click.stop="showLoginDialog = true"
-          >
-            Login
-          </div>
-          <div v-else class="d-flex ml-auto align-center">
-            <status-bar></status-bar>
+
+          <div class="d-flex align-center">
+            <v-btn
+              text
+              @click.stop="showLoginDialog = true"
+              v-if="!loggedIn"
+              color="white"
+            >
+              Login
+            </v-btn>
+            <status-bar v-if="loggedIn"></status-bar>
           </div>
         </div>
       </v-container>
@@ -41,21 +45,25 @@
 </template>
 
 <script>
-import LoginDialog from "@/components/login/LoginDialog.vue";
-import StatusBar from "@/components/navbar/StatusBar.vue";
+import LoginDialog from '@/components/login/LoginDialog.vue'
+import StatusBar from '@/components/navbar/StatusBar.vue'
+import { authComputed } from '@/store/helpers.js'
 
 export default {
-  name: "NavBar",
+  name: 'NavBar',
   data() {
     return {
       showLoginDialog: false
-    };
+    }
   },
   components: {
     LoginDialog,
     StatusBar
+  },
+  computed: {
+    ...authComputed
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -83,7 +91,7 @@ export default {
 }
 
 .nav-item {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .nav-item:hover {

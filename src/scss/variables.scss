@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;531;600;700;800;900&display=swap');
+
 // Globals
-$body-font-family: "Roboto", sans-serif;
+$body-font-family: 'Inter', sans-serif;
 $border-radius-root: 6px;
 $font-size-root: 14px;
 
@@ -7,8 +9,8 @@ $light-button-background: #36d1dc;
 $light-button-text-color: #fff;
 
 $color-primary: #36d1dc;
-$color-primary-dark: #1565C0;
-$color-primary-light: #90CAF9;
+$color-primary-dark: #1565c0;
+$color-primary-light: #90caf9;
 
 // Variables must come before the import
 $btn-letter-spacing: 0;
