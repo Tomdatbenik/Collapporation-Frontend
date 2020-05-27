@@ -60,7 +60,11 @@
                 :text="text"
               />
               <follow-button />
-              <like-button :likes="likes" />
+              <like-button
+                color="#DCEEFB"
+                text-color="#2680C2"
+                :likes="likes"
+              />
             </v-card-text>
           </v-col>
         </v-row>
