@@ -32,12 +32,6 @@ export default {
           name: 'Home',
           link: '/home',
           icon: 'mdi-home-outline'
-        },
-
-        {
-          name: 'feed',
-          link: '/feed',
-          icon: 'mdi-eye-outline'
         }
       ]
     }
