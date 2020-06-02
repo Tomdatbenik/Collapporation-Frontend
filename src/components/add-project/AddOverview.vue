@@ -84,32 +84,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ project: 'project/getAddProject', user: 'user/user' })
+    ...mapGetters({
+      project: 'project/getAddProject',
+      user: 'user/user'
+    })
   },
   methods: {
     previous() {
       this.$emit('previous')
     },
-    //TODO image omschrijven naar blob voordat deze verstuurd wordt
-    // async saveProject() {
-    //   const url = URL.createObjectURL(this.project.image)
-    //   let image = undefined
-    //   await fetch(url)
-    //     .then(function(response) {
-    //       return response.blob()
-    //     })
-    //     .then(function(blob) {
-    //       image = blob
-    //     })
-    //   this.project.image = image
-    //   //TODO save project
-    // }
     finish() {
-      console.log('user')
-      console.log(this.user)
-
       //TODO check of alles goed is ingevuld
-      //TODO wat krijg ik terug van de backend?
       API.addProject(this.project)
         .then(result => {
           console.log(result.data)
