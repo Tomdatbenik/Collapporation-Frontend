@@ -32,6 +32,9 @@
     "wrong": "Oops, something went wrong",
     "retry": "Retry",
     "noRes": "No results",
-    "noMore": "No more projects"
+    "noMore": "No more projects",
+    "hot": "Hot",
+    "trending": "Trending",
+    "fresh": "Fresh"
   }
 }

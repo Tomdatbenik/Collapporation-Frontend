@@ -4,15 +4,15 @@
       <v-tabs @change="resetFeed" v-model="tab" color="#696969" centered>
         <v-tab style="color: #696969">
           <v-icon class="pr-1">mdi-fire</v-icon>
-          HOT
+          {{ $t('feed.hot') }}
         </v-tab>
         <v-tab style="color: #696969">
           <v-icon class="pr-1">mdi-trending-up</v-icon>
-          TRENDING
+          {{ $t('feed.trending') }}
         </v-tab>
         <v-tab style="color: #696969">
           <v-icon class="pr-1">mdi-clock-outline</v-icon>
-          FRESH
+          {{ $t('feed.fresh') }}
         </v-tab>
       </v-tabs>
     </v-card>
