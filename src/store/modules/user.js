@@ -1,21 +1,18 @@
-import API from '@/service/api.js'
+import api from '@/service/token.js'
 
 export default {
   namespaced: true,
   state: {
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     loading: null,
     error: null
   },
   mutations: {
     SET_USER_DATA(state, userData) {
       state.user = userData
-      localStorage.setItem('user', JSON.stringify(userData))
-      // axios.defaults.headers.common['collapporationToken'] = userData
     },
-    CLEAR_USER_DATA() {
-      localStorage.removeItem('user')
-      location.reload()
+    SET_AUTH_TOKEN(state, idToken) {
+      state.user = { ...state.user, idToken }
     },
     SET_LOADING(state, payload) {
       state.loading = payload
@@ -25,30 +22,48 @@ export default {
     }
   },
   actions: {
-    authenticate({ commit }, credential) {
-      API.getNewToken(credential)
-        .then(response => {
-          console.log(response)
-          commit('SET_USER_DATA', response.data)
+    authenticate({ commit }, idToken) {
+      api
+        .getNewToken(idToken)
+        .then(res => {
+          const token = res.data.split('.')[1]
+
+          // Decodes the base64 encoded string into a user object
+          const user = atob(token)
+          localStorage.setItem('user', user)
+          commit('SET_USER_DATA', JSON.parse(user))
+
+          // Set collapporationToken in the user object so the axios interceptor
+          // can check if bearer tokens needs to be added
+          commit('SET_AUTH_TOKEN', token)
+          localStorage.setItem('user-token', token)
+
           commit('SET_ERROR', null)
           commit('SET_LOADING', false)
         })
         .catch(error => {
-          console.log(error)
+          // If the request fails, remove user token
+          localStorage.removeItem('user-token')
           commit('SET_ERROR', error)
           commit('SET_LOADING', false)
+          console.log(error)
         })
     },
+    getRefreshToken() {
+      api.getRefreshToken().then(newToken => {
+        return newToken
+      })
+    },
     logout({ commit }) {
-      commit('CLEAR_USER_DATA')
+      localStorage.removeItem('user')
+      localStorage.removeItem('user-token')
+      location.reload()
       commit('SET_ERROR', null)
       commit('SET_LOADING', false)
     }
   },
   getters: {
-    loading: state => {
-      return state.loading
-    },
+    loading: state => state.loading,
 
     user: state => {
       return state.user != null
@@ -56,12 +71,8 @@ export default {
         : JSON.parse(localStorage.getItem('user'))
     },
 
-    error: state => {
-      return state.error
-    },
+    error: state => state.error,
 
-    loggedIn: state => {
-      return !!state.user
-    }
+    isAuthenticated: state => !!state.user
   }
 }
