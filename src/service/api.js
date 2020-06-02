@@ -13,7 +13,7 @@ service.interceptors.request.use(
   config => {
     const token = localStorage.getItem('user-token')
     if (token) {
-      config.headers.common['collapporationToken'] = token
+      config.headers.common['Authorization'] = 'Bearer' + token
     }
     return config
   },
@@ -39,7 +39,7 @@ service.interceptors.request.use(
       const retryOriginalRequest = new Promise(resolve => {
         subscribeTokenRefresh(token => {
           // replace the expired token and retry
-          originalRequest.headers['collapporationToken'] = token
+          originalRequest.headers['Authorization'] = 'Bearer' + token
           resolve(axios(originalRequest))
         })
       })
