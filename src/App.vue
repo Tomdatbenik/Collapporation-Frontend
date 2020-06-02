@@ -30,7 +30,7 @@ export default {
 
   created() {
     firebase.auth().useDeviceLanguage()
-    this.fetchInformation()
+    this.fetchFirebaseInformation()
   },
   computed: {
     ...authComputed
@@ -40,7 +40,7 @@ export default {
     ...mapMutations('user', {
       loading: 'SET_LOADING'
     }),
-    fetchInformation() {
+    fetchFirebaseInformation() {
       if (!localStorage.getItem('user') && !this.isAuthenticated) {
         this.loading(true)
         firebase
@@ -51,7 +51,7 @@ export default {
               .auth()
               .currentUser.getIdToken(true)
               .then(idToken => {
-                this.authenticate(idToken)
+                this.authenticateUser(idToken)
               })
           })
           .catch(error => {
@@ -61,6 +61,15 @@ export default {
             this.loading(false)
           })
       }
+    },
+    authenticateUser(idToken) {
+      this.authenticate(idToken)
+        .then(() => {
+          console.log('Succesfully logged in')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
