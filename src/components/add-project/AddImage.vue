@@ -11,10 +11,10 @@
             label="Image"
             autofocus
             prepend-icon="mdi-camera"
-            accept="image/png, image/jpeg, image/bmp"
+            accept="image/png, image/jpeg, image/bmp, image/jfif"
             v-model="image"
             class="mx-10"
-            :rules="[rules.required]"
+            :rules="[rules.required, rules.size]"
             @change="update"
           ></v-file-input></v-form
       ></v-col>
@@ -52,17 +52,21 @@ export default {
       image: null,
       url: '',
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || 'Required.',
+        size: value =>
+          !value || value.size <= 5e6 || 'Image size should be less than 5 MB.'
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters({
+      project: 'project/getAddProject'
+    })
   },
   created() {
-    if (this.project.image) {
-      this.image = this.project.image
-      this.url = URL.createObjectURL(this.project.image)
+    if (this.project.img) {
+      this.image = this.project.img
+      this.url = this.project.img
     }
   },
   methods: {
@@ -77,13 +81,6 @@ export default {
       if (this.$refs.form.validate()) {
         this.url = URL.createObjectURL(this.image)
         this.saveProjectImage(this.image)
-        // await fetch(this.url)
-        //   .then(function(response) {
-        //     return response.blob()
-        //   })
-        //   .then(function(blob) {
-        //     image = blob
-        //   })
         // var file = new File([byteArrays], filename, {type: contentType, lastModified: Date.now()});
       } else {
         this.saveProjectImage(null)
