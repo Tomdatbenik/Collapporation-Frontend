@@ -19,7 +19,7 @@
                 <span
                   class="pr-2 font-weight-light text-uppercase"
                   style="letter-spacing: 0.025rem;"
-                  >Skills</span
+                  >{{ $t('profile.skills') }}</span
                 >
                 <div>
                   <a href="#" style="text-decoration: none;">
@@ -63,7 +63,7 @@
                 <span
                   class="pr-2 font-weight-light text-uppercase"
                   style="letter-spacing: 0.025rem;"
-                  >Socials</span
+                  >{{ $t('profile.socials') }}</span
                 >
                 <div>
                   <a href="#" style="text-decoration: none;">

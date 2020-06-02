@@ -31,7 +31,7 @@
               </v-icon>
               <div class=" flex-column text-color-grey">
                 <div class="info-label">
-                  Created by
+                  {{ $t('feedItem.createdBy') }}
                 </div>
                 <div>
                   {{ createdBy }}
@@ -44,7 +44,7 @@
               </v-icon>
               <div class=" flex-column text-color-grey">
                 <div class="info-label">
-                  Created at
+                  {{ $t('feedItem.createdAt') }}
                 </div>
                 <div>
                   {{ getDateString }}

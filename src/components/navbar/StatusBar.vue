@@ -49,7 +49,7 @@
             mdi-logout
           </v-icon>
           <v-list-item-title class="d-flex justify-start flex-fill grey--text">
-            Logout
+            {{ $t('subMenu.logOut') }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -67,17 +67,17 @@ export default {
     return {
       items: [
         {
-          title: 'Profile',
+          title: this.$t('subMenu.profile'),
           icon: 'mdi-account-outline',
           link: '/profile/Tim'
         },
         {
-          title: 'Settings',
+          title: this.$t('subMenu.settings'),
           icon: 'mdi-cog-outline',
           link: '/home'
         },
         {
-          title: 'My groups',
+          title: this.$t('subMenu.myGroups'),
           icon: 'mdi-account-group-outline',
           link: '/home'
         }

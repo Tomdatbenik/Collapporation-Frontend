@@ -13,7 +13,7 @@
         :src="require('@/assets/logo_google.svg')"
       ></v-img>
       <div class="ma-2 d-flex align-center justify-start">
-        Sign in with Google
+        {{$t('login.google')}}
       </div>
     </div>
   </v-btn>

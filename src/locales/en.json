@@ -2,6 +2,36 @@
   "landingPage": {
     "gettingStarted": "Getting started",
     "slogan": "The platform to bring developers together with your application ideas.",
-    "startBtn": "Start Now"
+    "startBtn": "Start now"
+  },
+  "login": {
+    "login": "Login",
+    "google": "Sign in with Google",
+    "facebook": "Sign in with Facebook",
+    "github": "Sign in with GitHub",
+    "close": "Close"
+  },
+  "navBar": {
+    "login": "Login"
+  },
+  "feedItem": {
+    "createdBy": "Created by",
+    "createdAt": "Created at"
+  },
+  "profile": {
+    "skills": "Skills",
+    "socials": "Socials"
+  },
+  "subMenu": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "myGroups": "My groups",
+    "logout": "Log out"
+  },
+  "feed": {
+    "wrong": "Oops, something went wrong",
+    "retry": "Retry",
+    "noRes": "No results",
+    "noMore": "No more projects"
   }
 }

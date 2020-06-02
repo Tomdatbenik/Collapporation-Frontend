@@ -8,7 +8,7 @@
       <v-icon class="ma-2" color="white">mdi-facebook</v-icon>
 
       <div class="ma-2 d-flex align-center justify-start">
-        Sign in with Facebook
+        {{$t('login.facebook')}}
       </div>
     </div>
   </v-btn>

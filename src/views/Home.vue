@@ -36,9 +36,21 @@
           <infinite-loading :identifier="infiniteId" @infinite="updateFeed">
             <div slot="error" slot-scope="{ trigger }">
               <p class="mb-2">
-                Oops, something went wrong.
+                {{ $t('feed.wrong') }}
               </p>
-              <a class="btn-try-infinite" @click="trigger">Retry</a>
+              <a class="btn-try-infinite" @click="trigger">{{
+                $t('feed.retry')
+              }}</a>
+            </div>
+            <div slot="no-results">
+              <p class="mb-2">
+                {{ $t('feed.noRes') }}
+              </p>
+            </div>
+            <div slot="no-more">
+              <p class="mb-2">
+                {{ $t('feed.noMore') }}
+              </p>
             </div>
           </infinite-loading>
         </div>
