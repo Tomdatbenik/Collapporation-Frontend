@@ -69,29 +69,29 @@
 
 <script>
 // @ is an alias to /src
-import firebase from "firebase";
+import firebase from 'firebase'
 
 export default {
-  name: "Home",
+  name: 'Home',
   data: function() {
     return {
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /^(.+)@(.+)+\.(.+)$/.test(v) || "E-mail must be valid"
+        v => !!v || 'E-mail is required',
+        v => /^(.+)@(.+)+\.(.+)$/.test(v) || 'E-mail must be valid'
       ],
-      passwordRules: [v => !!v || "Password is required"]
-    };
+      passwordRules: [v => !!v || 'Password is required']
+    }
   },
   mounted() {
-    firebase.auth().useDeviceLanguage();
-    this.getGoogleInformation();
-    this.getFacebookInformation();
-    this.getGithubInformation();
+    firebase.auth().useDeviceLanguage()
+    this.getGoogleInformation()
+    this.getFacebookInformation()
+    this.getGithubInformation()
   },
   methods: {
     googleLogin() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     getGoogleInformation() {
@@ -99,31 +99,31 @@ export default {
         .auth()
         .getRedirectResult()
         .then(function(result) {
-          console.log(result);
+          console.log(result)
           if (result.credential) {
-            var token = result.credential.accessToken;
-            console.log(token);
+            var token = result.credential.accessToken
+            console.log(token)
           }
 
-          var user = result.user;
-          console.log(user);
+          var user = result.user
+          console.log(user)
         })
         .catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode + ": " + errorMessage);
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode + ': ' + errorMessage)
 
-          var email = error.email;
+          var email = error.email
 
-          var credential = error.credential;
+          var credential = error.credential
 
-          console.log(email + " " + credential);
-        });
+          console.log(email + ' ' + credential)
+        })
     },
 
     facebookLogin() {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.FacebookAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     getFacebookInformation() {
@@ -133,32 +133,32 @@ export default {
         .then(function(result) {
           if (result.credential) {
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            var token = result.credential.accessToken;
-            console.log(token);
+            var token = result.credential.accessToken
+            console.log(token)
             // ...
           }
           // The signed-in user info.
-          var user = result.user;
-          console.log(user);
+          var user = result.user
+          console.log(user)
         })
         .catch(function(error) {
           // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode + ": " + errorMessage);
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode + ': ' + errorMessage)
           // The email of the user's account used.
-          var email = error.email;
-          console.log(email);
+          var email = error.email
+          console.log(email)
           // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          console.log(credential);
+          var credential = error.credential
+          console.log(credential)
           // ...
-        });
+        })
     },
 
     githubLogin() {
-      const provider = new firebase.auth.GithubAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.GithubAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
 
     getGithubInformation() {
@@ -168,28 +168,28 @@ export default {
         .then(function(result) {
           if (result.credential) {
             // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-            var token = result.credential.accessToken;
-            console.assert(token);
+            var token = result.credential.accessToken
+            console.assert(token)
             // ...
           }
           // The signed-in user info.
-          var user = result.user;
-          console.assert(user);
+          var user = result.user
+          console.assert(user)
         })
         .catch(function(error) {
           // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.assert(errorCode, +": " + errorMessage);
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.assert(errorCode, +': ' + errorMessage)
           // The email of the user's account used.
-          var email = error.email;
+          var email = error.email
           // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          console.assert(email, +": " + credential);
-        });
+          var credential = error.credential
+          console.assert(email, +': ' + credential)
+        })
     }
   }
-};
+}
 </script>
 
 <style>
@@ -209,7 +209,7 @@ export default {
   width: 223px;
 }
 .loginBtn:before {
-  content: "";
+  content: '';
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -231,7 +231,7 @@ export default {
 }
 .loginBtn--google:before {
   border-right: #bb3f30 1px solid;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png")
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png')
     6px 6px no-repeat;
 }
 .loginBtn--google:hover,
@@ -246,7 +246,7 @@ export default {
 }
 .loginBtn--github:before {
   border-right: dimgray 1px solid;
-  background: url("../../public/img/LoginIcons/GitHub-Mark-Light-120px-plus.png");
+  background: url('../../public/img/LoginIcons/GitHub-Mark-Light-120px-plus.png');
   background-size: 25px;
   background-position: center;
   background-repeat: no-repeat;
@@ -267,7 +267,7 @@ export default {
   background: linear-gradient(to right, #36d1dc, #3bc8dd, #47aee0, #5b86e5);
 }
 #wave:before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   border-radius: 100% 90%;
@@ -278,7 +278,7 @@ export default {
   bottom: -100px;
 }
 #wave:after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   border-radius: 100% 90%;

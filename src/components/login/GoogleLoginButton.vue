@@ -21,11 +21,11 @@
 
 <script>
 export default {
-  name: "GoogleLoginButton",
+  name: 'GoogleLoginButton',
   props: {
     width: String
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

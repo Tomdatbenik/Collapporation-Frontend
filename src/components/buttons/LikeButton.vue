@@ -20,16 +20,16 @@
 
 <script>
 export default {
-  name: "LikeButton",
+  name: 'LikeButton',
   props: {
     likes: Number
   },
   data() {
     return {
       liked: false
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped>

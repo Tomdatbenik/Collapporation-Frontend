@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  name: "FacebookLoginButton",
+  name: 'FacebookLoginButton',
   props: {
     width: String
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

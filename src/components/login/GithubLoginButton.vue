@@ -15,11 +15,11 @@
 
 <script>
 export default {
-  name: "GithubLoginButton",
+  name: 'GithubLoginButton',
   props: {
     width: String
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>
