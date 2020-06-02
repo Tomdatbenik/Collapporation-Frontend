@@ -14,6 +14,7 @@ import Navbar from '@/components/navbar/Navbar.vue'
 import LoadingOverlay from '@/components/shared/LoadingOverlay.vue'
 import { mapActions, mapMutations } from 'vuex'
 import firebase from 'firebase'
+import { authComputed } from '@/store/helpers.js'
 
 export default {
   name: 'App',
@@ -31,14 +32,16 @@ export default {
     firebase.auth().useDeviceLanguage()
     this.fetchInformation()
   },
-
+  computed: {
+    ...authComputed
+  },
   methods: {
     ...mapActions('user', ['authenticate']),
     ...mapMutations('user', {
       loading: 'SET_LOADING'
     }),
     fetchInformation() {
-      if (!localStorage.getItem('user')) {
+      if (!localStorage.getItem('user') && !this.isAuthenticated) {
         this.loading(true)
         firebase
           .auth()
@@ -55,9 +58,6 @@ export default {
             var errorCode = error.code
             var errorMessage = error.message
             console.log(errorCode + ': ' + errorMessage)
-            var email = error.email
-            var credential = error.credential
-            console.log(email + ' ' + credential)
             this.loading(false)
           })
       }
