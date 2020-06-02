@@ -23,7 +23,6 @@ export default {
   },
 
   addProject(project) {
-    console.log(project)
-    return api.post('project-service/project/create')
+    return api.post('project-service/project/create', project)
   }
 }
