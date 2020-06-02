@@ -38,29 +38,29 @@ export default {
       loading: 'SET_LOADING'
     }),
     fetchInformation() {
-      this.loading(true)
-      firebase
-        .auth()
-        .getRedirectResult()
-        .then(result => {
-          console.log(result)
-          firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then(idToken => {
-              console.log(idToken)
-              this.authenticate(idToken)
-            })
-        })
-        .catch(error => {
-          var errorCode = error.code
-          var errorMessage = error.message
-          console.log(errorCode + ': ' + errorMessage)
-          var email = error.email
-          var credential = error.credential
-          console.log(email + ' ' + credential)
-          this.loading(false)
-        })
+      if (!localStorage.getItem('user')) {
+        this.loading(true)
+        firebase
+          .auth()
+          .getRedirectResult()
+          .then(() => {
+            firebase
+              .auth()
+              .currentUser.getIdToken(true)
+              .then(idToken => {
+                this.authenticate(idToken)
+              })
+          })
+          .catch(error => {
+            var errorCode = error.code
+            var errorMessage = error.message
+            console.log(errorCode + ': ' + errorMessage)
+            var email = error.email
+            var credential = error.credential
+            console.log(email + ' ' + credential)
+            this.loading(false)
+          })
+      }
     }
   }
 }
