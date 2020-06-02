@@ -24,9 +24,12 @@ export default {
 
   sendLike(authToken, id) {
     console.log(authToken)
-    return api.post('like-service/like/like', {
-      headers: { Authorization: authToken },
-      body: { object_id: id }
-    })
+    return api.post(
+      'like-service/like/like',
+      { object_id: id },
+      {
+        headers: { Authorization: 'Bearer ' + authToken.replace('"', '') }
+      }
+    )
   }
 }
