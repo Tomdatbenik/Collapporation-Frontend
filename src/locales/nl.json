@@ -32,6 +32,9 @@
     "wrong": "Oeps, er ging iets mis",
     "retry": "Opniew proberen",
     "noRes": "Geen resultaten",
-    "noMore": "Geen projecten meer"
+    "noMore": "Geen projecten meer",
+    "hot": "hot",
+    "trending": "Populair",
+    "fresh": "Recent"
   }
 }
