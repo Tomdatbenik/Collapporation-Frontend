@@ -64,6 +64,7 @@
                 color="#DCEEFB"
                 text-color="#2680C2"
                 :likes="likes"
+                @clicked="click"
               />
             </v-card-text>
           </v-col>
@@ -100,6 +101,12 @@ export default {
         '-' +
         this.createdAt.getFullYear()
       )
+    }
+  },
+  methods: {
+    click() {
+      let self = this
+      this.$emit('clicked', self.id)
     }
   }
 }
