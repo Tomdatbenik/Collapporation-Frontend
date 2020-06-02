@@ -84,7 +84,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters({ project: 'project/getAddProject', user: 'user/user' })
   },
   methods: {
     previous() {
@@ -105,6 +105,9 @@ export default {
     //   //TODO save project
     // }
     finish() {
+      console.log('user')
+      console.log(this.user)
+
       //TODO check of alles goed is ingevuld
       //TODO wat krijg ik terug van de backend?
       API.addProject(this.project)
