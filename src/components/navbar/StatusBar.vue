@@ -23,8 +23,13 @@
 
     <v-menu offset-y open-on-hover>
       <template v-slot:activator="{ on }">
-        <div class="d-flex align-center mx-1 profile-box pa-2" v-on="on">
-          <div color="white" size="1.2rem" class="mr-1">Hallo Tim!</div>
+        <div
+          class="d-flex align-center mx-1 profile-box pa-sm-2 pl-4"
+          v-on="on"
+        >
+          <div color="white" size="1.2rem" class="mr-1 d-none d-sm-flex">
+            <span>Hi {{ user.userName }}!</span>
+          </div>
           <v-icon color="grey lighten-2" x-large>mdi-account-circle</v-icon>
           <v-icon color="grey lighten-2" class="ml-n1">mdi-menu-down</v-icon>
         </div>
@@ -59,7 +64,7 @@
 
 <script>
 import firebase from 'firebase'
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'StatusBar',
@@ -83,6 +88,9 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapState('user', ['user'])
   },
   methods: {
     ...mapActions('user', ['logout']),
