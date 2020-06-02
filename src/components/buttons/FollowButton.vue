@@ -19,13 +19,13 @@
 
 <script>
 export default {
-  name: "FollowButton",
+  name: 'FollowButton',
   data() {
     return {
       followed: false
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped></style>

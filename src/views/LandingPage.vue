@@ -5,22 +5,21 @@
         <div class="d-flex flex-row align-center">
           <div class="d-flex flex-column">
             <h1 class="display-2 font-weight-bold mb-4  pr-10">
-              Getting Started
+              {{ $t('landingPage.gettingStarted') }}
             </h1>
             <p class="font-weight-light headline">
-              The platform to bring developers together with your application
-              ideas.
+              {{ $t('landingPage.slogan') }}
             </p>
             <v-btn
               class="text-capitalize cyan--text text--lighten-1"
               width="50%"
               rounded
-              >Start Now</v-btn
-            >
+              >{{ $t('landingPage.startBtn') }}
+            </v-btn>
           </div>
           <!-- <div class="pa-3 flex-fill hidden-sm-and-down">
-            <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
-          </div> -->
+                      <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
+                    </div> -->
         </div>
       </div>
     </v-container>
@@ -57,6 +56,7 @@ export default {
   color: #fff;
   overflow: hidden;
 }
+
 .wave-container > svg {
   display: block;
 }
@@ -69,6 +69,7 @@ export default {
     transform: scale(1, 1);
   }
 }
+
 .wave-container > svg {
   display: block;
   transform-origin: bottom;

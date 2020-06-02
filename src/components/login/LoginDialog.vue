@@ -2,7 +2,7 @@
   <v-dialog v-model="show" max-width="500px">
     <v-card>
       <v-card-title class="justify-center">
-        Login
+        {{ $t('login.login') }}
       </v-card-title>
       <v-card-actions>
         <v-row no-gutters>
@@ -26,7 +26,7 @@
           </v-col>
           <v-col cols="12" class="d-flex justify-center">
             <v-btn color="teal lighten-2" text @click.stop="show = false"
-              >Close</v-btn
+              >{{$t('login.close')}}</v-btn
             >
           </v-col>
         </v-row>

@@ -1,0 +1,37 @@
+{
+  "landingPage": {
+    "gettingStarted": "Beginnen",
+    "slogan": "Het platform dat developers en jouw application ideeën samen brengt.",
+    "startBtn": "Start Nu"
+  },
+  "login": {
+    "login": "Inloggen",
+    "google": "Log in met Google",
+    "facebook": "Log in met Facebook",
+    "github": "Log in met GitHub",
+    "close": "Sluiten"
+  },
+  "navBar": {
+    "login": "Inloggen"
+  },
+  "feedItem": {
+    "createdBy": "Aangemaakt door",
+    "createdAt": "Aangemaakt op"
+  },
+  "profile": {
+    "skills": "Vaardigheden",
+    "socials": "Social media"
+  },
+  "subMenu": {
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "myGroups": "Mijn groepen",
+    "logOut": "Uitloggen"
+  },
+  "feed": {
+    "wrong": "Oeps, er ging iets mis",
+    "retry": "Opniew proberen",
+    "noRes": "Geen resultaten",
+    "noMore": "Geen projecten meer"
+  }
+}

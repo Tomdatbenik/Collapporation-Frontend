@@ -33,7 +33,7 @@
               v-if="!loggedIn"
               color="white"
             >
-              Login
+              {{ $t('navBar.login') }}
             </v-btn>
             <status-bar v-if="loggedIn"></status-bar>
           </div>

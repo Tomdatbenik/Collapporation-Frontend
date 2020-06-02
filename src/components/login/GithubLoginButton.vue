@@ -7,7 +7,7 @@
     <div class="d-flex flex-row justify-start" style="width: 100%">
       <v-icon class="ma-2" color="white">mdi-github</v-icon>
       <div class="ma-2 d-flex align-center justify-start">
-        Sign in with GitHub
+        {{$t('login.github')}}
       </div>
     </div>
   </v-btn>
@@ -15,11 +15,11 @@
 
 <script>
 export default {
-  name: "GithubLoginButton",
+  name: 'GithubLoginButton',
   props: {
     width: String
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>
