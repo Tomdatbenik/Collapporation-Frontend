@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card tile width="100%">
+    <v-card tile width="100%" color="white">
       <v-tabs @change="resetFeed" v-model="tab" color="#696969" centered>
         <v-tab style="color: #696969">
           <v-icon class="pr-1">mdi-fire</v-icon>
@@ -32,6 +32,7 @@
             :tags="item.tags"
             :likes="item.likes"
             :status="item.status"
+            @clicked="updateLike"
           />
           <infinite-loading :identifier="infiniteId" @infinite="updateFeed">
             <div slot="error" slot-scope="{ trigger }">
@@ -51,6 +52,7 @@
 import FeedItem from '../components/feed/FeedItem'
 import InfiniteLoading from 'vue-infinite-loading'
 import axios from 'axios'
+import api from '@/service/api'
 
 export default {
   components: { FeedItem, InfiniteLoading },
@@ -93,9 +95,18 @@ export default {
       this.page = 0
       this.feedItems = []
       this.infiniteId += 1
+    },
+    updateLike(id) {
+      api.sendLike(localStorage.getItem('user'), id).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+::v-deep .v-tabs-bar {
+  background-color: white !important;
+}
+</style>
