@@ -60,13 +60,15 @@ export default {
       feedItems: [],
       page: 0,
       size: 12,
-      infiniteId: +new Date()
+      infiniteId: +new Date(),
+      hasLoaded: false
     }
   },
   methods: {
     updateFeed: function($state) {
       let self = this
       let apicall = axios.create()
+
       apicall
         .get('http://localhost:8102/project-service/projectfeed/all', {
           params: {
@@ -76,11 +78,16 @@ export default {
         })
         .then(response => {
           self.page++
-          for (let i = 0; i < response.data.length; i++) {
-            self.feedItems.push(response.data[i])
-          }
-          $state.loaded()
-          if (response.data.length < self.size) {
+          if (this.hasLoaded === false) {
+            for (let i = 0; i < response.data.length; i++) {
+              self.feedItems.push(response.data[i])
+            }
+            $state.loaded()
+            if (response.data.length < self.size) {
+              $state.complete()
+              this.hasLoaded = true
+            }
+          } else {
             $state.complete()
           }
         })
@@ -93,6 +100,7 @@ export default {
       this.page = 0
       this.feedItems = []
       this.infiniteId += 1
+      this.hasLoaded = false
     }
   }
 }
