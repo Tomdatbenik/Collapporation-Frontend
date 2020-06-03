@@ -93,7 +93,6 @@ export default {
         `projectImg.${extension}`,
         `image/${extension}`
       ).then(image => {
-        console.log(image)
         this.image = image
       })
     },
@@ -110,14 +109,14 @@ export default {
       const strings = base64.split(',')
       let extension = ''
       switch (strings[0]) {
+        case 'data:image/jpg;base64':
+          extension = 'jpg'
+          break
         case 'data:image/jpeg;base64':
           extension = 'jpeg'
           break
         case 'data:image/png;base64':
           extension = 'png'
-          break
-        case 'data:image/jpg;base64':
-          extension = 'jpg'
           break
         case 'data:image/jfif;base64':
           extension = 'jfif'
