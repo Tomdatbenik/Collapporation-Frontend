@@ -11,7 +11,7 @@
             label="Image"
             autofocus
             prepend-icon="mdi-camera"
-            accept="image/png, image/jpeg, image/bmp, image/jfif"
+            accept="image/png, image/jpeg, image/bmp, image/jfif, image/jpg"
             v-model="image"
             class="mx-10"
             :rules="[rules.required, rules.size]"
@@ -54,7 +54,7 @@ export default {
       rules: {
         required: value => !!value || 'Required.',
         size: value =>
-          !value || value.size <= 5e6 || 'Image size should be less than 5 MB.'
+          !value || value.size <= 2e6 || 'Image size should be less than 2 MB.'
       }
     }
   },
@@ -65,7 +65,7 @@ export default {
   },
   created() {
     if (this.project.img) {
-      this.image = this.project.img
+      this.getImage()
       this.url = this.project.img
     }
   },
@@ -81,11 +81,52 @@ export default {
       if (this.$refs.form.validate()) {
         this.url = URL.createObjectURL(this.image)
         this.saveProjectImage(this.image)
-        // var file = new File([byteArrays], filename, {type: contentType, lastModified: Date.now()});
       } else {
         this.saveProjectImage(null)
         this.url = ''
       }
+    },
+    async getImage() {
+      const extension = this.getFileType(this.project.img)
+      await this.urlToFile(
+        this.project.img,
+        `projectImg.${extension}`,
+        `image/${extension}`
+      ).then(image => {
+        console.log(image)
+        this.image = image
+      })
+    },
+    urlToFile(url, filename, mimeType) {
+      return fetch(url)
+        .then(function(res) {
+          return res.arrayBuffer()
+        })
+        .then(function(buf) {
+          return new File([buf], filename, { type: mimeType })
+        })
+    },
+    getFileType(base64) {
+      const strings = base64.split(',')
+      let extension = ''
+      switch (strings[0]) {
+        case 'data:image/jpeg;base64':
+          extension = 'jpeg'
+          break
+        case 'data:image/png;base64':
+          extension = 'png'
+          break
+        case 'data:image/jpg;base64':
+          extension = 'jpg'
+          break
+        case 'data:image/jfif;base64':
+          extension = 'jfif'
+          break
+        case 'data:image/bmp;base64':
+          extension = 'bmp'
+          break
+      }
+      return extension
     }
   }
 }
