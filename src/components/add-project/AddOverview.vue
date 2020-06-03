@@ -1,6 +1,50 @@
 <template>
-  <div>
-    <v-card>
+  <v-container>
+    <v-row class="d-flex flex-wrap">
+      <v-col class="d-flex" cols="6">
+        <v-card elevation="0" tile width="100%">
+          <v-card-actions class="pa-0"
+            ><img v-if="project.img" :src="project.img" style="width: 100%;"
+          /></v-card-actions>
+        </v-card>
+      </v-col>
+      <v-col class="d-flex flex-column" cols="6">
+        <h1>{{ project.title }}</h1>
+        <p>{{ project.smallDescription }}</p>
+      </v-col>
+      <v-col align="end" cols="12">
+        <h4>Tags</h4>
+        <v-chip v-for="(tag, index) in project.tags" :key="index">{{
+          tag
+        }}</v-chip>
+        <h4>Links</h4>
+        <v-chip v-for="(link, index) in project.links" :key="index">{{
+          link
+        }}</v-chip>
+      </v-col>
+      <v-col cols="12">
+        <markdown-it-vue
+          class="md-body mx-2 my-2"
+          :content="this.project.description"
+        />
+      </v-col>
+
+      <v-col cols="6">
+        <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      </v-col>
+      <v-col cols="6">
+        <v-btn
+          color="teal lighten-2"
+          rounded
+          width="15vw"
+          class="ml-3"
+          @click="finish"
+          >FINISH</v-btn
+        >
+      </v-col>
+    </v-row>
+
+    <!-- <v-card>
       <v-card-title>{{
         project.title ? project.title : 'No title yet...'
       }}</v-card-title>
@@ -50,19 +94,8 @@
             :content="this.project.description"
         /></v-col>
       </v-row>
-    </v-card>
-    <v-row class="mt-10" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
-      <v-btn
-        color="teal lighten-2"
-        rounded
-        width="15vw"
-        class="ml-3"
-        @click="finish"
-        >FINISH</v-btn
-      >
-    </v-row>
-  </div>
+    </v-card> -->
+  </v-container>
 </template>
 
 <script>
@@ -97,7 +130,15 @@ export default {
       //TODO check of alles goed is ingevuld
       API.addProject(this.project)
         .then(result => {
-          console.log(result.data)
+          if (result && result.status) {
+            if (result.status === 200) {
+              alert('route to show project page')
+            }
+          } else {
+            alert(
+              `Exited with status code ${result.status}. Please try again...`
+            )
+          }
         })
         .catch(error => {
           console.log(error)
