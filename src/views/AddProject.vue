@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="9">
-        <v-card tile height="70vh">
+      <v-col xs="12" sm="8" md="9">
+        <v-card tile>
           <v-row no-gutters justify="center">
             <v-card-title class="mt-10" color="#696969" style="width: 80%;">
               {{ this.currentStep.title }}
@@ -51,7 +51,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="3">
+      <v-col sm="4" md="3" class="d-none d-sm-block">
         <v-card tile class="pb-3">
           <v-card-title color="#696969">
             Create Concept

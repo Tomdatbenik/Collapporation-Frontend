@@ -49,7 +49,7 @@
         >{{ link }}
       </v-chip>
     </v-row>
-    <v-row class="mt-10" no-gutters justify="center">
+    <v-row class="mt-10 mb-5" no-gutters justify="center">
       <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
       <v-btn
         color="teal lighten-2"
@@ -64,69 +64,69 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import AddToProjectDialog from "@/components/add-project/AddToProjectDialog.vue";
+import { mapGetters, mapActions } from 'vuex'
+import AddToProjectDialog from '@/components/add-project/AddToProjectDialog.vue'
 
 export default {
   components: {
-    AddToProjectDialog,
+    AddToProjectDialog
   },
   data() {
     return {
       valid: false,
-      linkName: "",
+      linkName: '',
       links: [],
       showAddDialog: false,
       rules: {
-        url: (value) => {
-          const pattern = /^(https:\/\/|http:\/\/)?[w]{3}[.]([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/; //eslint-disable-line no-useless-escape
-          return pattern.test(value) || "Invalid URL.";
+        url: value => {
+          const pattern = /^(https:\/\/|http:\/\/)?[w]{3}[.]([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/ //eslint-disable-line no-useless-escape
+          return pattern.test(value) || 'Invalid URL.'
         },
-        unique: (value) => {
-          let existing = false;
+        unique: value => {
+          let existing = false
           if (value) {
-            this.links.forEach((link) => {
+            this.links.forEach(link => {
               if (link.toLowerCase() === value.toLowerCase()) {
-                existing = true;
+                existing = true
               }
-            });
+            })
           }
-          return !existing || "This link already exists.";
-        },
-      },
-    };
+          return !existing || 'This link already exists.'
+        }
+      }
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   created() {
-    this.links = this.project.links;
+    this.links = this.project.links
   },
   methods: {
-    ...mapActions("project", ["saveProjectLinks"]),
+    ...mapActions('project', ['saveProjectLinks']),
     addLink() {
       if (this.$refs.form.validate) {
-        this.links.push(this.linkName.toLowerCase());
-        this.saveProjectLinks(this.links);
+        this.links.push(this.linkName.toLowerCase())
+        this.saveProjectLinks(this.links)
       }
-      this.linkName = "";
+      this.linkName = ''
     },
     removeLink(link) {
       for (let i = 0; i < this.links.length; i++) {
         if (this.links[i] === link) {
-          this.links.splice(i, 1);
+          this.links.splice(i, 1)
         }
       }
-      this.saveProjectLinks(this.links);
+      this.saveProjectLinks(this.links)
     },
     previous() {
-      this.$emit("previous");
+      this.$emit('previous')
     },
     next() {
-      this.$emit("next");
-    },
-  },
-};
+      this.$emit('next')
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>

@@ -20,7 +20,7 @@
         ></v-textarea>
       </v-form>
     </div>
-    <v-row class="mt-10" no-gutters justify="center">
+    <v-row class="mt-10  mb-5" no-gutters justify="center">
       <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
       <v-btn
         :disabled="!valid"
@@ -36,41 +36,41 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       valid: false,
-      smallDescription: "",
+      smallDescription: '',
       rules: {
-        required: (value) => !!value || "Required.",
-        counter: (value) =>
-          (value && value.length <= 255) || "Max 255 characters.",
-      },
-    };
+        required: value => !!value || 'Required.',
+        counter: value =>
+          (value && value.length <= 255) || 'Max 255 characters.'
+      }
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   created() {
-    this.smallDescription = this.project.smallDescription;
+    this.smallDescription = this.project.smallDescription
   },
   methods: {
-    ...mapActions("project", ["saveProjectSmallDescription"]),
+    ...mapActions('project', ['saveProjectSmallDescription']),
     previous() {
-      this.$emit("previous");
+      this.$emit('previous')
     },
     next() {
-      this.$emit("next");
+      this.$emit('next')
     },
     update() {
       if (this.$refs.form.validate()) {
-        this.saveProjectSmallDescription(this.smallDescription);
+        this.saveProjectSmallDescription(this.smallDescription)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>

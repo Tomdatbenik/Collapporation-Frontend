@@ -1,14 +1,17 @@
 <template>
   <v-container>
     <v-row class="d-flex flex-wrap">
-      <v-col class="d-flex" cols="6">
-        <v-card elevation="0" tile width="100%">
+      <v-col class="d-flex">
+        <v-avatar min-height="100" min-width="100" size="200" tile>
+          <v-img contain v-if="project.img" :src="project.img"></v-img>
+        </v-avatar>
+        <!-- <v-card elevation="0" tile width="100%">
           <v-card-actions class="pa-0"
             ><img v-if="project.img" :src="project.img" style="width: 100%;"
           /></v-card-actions>
-        </v-card>
+        </v-card> -->
       </v-col>
-      <v-col class="d-flex flex-column" cols="6">
+      <v-col class="d-flex flex-column">
         <h1>
           {{ project.title
           }}<v-divider
@@ -17,8 +20,11 @@
         </h1>
         <p>{{ project.smallDescription }}</p>
       </v-col>
-      <v-col align="end" cols="12">
-        <div v-if="project.tags.length > 0">
+      <v-col
+        align="end"
+        cols="12"
+        v-if="project.tags.length > 0 || project.links.length > 0"
+        ><div v-if="project.tags.length > 0">
           <h4>Tags</h4>
           <v-chip v-for="(tag, index) in project.tags" :key="index">{{
             tag
@@ -29,12 +35,12 @@
           <v-chip v-for="(link, index) in project.links" :key="index">{{
             link
           }}</v-chip>
-        </div>
-      </v-col>
+        </div></v-col
+      >
       <v-col
         cols="12"
         class="mt-3 mb-10"
-        style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; height: 19em;"
+        style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; max-height: 200px; overflow-y: auto;"
       >
         <markdown-it-vue
           class="md-body mx-2 my-2"

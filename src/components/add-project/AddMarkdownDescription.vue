@@ -31,7 +31,7 @@
         ><markdown-it-vue class="md-body" :content="this.description"
       /></v-col>
     </v-row>
-    <v-row class="mt-10" no-gutters justify="center">
+    <v-row class="mt-10  mb-5" no-gutters justify="center">
       <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
       <v-btn
         color="teal lighten-2"

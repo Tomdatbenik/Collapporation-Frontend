@@ -20,7 +20,7 @@
         ></v-text-field
       ></v-form>
     </div>
-    <v-row class="mt-10" no-gutters justify="center">
+    <v-row class="mt-10 mb-5" no-gutters justify="center">
       <v-btn rounded width="15vw">CANCEL</v-btn>
       <v-btn
         :disabled="!valid"
@@ -36,39 +36,39 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       valid: false,
-      title: "",
+      title: '',
       rules: {
-        required: (value) => !!value || "Required.",
-      },
-    };
+        required: value => !!value || 'Required.'
+      }
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   created() {
-    this.title = this.project.title;
+    this.title = this.project.title
   },
   methods: {
-    ...mapActions("project", ["saveProjectTitle"]),
+    ...mapActions('project', ['saveProjectTitle']),
     next() {
-      this.$emit("next");
+      this.$emit('next')
     },
     update() {
       if (this.$refs.form.validate()) {
-        this.saveProjectTitle(this.title);
+        this.saveProjectTitle(this.title)
       }
     },
     remove() {
-      this.saveProjectTitle("");
-    },
-  },
-};
+      this.saveProjectTitle('')
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>
