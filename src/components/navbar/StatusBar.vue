@@ -28,7 +28,7 @@
           v-on="on"
         >
           <div color="white" size="1.2rem" class="mr-1 d-none d-sm-flex">
-            <span>Hi {{ user.userName }}!</span>
+            <span>Hi {{ user.firstName }}!</span>
           </div>
           <v-icon color="grey lighten-2" x-large>mdi-account-circle</v-icon>
           <v-icon color="grey lighten-2" class="ml-n1">mdi-menu-down</v-icon>
