@@ -2,14 +2,16 @@
   <v-container>
     <v-row class="d-flex flex-wrap">
       <v-col class="d-flex">
-        <v-avatar min-height="100" min-width="100" size="200" tile>
+        <v-avatar
+          min-height="100"
+          min-width="100"
+          max-height="300"
+          max-width="300"
+          size="100%"
+          tile
+        >
           <v-img contain v-if="project.img" :src="project.img"></v-img>
         </v-avatar>
-        <!-- <v-card elevation="0" tile width="100%">
-          <v-card-actions class="pa-0"
-            ><img v-if="project.img" :src="project.img" style="width: 100%;"
-          /></v-card-actions>
-        </v-card> -->
       </v-col>
       <v-col class="d-flex flex-column">
         <h1>

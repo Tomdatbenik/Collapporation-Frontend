@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="d-flex flex-wrap"
       ><v-col class="d-flex">
-        <v-avatar min-height="100" min-width="100" size="200" tile>
+        <v-avatar min-height="100" min-width="100" size="100%" tile>
           <v-img contain v-if="project.img" :src="project.img"></v-img>
         </v-avatar> </v-col
       ><v-col class="d-flex">
@@ -20,6 +20,7 @@
               v-model="image"
               :rules="[rules.required, rules.size]"
               @change="update"
+              @click:clear="clearImage"
             ></v-file-input
           ></v-form>
         </div>
@@ -83,6 +84,11 @@ export default {
         this.saveProjectImage(null)
         this.url = ''
       }
+    },
+    clearImage() {
+      this.saveProjectImage(null)
+      this.image = null
+      this.url = ''
     },
     async getImage() {
       const extension = this.getFileType(this.project.img)
