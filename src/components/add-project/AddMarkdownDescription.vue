@@ -46,50 +46,49 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import MarkdownItVue from "markdown-it-vue";
-import "markdown-it-vue/dist/markdown-it-vue.css";
+import { mapGetters, mapActions } from 'vuex'
+import MarkdownItVue from '../../../node_modules/markdown-it-vue/src/index'
 
 export default {
   components: {
-    MarkdownItVue,
+    MarkdownItVue
   },
   data() {
     return {
       togglePreview: false,
-      description: "",
-    };
+      description: ''
+    }
   },
   computed: {
-    ...mapGetters("project", { project: "getAddProject" }),
+    ...mapGetters('project', { project: 'getAddProject' })
   },
   created() {
-    this.description = this.project.description;
+    this.description = this.project.description
   },
   methods: {
-    ...mapActions("project", ["saveProjectDescription"]),
+    ...mapActions('project', ['saveProjectDescription']),
     previous() {
-      this.$emit("previous");
+      this.$emit('previous')
     },
     next() {
-      this.$emit("next");
+      this.$emit('next')
     },
     update() {
-      this.saveProjectDescription(this.description);
-    },
-  },
-};
+      this.saveProjectDescription(this.description)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
 .editPreviewSwitch::before {
-  content: "Edit";
+  content: 'Edit';
   color: black;
   margin-right: 0.5em;
 }
 
 .editPreviewSwitch::after {
-  content: "Preview";
+  content: 'Preview';
   color: black;
 }
 </style>
