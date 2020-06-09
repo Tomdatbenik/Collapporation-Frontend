@@ -19,7 +19,7 @@
                 width="50"
               />
             </div>
-            <div class="white--text headline ml-3">
+            <div class="white--text headline ml-3 d-none d-sm-flex">
               <span class="font-weight-bold">Coll</span>
               <span class="font-italic" id="app-subtitle">app</span>
               <span class="font-weight-bold">oration</span>
@@ -30,12 +30,12 @@
             <v-btn
               text
               @click.stop="showLoginDialog = true"
-              v-if="!loggedIn"
+              v-if="!isAuthenticated"
               color="white"
             >
               {{ $t('navBar.login') }}
             </v-btn>
-            <status-bar v-if="loggedIn"></status-bar>
+            <status-bar v-if="isAuthenticated"></status-bar>
           </div>
         </div>
       </v-container>

@@ -9,7 +9,7 @@
               size="225"
               class="elevation-1 mb-12 align-self-center d-none d-sm-flex"
             >
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+              <img :src="user.picture" />
             </v-avatar>
             <div class="user--skills mb-12">
               <div
@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import API from '@/service/api.js'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -192,14 +192,17 @@ export default {
     }
   },
   created() {
-    API.getProfile(this.$route.params.id)
-      .then(result => {
-        console.log(result.data)
-        this.user = result.data
+    this.getProfile(this.$route.params.id)
+      .then(user => {
+        this.user = user
       })
-      .catch(error => {
-        console.log(error)
+      .catch(err => {
+        this.$router.push('/home')
+        console.log(err)
       })
+  },
+  methods: {
+    ...mapActions('user', ['getProfile'])
   }
 }
 </script>

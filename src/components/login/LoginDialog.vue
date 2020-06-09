@@ -39,7 +39,7 @@
 import GoogleLoginButton from '@/components/login/GoogleLoginButton.vue'
 import FacebookLoginButton from '@/components/login/FacebookLoginButton.vue'
 import GithubLoginButton from '@/components/login/GithubLoginButton.vue'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export default {
   name: 'LoginDialog',

@@ -1,35 +1,71 @@
 import axios from 'axios'
+import store from '@/store/index.js'
 
-const api = axios.create({
+let isRefreshing = false
+let subscribers = []
+
+const service = axios.create({
   baseURL: 'http://localhost:8102/',
   withCredentials: false
 })
 
-export default {
-  getNewToken(idToken) {
-    return api.get('token-service/token/new', {
-      headers: { idToken: idToken }
-    })
+service.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('user-token')
+    if (token) {
+      config.headers.common['Authorization'] = 'Bearer' + token
+    }
+    return config
   },
-
-  getRefreshedToken(collapToken) {
-    return api.get('token-service/token/refresh', {
-      headers: { collaporationToken: collapToken }
-    })
+  response => {
+    return response.data
   },
+  error => {
+    const {
+      config,
+      response: { status }
+    } = error
+    const originalRequest = config
 
-  getProfile(userId) {
-    return api.get('user-service/user/' + userId)
-  },
-
-  sendLike(authToken, id) {
-    console.log(authToken)
-    return api.post(
-      'like-service/like/like',
-      { object_id: id },
-      {
-        headers: { Authorization: 'Bearer ' + authToken.replace('"', '') }
+    if (status === 401) {
+      if (!isRefreshing) {
+        isRefreshing = true
+        store
+          .dispatch('user/getRefreshToken')
+          .then(newToken => {
+            console.log(
+              'received refresh token in api handler with token: ' + newToken
+            )
+            isRefreshing = false
+            onRefreshed(newToken)
+          })
+          .catch(() => {
+            return Promise.reject(error)
+          })
       }
-    )
+
+      const retryOriginalRequest = new Promise(resolve => {
+        subscribeTokenRefresh(token => {
+          // replace the expired token and retry
+          console.log('setting refresh token as new header')
+          originalRequest.headers['Authorization'] = 'Bearer' + token
+          resolve(axios(originalRequest))
+        })
+      })
+
+      return retryOriginalRequest
+    }
+
+    return Promise.reject(error)
   }
+)
+
+function subscribeTokenRefresh(cb) {
+  subscribers.push(cb)
 }
+
+function onRefreshed(newToken) {
+  subscribers = subscribers.filter(callback => callback(newToken))
+}
+
+export default service

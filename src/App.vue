@@ -13,7 +13,8 @@
 import Navbar from '@/components/navbar/Navbar.vue'
 import LoadingOverlay from '@/components/shared/LoadingOverlay.vue'
 import { mapActions, mapMutations } from 'vuex'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import { authComputed } from '@/store/helpers.js'
 
 export default {
   name: 'App',
@@ -29,37 +30,45 @@ export default {
 
   created() {
     firebase.auth().useDeviceLanguage()
-    this.fetchInformation()
+    this.fetchFirebaseInformation()
   },
-
+  computed: {
+    ...authComputed
+  },
   methods: {
     ...mapActions('user', ['authenticate']),
     ...mapMutations('user', {
       loading: 'SET_LOADING'
     }),
-    fetchInformation() {
-      this.loading(true)
-      firebase
-        .auth()
-        .getRedirectResult()
-        .then(result => {
-          console.log(result)
-          firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then(idToken => {
-              console.log(idToken)
-              this.authenticate(idToken)
-            })
+    fetchFirebaseInformation() {
+      if (!localStorage.getItem('user') && !this.isAuthenticated) {
+        this.loading(true)
+        firebase
+          .auth()
+          .getRedirectResult()
+          .then(() => {
+            firebase
+              .auth()
+              .currentUser.getIdToken(true)
+              .then(idToken => {
+                this.authenticateUser(idToken)
+              })
+          })
+          .catch(error => {
+            var errorCode = error.code
+            var errorMessage = error.message
+            console.log(errorCode + ': ' + errorMessage)
+            this.loading(false)
+          })
+      }
+    },
+    authenticateUser(idToken) {
+      this.authenticate(idToken)
+        .then(() => {
+          console.log('Succesfully logged in')
         })
-        .catch(error => {
-          var errorCode = error.code
-          var errorMessage = error.message
-          console.log(errorCode + ': ' + errorMessage)
-          var email = error.email
-          var credential = error.credential
-          console.log(email + ' ' + credential)
-          this.loading(false)
+        .catch(err => {
+          console.log(err)
         })
     }
   }
