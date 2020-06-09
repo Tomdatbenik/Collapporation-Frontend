@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import api from '@/service/profile.js'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -192,14 +192,17 @@ export default {
     }
   },
   created() {
-    api
-      .getProfile(this.$route.params.id)
-      .then(result => {
-        this.user = result.data
+    this.getProfile(this.$route.params.id)
+      .then(user => {
+        this.user = user
       })
-      .catch(error => {
-        console.log(error)
+      .catch(err => {
+        this.$router.push('/home')
+        console.log(err)
       })
+  },
+  methods: {
+    ...mapActions('user', ['getProfile'])
   }
 }
 </script>
