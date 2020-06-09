@@ -13,7 +13,7 @@
 import Navbar from '@/components/navbar/Navbar.vue'
 import LoadingOverlay from '@/components/shared/LoadingOverlay.vue'
 import { mapActions, mapMutations } from 'vuex'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { authComputed } from '@/store/helpers.js'
 
 export default {
