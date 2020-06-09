@@ -16,7 +16,7 @@
               label="Image"
               autofocus
               prepend-icon="mdi-camera"
-              accept="image/png, image/jpeg, image/bmp, image/jfif, image/jpg"
+              accept="image/png, image/jpeg, image/bmp, image/jfif, image/jpg, image/gif"
               v-model="image"
               :rules="[rules.required, rules.size]"
               @change="update"
@@ -121,6 +121,9 @@ export default {
           break
         case 'data:image/bmp;base64':
           extension = 'bmp'
+          break
+        case 'data:image/gif;base64':
+          extension = 'gif'
           break
       }
       return extension
