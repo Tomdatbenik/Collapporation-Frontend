@@ -74,7 +74,7 @@ export default {
         {
           title: 'Profile',
           icon: 'mdi-account-outline',
-          link: '/profile/Tim'
+          link: '/profile/1'
         },
         {
           title: 'Settings',
