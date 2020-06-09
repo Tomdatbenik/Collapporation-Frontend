@@ -1,4 +1,5 @@
-import api from '@/service/token.js'
+import tokenApi from '@/service/token.js'
+import userApi from '@/service/user.js'
 
 export default {
   namespaced: true,
@@ -23,7 +24,7 @@ export default {
   },
   actions: {
     authenticate({ commit }, idToken) {
-      api
+      tokenApi
         .getNewToken(idToken)
         .then(res => {
           const token = res.data.split('.')[1]
@@ -39,19 +40,41 @@ export default {
           localStorage.setItem('user-token', token)
 
           commit('SET_ERROR', null)
-          commit('SET_LOADING', false)
         })
         .catch(error => {
           // If the request fails, remove user token
           localStorage.removeItem('user-token')
           commit('SET_ERROR', error)
-          commit('SET_LOADING', false)
           console.log(error)
         })
+        .finally(() => {
+          commit('SET_LOADING', false)
+        })
     },
-    getRefreshToken() {
-      api.getRefreshToken().then(newToken => {
-        return newToken
+    getProfile({ commit }, userId) {
+      commit('SET_LOADING', true)
+      return userApi
+        .getProfile(userId)
+        .then(res => {
+          return res.data
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+          throw error
+        })
+        .finally(() => {
+          commit('SET_LOADING', false)
+        })
+    },
+    getRefreshToken({ commit }) {
+      return tokenApi.getRefreshToken().then(res => {
+        const token = res.data.split('.')[1]
+
+        console.log('received refresh token: ' + token)
+        commit('SET_AUTH_TOKEN', token)
+        localStorage.setItem('user-token', token)
+
+        return token
       })
     },
     logout({ commit }) {

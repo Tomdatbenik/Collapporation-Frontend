@@ -18,7 +18,7 @@ service.interceptors.request.use(
     return config
   },
   response => {
-    return response
+    return response.data
   },
   error => {
     const {
@@ -30,15 +30,24 @@ service.interceptors.request.use(
     if (status === 401) {
       if (!isRefreshing) {
         isRefreshing = true
-        store.dispatch('user/getRefreshToken').then(newToken => {
-          isRefreshing = false
-          onRefreshed(newToken)
-        })
+        store
+          .dispatch('user/getRefreshToken')
+          .then(newToken => {
+            console.log(
+              'received refresh token in api handler with token: ' + newToken
+            )
+            isRefreshing = false
+            onRefreshed(newToken)
+          })
+          .catch(() => {
+            return Promise.reject(error)
+          })
       }
 
       const retryOriginalRequest = new Promise(resolve => {
         subscribeTokenRefresh(token => {
           // replace the expired token and retry
+          console.log('setting refresh token as new header')
           originalRequest.headers['Authorization'] = 'Bearer' + token
           resolve(axios(originalRequest))
         })
