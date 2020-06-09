@@ -24,5 +24,16 @@ export default {
 
   addProject(project) {
     return api.post('project-service/project/create', project)
+  },
+
+  sendLike(authToken, id) {
+    console.log(authToken)
+    return api.post(
+      'like-service/like/like',
+      { object_id: id },
+      {
+        headers: { Authorization: 'Bearer ' + authToken.replace('"', '') }
+      }
+    )
   }
 }
