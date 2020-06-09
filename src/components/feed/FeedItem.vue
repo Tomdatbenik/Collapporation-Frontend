@@ -60,7 +60,12 @@
                 :text="text"
               />
               <follow-button />
-              <like-button :likes="likes" />
+              <like-button
+                color="#DCEEFB"
+                text-color="#2680C2"
+                :likes="likes"
+                @clicked="click"
+              />
             </v-card-text>
           </v-col>
         </v-row>
@@ -70,7 +75,7 @@
 </template>
 
 <script>
-import TagChip from './TagChip'
+import TagChip from '@/components/project/TagChip'
 import LikeButton from '../buttons/LikeButton'
 import FollowButton from '../buttons/FollowButton'
 export default {
@@ -96,6 +101,12 @@ export default {
         '-' +
         this.createdAt.getFullYear()
       )
+    }
+  },
+  methods: {
+    click() {
+      let self = this
+      this.$emit('clicked', self.id)
     }
   }
 }

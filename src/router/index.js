@@ -4,6 +4,7 @@ import LandingPage from '@/views/LandingPage.vue'
 import SubNavbar from '@/components/navbar/SubNavbar.vue'
 import Home from '@/views/Home.vue'
 import Profile from '@/views/Profile/Profile.vue'
+import Projectview from '@/views/Projectview.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
         path: '/profile/:id',
         name: 'profile',
         component: Profile
+      },
+      {
+        path: 'project/:id',
+        name: 'project',
+        component: Projectview
       }
     ]
   }

@@ -1,20 +1,23 @@
 <template>
   <v-chip
-    @click="liked = !liked"
-    color="#EBE9E9"
+    @click="click"
+    :color="color"
     class="ml-1 like-button"
     v-if="liked"
+    :style="{ color: textColor }"
   >
-    <v-icon color="#696969" class="mr-2">mdi-thumb-up</v-icon> {{ likes }}
+    <v-icon :color="textColor" class="mr-2">mdi-thumb-up</v-icon>
+    {{ likeCount }}
   </v-chip>
   <v-chip
-    @click="liked = !liked"
-    color="#EBE9E9"
+    @click="click"
+    :color="color"
     class="ml-1 like-button"
     v-else
+    :style="{ color: textColor }"
   >
-    <v-icon color="#696969" class="mr-2">mdi-thumb-up-outline</v-icon>
-    {{ likes }}
+    <v-icon :color="textColor" class="mr-2">mdi-thumb-up-outline</v-icon>
+    {{ likeCount }}
   </v-chip>
 </template>
 
@@ -22,11 +25,26 @@
 export default {
   name: 'LikeButton',
   props: {
-    likes: Number
+    likes: Number,
+    textColor: String,
+    color: String
   },
   data() {
     return {
-      liked: false
+      liked: false,
+      likeCount: 0
+    }
+  },
+  created() {
+    this.likeCount = this.likes
+  },
+  methods: {
+    click() {
+      this.liked = !this.liked
+      if (this.liked) {
+        this.likeCount++
+      } else this.likeCount--
+      this.$emit('clicked')
     }
   }
 }
