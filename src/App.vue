@@ -65,6 +65,7 @@ export default {
     authenticateUser(idToken) {
       this.authenticate(idToken)
         .then(() => {
+          this.$router.push('/home')
           console.log('Succesfully logged in')
         })
         .catch(err => {
