@@ -32,6 +32,11 @@ export default {
           name: 'Home',
           link: '/home',
           icon: 'mdi-home-outline'
+        },
+        {
+          name: 'Add Concept',
+          link: '/add-project',
+          icon: 'mdi-text-box-plus-outline'
         }
       ]
     }
