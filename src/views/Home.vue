@@ -45,7 +45,7 @@
             </div>
             <div slot="no-results">
               <p class="mb-2">
-                {{ $t('feed.noRes') }}
+                {{ $t('feed.noMore') }}
               </p>
             </div>
             <div slot="no-more">
@@ -73,7 +73,8 @@ export default {
       feedItems: [],
       page: 0,
       size: 12,
-      infiniteId: +new Date()
+      infiniteId: +new Date(),
+      hasLoaded: false
     }
   },
   methods: {
@@ -82,11 +83,16 @@ export default {
       this.getProjectFeed({ page: this.page, size: this.size })
         .then(response => {
           this.page++
-          for (let i = 0; i < response.length; i++) {
-            this.feedItems.push(response[i])
-          }
-          $state.loaded()
-          if (response.length < this.size) {
+          if (this.hasLoaded === false) {
+            for (let i = 0; i < response.length; i++) {
+              this.feedItems.push(response[i])
+            }
+            $state.loaded()
+            if (response.length < this.size) {
+              $state.complete()
+              this.hasLoaded = true
+            }
+          } else {
             $state.complete()
           }
         })
@@ -99,6 +105,7 @@ export default {
       this.page = 0
       this.feedItems = []
       this.infiniteId += 1
+      this.hasLoaded = false
     },
     updateLike(id) {
       this.likeProject(id).catch(error => {
