@@ -30,14 +30,15 @@ export default {
 
   created() {
     firebase.auth().useDeviceLanguage()
-    this.fetchFirebaseInformation()let lan = 'en'
+    this.fetchFirebaseInformation()
+    let lan = 'en'
     if (navigator.languages !== undefined) {
       lan = navigator.languages[0]
     } else {
       lan = navigator.language
     }
 
-    if ((lan !== 'en') || (lan !== 'nl')) {
+    if (lan !== 'en' || lan !== 'nl') {
       lan = 'en'
     }
 
