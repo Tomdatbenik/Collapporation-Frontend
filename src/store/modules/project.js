@@ -47,6 +47,17 @@ export default {
   },
   actions: {
     saveAddProject({ commit }, addProject) {
+      if (!addProject) {
+        addProject = {
+          title: '',
+          img: '',
+          smallDescription: '',
+          tags: [],
+          links: [],
+          description: '',
+          collapporators: []
+        }
+      }
       commit('SAVE_ADDPROJECT', addProject)
     },
     saveProjectTitle({ commit }, title) {
@@ -54,14 +65,6 @@ export default {
     },
     async saveProjectImage({ commit }, image) {
       if (image) {
-        // const url = URL.createObjectURL(image)
-        // await fetch(url)
-        //   .then(function(response) {
-        //     return response.blob()
-        //   })
-        //   .then(async function(blob) {
-        //     blobImage = new Uint8Array(await new Response(blob).arrayBuffer())
-        //   })
         const reader = new FileReader()
         reader.readAsDataURL(image)
         reader.onloadend = () => {
@@ -70,6 +73,8 @@ export default {
         reader.onerror = error => {
           console.log('Error: ', error)
         }
+      } else {
+        commit('SAVE_PROJECT_IMAGE', '')
       }
     },
     saveProjectSmallDescription({ commit }, smallDescription) {

@@ -86,7 +86,7 @@ export default {
       }
     },
     clearImage() {
-      this.saveProjectImage(null)
+      this.saveProjectImage('')
       this.image = null
       this.url = ''
     },
