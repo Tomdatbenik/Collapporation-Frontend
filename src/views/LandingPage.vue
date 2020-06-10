@@ -11,6 +11,7 @@
               {{ $t('landingPage.slogan') }}
             </p>
             <v-btn
+              to="/home"
               class="text-capitalize cyan--text text--lighten-1"
               width="50%"
               rounded
