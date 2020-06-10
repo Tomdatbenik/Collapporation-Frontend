@@ -99,11 +99,12 @@ export default {
     }
   },
   methods: {
-    setLan(lan){
+    setLan(lan) {
       this.$i18n.locale = lan
       this.lan = this.lans.find(x => {
         return x.lan === lan
       })
+      localStorage.setItem('locale', lan)
     }
   },
   components: {
