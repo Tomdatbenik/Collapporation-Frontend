@@ -48,6 +48,14 @@
             {{ item.title }}
           </v-list-item-title>
         </v-list-item>
+        <v-list-item :to="profileLink" class="d-flex flex-row">
+          <v-icon color="grey" class="d-flex justify-start mr-2">
+            mdi-account-outline
+          </v-icon>
+          <v-list-item-title class="d-flex justify-start flex-fill grey--text">
+            {{ $t('subMenu.profile') }}
+          </v-list-item-title>
+        </v-list-item>
         <v-divider></v-divider>
         <v-list-item class="d-flex flex-row" @click="handleLogout">
           <v-icon color="grey" class="d-flex justify-start mr-2">
@@ -72,11 +80,6 @@ export default {
     return {
       items: [
         {
-          title: this.$t('subMenu.profile'),
-          icon: 'mdi-account-outline',
-          link: '/profile/1'
-        },
-        {
           title: this.$t('subMenu.settings'),
           icon: 'mdi-cog-outline',
           link: '/home'
@@ -90,7 +93,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('user', ['user'])
+    ...mapState('user', ['user']),
+    profileLink() {
+      return 'profile/' + this.user.uuid
+    }
   },
   methods: {
     ...mapActions('user', ['logout']),
