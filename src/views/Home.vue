@@ -63,8 +63,7 @@
 <script>
 import FeedItem from '../components/feed/FeedItem'
 import InfiniteLoading from 'vue-infinite-loading'
-import axios from 'axios'
-import api from '@/service/api'
+import { mapActions } from 'vuex'
 
 export default {
   components: { FeedItem, InfiniteLoading },
@@ -78,23 +77,16 @@ export default {
     }
   },
   methods: {
-    updateFeed: function($state) {
-      let self = this
-      let apicall = axios.create()
-      apicall
-        .get('http://localhost:8102/project-service/projectfeed/all', {
-          params: {
-            size: self.size,
-            page: self.page
-          }
-        })
+    ...mapActions('project', ['getProjectFeed', 'likeProject']),
+    updateFeed($state) {
+      this.getProjectFeed({ page: this.page, size: this.size })
         .then(response => {
-          self.page++
-          for (let i = 0; i < response.data.length; i++) {
-            self.feedItems.push(response.data[i])
+          this.page++
+          for (let i = 0; i < response.length; i++) {
+            this.feedItems.push(response[i])
           }
           $state.loaded()
-          if (response.data.length < self.size) {
+          if (response.length < this.size) {
             $state.complete()
           }
         })
@@ -103,13 +95,13 @@ export default {
           $state.error()
         })
     },
-    resetFeed: function() {
+    resetFeed() {
       this.page = 0
       this.feedItems = []
       this.infiniteId += 1
     },
     updateLike(id) {
-      api.sendLike(localStorage.getItem('user'), id).catch(error => {
+      this.likeProject(id).catch(error => {
         console.log(error)
       })
     }
