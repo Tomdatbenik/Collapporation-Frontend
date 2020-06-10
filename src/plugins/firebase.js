@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import router from '@/router/index.js'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB0oaQ94WOdbYp323AlQJuJQjfXt47JVqw',
@@ -13,3 +14,11 @@ const firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig)
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    router.push('/home')
+  } else {
+    // No user is signed in.
+  }
+})
