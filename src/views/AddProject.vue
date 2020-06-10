@@ -95,6 +95,7 @@ import AddLinks from '@/components/add-project/AddLinks.vue'
 import AddMarkdownDescription from '@/components/add-project/AddMarkdownDescription.vue'
 import AddCollapporators from '@/components/add-project/AddCollapporators.vue'
 import AddOverview from '@/components/add-project/AddOverview.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -122,7 +123,16 @@ export default {
       currentStep: { number: 1, title: 'Title' }
     }
   },
+  computed: {
+    ...mapGetters({
+      project: 'project/getAddProject'
+    })
+  },
+  created() {
+    this.saveAddProject(null)
+  },
   methods: {
+    ...mapActions('project', ['saveAddProject']),
     nextStep() {
       this.currentStep = this.steps[this.currentStep.number]
     },
