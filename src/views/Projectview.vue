@@ -3,12 +3,21 @@
     <div>
       <div
         class="changeable-color"
-        :style="{ backgroundColor: this.averageColor }"
+        :style="{
+          backgroundColor: this.averageColor
+        }"
       >
         <v-container class="py-10">
           <v-row no-gutters>
             <v-col cols="3">
-              <v-card tile width="100%" height="100%" min-height="300px">
+              <v-card
+                id="img-box"
+                tile
+                elevation="0"
+                width="100%"
+                min-height="300px"
+                class="d-flex align-center"
+              >
                 <v-card-actions class="pa-0">
                   <img id="image" class="image" :src="this.project.image" />
                   <div
@@ -35,23 +44,35 @@
                 </v-card-actions>
               </v-card>
             </v-col>
-            <v-col class="mt-6">
-              <v-row no-gutters class="pl-3">
+            <v-col class="my-6">
+              <v-row
+                no-gutters
+                class="pl-3 d-flex flex-wrap"
+                style="height: 100%"
+              >
                 <v-col v-if="editable" cols="12">
                   <v-text-field
                     class="ma-0 pa-0"
+                    :color="textColor"
                     v-model="project.title"
                     label="Title"
                     filled
                     clearable
                   ></v-text-field>
                 </v-col>
-                <v-col v-else cols="11" class="display-4">
+                <v-col
+                  v-else
+                  cols="11"
+                  class="display-4"
+                  :style="{ color: textColor }"
+                >
                   {{ this.project.title }}
                 </v-col>
                 <v-col class="d-flex justify-end" cols="1">
                   <v-btn v-if="!editable" @click="edit" icon
-                    ><v-icon>mdi-pencil</v-icon></v-btn
+                    ><v-icon :style="{ color: textColor }"
+                      >mdi-pencil</v-icon
+                    ></v-btn
                   >
                 </v-col>
                 <v-col
@@ -61,18 +82,24 @@
                 >
                   <v-textarea
                     v-if="editable"
+                    :color="textColor"
                     v-model="project.smallDescription"
                     label="Small Description"
                     filled
                     clearable
                   />
                 </v-col>
-                <v-col v-else cols="12" class="mt-6 pl-1 smallDescription">
+                <v-col
+                  v-else
+                  cols="12"
+                  class="mt-6 pl-1 smallDescription"
+                  :style="{ color: textColor }"
+                >
                   {{ this.project.smallDescription }}
                 </v-col>
                 <v-col
                   cols="12"
-                  class="mt-6 d-flex fill-height"
+                  class="mt-6 d-flex  align-end"
                   align-self="end"
                 >
                   <tag-chip
@@ -94,7 +121,6 @@
                     text-size="10px"
                     text-color="#285E61"
                     height="20px"
-                    @clicked="tagClicked"
                   />
                 </v-col>
               </v-row>
@@ -237,6 +263,7 @@ export default {
       selectedFile: null,
       averageColor: null,
       editable: false,
+      textColor: false,
       project: {
         id: this.$route.params.id,
         title: 'Tropical Island',
@@ -279,6 +306,7 @@ export default {
     let self = this
     setTimeout(function() {
       self.averageColor = self.getAverageRGB()
+      self.textColor = self.getContrastYIQ(self.averageColor)
     }, 20)
   },
   computed: {
@@ -287,8 +315,50 @@ export default {
     }
   },
   methods: {
+    getContrastYIQ: function(rgba) {
+      let hexcolor = this.RGBAToHexA(rgba)
+      hexcolor = hexcolor.replace('#', '')
+      let r = parseInt(hexcolor.substr(0, 2), 16)
+      let g = parseInt(hexcolor.substr(2, 2), 16)
+      let b = parseInt(hexcolor.substr(4, 2), 16)
+      let yiq = (r * 299 + g * 587 + b * 114) / 1000
+      return yiq >= 128 ? '#4D4D4D' : '#FFFFFF'
+    },
+    RGBAToHexA: function(rgba) {
+      let sep = rgba.indexOf(',') > -1 ? ',' : ' '
+      rgba = rgba
+        .substr(5)
+        .split(')')[0]
+        .split(sep)
+
+      if (rgba.indexOf('/') > -1) rgba.splice(3, 1)
+
+      for (let R in rgba) {
+        let r = rgba[R]
+        if (r.indexOf('%') > -1) {
+          let p = r.substr(0, r.length - 1) / 100
+
+          if (R < 3) {
+            rgba[R] = Math.round(p * 255)
+          } else {
+            rgba[R] = p
+          }
+        }
+      }
+      let r = (+rgba[0]).toString(16),
+        g = (+rgba[1]).toString(16),
+        b = (+rgba[2]).toString(16),
+        a = Math.round(+rgba[3] * 255).toString(16)
+
+      if (r.length == 1) r = '0' + r
+      if (g.length == 1) g = '0' + g
+      if (b.length == 1) b = '0' + b
+      if (a.length == 1) a = '0' + a
+
+      return '#' + r + g + b + a
+    },
     getAverageRGB() {
-      var blockSize = 5,
+      let blockSize = 5,
         imgEl = document.getElementById('image'),
         defaultRGB = { r: 0, g: 0, b: 0 },
         canvas = document.createElement('canvas'),
@@ -330,7 +400,7 @@ export default {
       rgb.g = ~~(rgb.g / count)
       rgb.b = ~~(rgb.b / count)
 
-      return 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ', 0.5)'
+      return 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ', 0.7)'
     },
     updateLike() {
       console.log('Liked')
@@ -389,7 +459,7 @@ export default {
     },
     onFileChanged(e) {
       let self = this
-      var reader = new FileReader()
+      let reader = new FileReader()
       reader.readAsDataURL(e.target.files[0])
       reader.onload = function() {
         self.project.image = reader.result
@@ -405,6 +475,7 @@ export default {
       let self = this
       setTimeout(function() {
         self.averageColor = self.getAverageRGB()
+        self.textColor = self.getContrastYIQ(self.averageColor)
       }, 20)
     }
   }
@@ -412,9 +483,22 @@ export default {
 </script>
 
 <style scoped>
+#img-box {
+  padding-top: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+}
+
 .image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 100%;
-  max-height: 372.18px;
+  max-height: 100%;
+  transform: translate(-50%, -50%);
 }
 
 .smallDescription {
@@ -452,11 +536,24 @@ export default {
   background-color: rgba(255, 255, 255, 0.35);
 }
 
+.text-difference * {
+  color: '#4D4D4D' !important;
+  mix-blend-mode: difference !important;
+}
+
 .changeable-color {
   -webkit-transition: background-color 0.5s ease-out;
   -moz-transition: background-color 0.5s ease-out;
   -o-transition: background-color 0.5s ease-out;
   transition: background-color 0.5s ease-out;
+}
+
+::v-deep textarea {
+  color: inherit !important;
+}
+
+::v-deep input {
+  color: inherit !important;
 }
 
 ::v-deep .v-tabs-bar {
