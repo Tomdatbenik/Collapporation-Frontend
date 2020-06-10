@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="d-flex flex-wrap">
+    <v-row class="d-flex flex-wrap" v-if="project">
       <v-col class="d-flex">
         <v-avatar
           min-height="100"
@@ -42,7 +42,7 @@
       <v-col
         cols="12"
         class="mt-3 mb-10"
-        style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; max-height: 200px; overflow-y: auto;"
+        style="border-radius: 7.5px 7.5px 0 0; background-color: whitesmoke; max-height: 300px; overflow-y: auto;"
       >
         <markdown-it-vue
           class="md-body mx-2 my-2"
@@ -64,12 +64,18 @@
         >
       </v-col>
     </v-row>
+    <v-row class="d-flex flex-wrap" justify="center" v-else>
+      <p>
+        You have no concept yet! Follow all the steps to create your concept
+        first.
+      </p>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import API from '@/service/api.js'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import MarkdownItVue from '../../../node_modules/markdown-it-vue/src/index'
 
 export default {
@@ -91,6 +97,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions('project', ['saveAddProject']),
     previous() {
       this.$emit('previous')
     },
@@ -102,6 +109,7 @@ export default {
             if (result.status === 200) {
               const id = result.data.id
               this.$router.push({ name: 'project', params: id })
+              this.saveAddProject(null)
             }
           } else {
             alert(
