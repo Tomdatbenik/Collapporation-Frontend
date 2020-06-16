@@ -76,8 +76,9 @@
 
 <script>
 import TagChip from '@/components/project/TagChip'
-import LikeButton from '../buttons/LikeButton'
-import FollowButton from '../buttons/FollowButton'
+import LikeButton from '@/components/buttons/LikeButton'
+import FollowButton from '@/components/buttons/FollowButton'
+
 export default {
   name: 'FeedItem',
   components: { FollowButton, LikeButton, TagChip },
