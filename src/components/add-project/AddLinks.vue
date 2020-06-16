@@ -2,13 +2,12 @@
   <div>
     <v-row no-gutters
       ><p class="mx-10">
-        The links will be shown in your project page. Include links of your
-        github page or additional resources.
+        {{ $t('addProject.addLinks.linksInfo') }}
       </p></v-row
     >
     <v-row no-gutters
       ><v-chip @click="showAddDialog = true" color="secondary" class="ma-2"
-        >+ ADD LINK</v-chip
+        >+ {{ $t('addProject.addLinks.addLinks') }}</v-chip
       >
       <AddToProjectDialog
         title="Add Links"
@@ -50,14 +49,16 @@
       </v-chip>
     </v-row>
     <v-row class="mt-10 mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         color="teal lighten-2"
         rounded
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>

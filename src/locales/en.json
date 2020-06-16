@@ -43,7 +43,10 @@
       "image": "Image",
       "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible."
     },
-    "addLinks": {},
+    "addLinks": {
+      "addLinks": "Add link",
+      "linksInfo": "The links will be shown in your project page. Include links of your github page or additional resources."
+    },
     "addMarkdownDescription": {},
     "addOverview": {},
     "addSmallDescription": {

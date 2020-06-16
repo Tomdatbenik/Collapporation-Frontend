@@ -43,7 +43,9 @@
       "image": "Afbeelding",
       "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken."
     },
-    "addLinks": {},
+    "addLinks": {
+      "addLinks": "Voeg een link toe",
+      "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."},
     "addMarkdownDescription": {},
     "addOverview": {},
     "addSmallDescription": {

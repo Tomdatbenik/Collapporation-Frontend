@@ -58,7 +58,7 @@
         width="15vw"
         class="ml-3"
         @click="next"
-        >{{$t('addProject.next')}}</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
