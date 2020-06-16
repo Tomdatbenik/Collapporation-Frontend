@@ -47,7 +47,11 @@
       "addLinks": "Add link",
       "linksInfo": "The links will be shown in your project page. Include links of your github page or additional resources."
     },
-    "addMarkdownDescription": {},
+    "addMarkdownDescription": {
+      "edit": "Edit",
+      "preview": "Preview",
+      "markdownDescriptionInfo": "The markdown description is where you put an extensive description of what your project is about. You can provide additional information on the idea behind the concept, design choices, used techniques together with images."
+    },
     "addOverview": {},
     "addSmallDescription": {
       "maxChars": "Max 255 characters",

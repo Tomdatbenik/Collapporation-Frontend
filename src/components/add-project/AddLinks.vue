@@ -67,7 +67,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import AddToProjectDialog from '@/components/add-project/AddToProjectDialog.vue'
-
+//Todo pop ups on links + tags
 export default {
   components: {
     AddToProjectDialog
