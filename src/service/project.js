@@ -24,5 +24,11 @@ export default {
         headers: { Authorization: 'Bearer ' + authToken.replace('"', '') }
       }
     )
+  },
+  getProjectById(id) {
+    return api.get('project-service/project/' + id)
+  },
+  updateProject(data) {
+    return api.put('project-service/update', data)
   }
 }
