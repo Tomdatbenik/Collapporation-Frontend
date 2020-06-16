@@ -39,7 +39,9 @@
   },
   "addProject": {
     "addCollapporators": {},
-    "addImage": {},
+    "addImage": {
+      "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible."
+    },
     "addLinks": {},
     "addMarkdownDescription": {},
     "addOverview": {},
@@ -47,10 +49,10 @@
     "addTags": {},
     "addTitle": {
       "title": "Title",
-      "required": "Required",
       "titleInfo": "The title will be shown as header in the feed. Pick something that describes your project best in a few words. This title will also be used in filtering for keywords."
     },
     "addToProjectDialog": {},
+    "required": "Required",
     "previous": "Previous",
     "next": "Next",
     "cancel": "Cancel",

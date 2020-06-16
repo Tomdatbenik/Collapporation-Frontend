@@ -8,8 +8,7 @@
       ><v-col class="d-flex">
         <div>
           <p>
-            This image will be shown in the feed. Pick something attractive to
-            lure as many collapporators as possible.
+            {{ $t('addProject.addImage.imageInfo') }}
           </p>
           <v-form ref="form" v-model="valid">
             <v-file-input

@@ -48,8 +48,8 @@ export default {
   },
   computed: {
     ...mapGetters('project', { project: 'getAddProject' }),
-    requiredText: () => {
-      return this.$t('addProject.addTitle.required')
+    requiredText: function() {
+      return this.$t('addProject.required')
     }
   },
   created() {

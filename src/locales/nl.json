@@ -39,7 +39,9 @@
   },
   "addProject": {
     "addCollapporators": {},
-    "addImage": {},
+    "addImage": {
+      "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken."
+    },
     "addLinks": {},
     "addMarkdownDescription": {},
     "addOverview": {},
@@ -47,10 +49,10 @@
     "addTags": {},
     "addTitle": {
       "title": "Titel",
-      "required": "Verplicht",
       "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
     },
     "addToProjectDialog": {},
+    "required": "Vereist",
     "previous": "Vorige",
     "next": "Volgende",
     "cancel": "Annuleren",
