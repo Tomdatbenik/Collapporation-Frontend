@@ -45,7 +45,15 @@
     "addOverview": {},
     "addSmallDescription": {},
     "addTags": {},
-    "addTitle": {},
-    "addToProjectDialog": {}
+    "addTitle": {
+      "title": "Title",
+      "required": "Required",
+      "titleInfo": "The title will be shown as header in the feed. Pick something that describes your project best in a few words. This title will also be used in filtering for keywords."
+    },
+    "addToProjectDialog": {},
+    "previous": "Previous",
+    "next": "Next",
+    "cancel": "Cancel",
+    "finish": "Finish"
   }
 }

@@ -2,15 +2,13 @@
   <div>
     <div>
       <p class="mx-10">
-        The title will be shown as header in the feed. Pick something that
-        describes your project best in a few words. This title will also be used
-        in filtering for keywords.
+        {{ $t('addProject.addTitle.titleInfo') }}
       </p>
       <v-form ref="form" v-model="valid">
         <v-text-field
           autofocus
           v-model="title"
-          label="Title"
+          :label="$t('addProject.addTitle.title')"
           filled
           clearable
           :rules="[rules.required]"
@@ -21,7 +19,7 @@
       ></v-form>
     </div>
     <v-row class="mt-10 mb-5" no-gutters justify="center">
-      <v-btn rounded width="15vw">CANCEL</v-btn>
+      <v-btn rounded width="15vw">{{ $t('addProject.cancel') }}</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
@@ -29,7 +27,7 @@
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
@@ -44,12 +42,15 @@ export default {
       valid: false,
       title: '',
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || this.requiredText
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    requiredText: () => {
+      return this.$t('addProject.addTitle.required')
+    }
   },
   created() {
     this.title = this.project.title

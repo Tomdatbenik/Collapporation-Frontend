@@ -45,7 +45,15 @@
     "addOverview": {},
     "addSmallDescription": {},
     "addTags": {},
-    "addTitle": {},
-    "addToProjectDialog": {}
+    "addTitle": {
+      "title": "Titel",
+      "required": "Verplicht",
+      "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
+    },
+    "addToProjectDialog": {},
+    "previous": "Vorige",
+    "next": "Volgende",
+    "cancel": "Annuleren",
+    "finish": "Voltooien"
   }
 }
