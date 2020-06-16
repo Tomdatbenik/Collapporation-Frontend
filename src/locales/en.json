@@ -40,6 +40,7 @@
   "addProject": {
     "addCollapporators": {},
     "addImage": {
+      "image": "Image",
       "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible."
     },
     "addLinks": {},

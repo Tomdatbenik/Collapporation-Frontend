@@ -12,7 +12,7 @@
           </p>
           <v-form ref="form" v-model="valid">
             <v-file-input
-              label="Image"
+              :label="$t('addProject.addImage.image')"
               autofocus
               prepend-icon="mdi-camera"
               accept="image/png, image/jpeg, image/bmp, image/jfif, image/jpg, image/gif"
@@ -26,7 +26,9 @@
       </v-col>
     </v-row>
     <v-row class="mt-10 mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
@@ -34,7 +36,7 @@
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </v-container>
@@ -50,7 +52,7 @@ export default {
       image: null,
       url: '',
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || this.requiredText,
         size: value =>
           !value || value.size <= 2e6 || 'Image size should be less than 2 MB.'
       }
@@ -59,7 +61,10 @@ export default {
   computed: {
     ...mapGetters({
       project: 'project/getAddProject'
-    })
+    }),
+    requiredText: function() {
+      return this.$t('addProject.required')
+    }
   },
   created() {
     if (this.project.img) {
