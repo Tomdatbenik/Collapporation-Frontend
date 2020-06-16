@@ -65,6 +65,17 @@ export default {
           throw err
         })
     },
+    getProjectById(context, id) {
+      return projectApi
+        .getProjectById(id)
+        .then(res => {
+          console.log(res.data)
+          return res.data
+        })
+        .catch(err => {
+          throw err
+        })
+    },
     likeProject(context, id) {
       return projectApi
         .postLike(id)
@@ -73,6 +84,16 @@ export default {
         })
         .catch(err => {
           throw err
+        })
+    },
+    updateProject(context, data) {
+      return projectApi
+        .updateProject(data)
+        .then(response => {
+          return response
+        })
+        .cath(error => {
+          throw error
         })
     },
     saveAddProject({ commit }, addProject) {

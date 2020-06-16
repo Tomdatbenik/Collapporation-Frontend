@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div>
       <div
         class="changeable-color"
@@ -19,7 +19,7 @@
                 class="d-flex align-center"
               >
                 <v-card-actions class="pa-0">
-                  <img id="image" class="image" :src="this.project.image" />
+                  <img id="image" class="image" :src="this.project.img" />
                   <div
                     v-if="editable"
                     class="upload-image d-flex justify-center align-center"
@@ -145,7 +145,7 @@
               @clicked="updateLike()"
               color="#DCEEFB"
               text-color="#2680C2"
-              :likes="this.project.likes"
+              :likes="this.project.likes.count"
             />
           </v-row>
         </v-tabs>
@@ -172,7 +172,7 @@
           <v-tab-item>
             <v-row>
               <collapporator
-                v-for="(collapporator, index) in this.project.collapporators"
+                v-for="(collapporator, index) in this.project.collaborators"
                 :key="index"
                 :name="collapporator.name"
                 :role="collapporator.role"
@@ -237,6 +237,18 @@
       </v-card>
     </div>
   </div>
+  <v-container v-else class="d-flex">
+    <v-progress-circular
+      class="d-flex justify-center align-center"
+      style="margin: auto"
+      indeterminate
+      color="#3bc8dd"
+      :size="100"
+      :width="5"
+    >
+      Loading...
+    </v-progress-circular>
+  </v-container>
 </template>
 
 <script>
@@ -246,6 +258,7 @@ import FollowButton from '@/components/buttons/FollowButton'
 import MarkdownItVue from 'markdown-it-vue'
 import Collapporator from '@/components/project/Collapporator'
 import CollapLink from '@/components/project/CollapLink'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Projectview',
@@ -259,15 +272,22 @@ export default {
   },
   data() {
     return {
+      loaded: false,
       tab: null,
       isSelecting: false,
       selectedFile: null,
       averageColor: null,
       editable: false,
-      textColor: false,
-      project: {},
+      textColor: '#ffffff',
+      project: null,
       tmpProject: {}
     }
+  },
+  created() {
+    this.getProjectById(this.$route.params.id).then(project => {
+      this.project = project
+      this.loaded = true
+    })
   },
   mounted() {
     let self = this
@@ -282,6 +302,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('project', ['getProjectById', 'updateProject']),
     getContrastYIQ: function(rgba) {
       let hexcolor = this.RGBAToHexA(rgba)
       hexcolor = hexcolor.replace('#', '')
@@ -382,10 +403,10 @@ export default {
     },
     removeCollapporator(name) {
       if (this.editable) {
-        let index = this.project.collapporators.indexOf(
-          this.project.collapporators.filter(collap => collap.name === name)[0]
+        let index = this.project.collaborators.indexOf(
+          this.project.collaborators.filter(collap => collap.name === name)[0]
         )
-        this.project.collapporators.splice(index, 1)
+        this.project.collaborators.splice(index, 1)
       }
     },
     addCollapporator() {
@@ -411,6 +432,7 @@ export default {
     save() {
       this.editable = !this.editable
       this.tmpProject = {}
+      this.updateProject(this.project)
     },
     onButtonClick() {
       this.isSelecting = true
@@ -429,7 +451,7 @@ export default {
       let reader = new FileReader()
       reader.readAsDataURL(e.target.files[0])
       reader.onload = function() {
-        self.project.image = reader.result
+        self.project.img = reader.result
       }
       reader.onerror = function(error) {
         console.log('Error: ', error)
@@ -438,12 +460,22 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    'project.image': function(newVal, oldVal) {
+    'project.img': function(newVal, oldVal) {
       let self = this
       setTimeout(function() {
         self.averageColor = self.getAverageRGB()
         self.textColor = self.getContrastYIQ(self.averageColor)
       }, 20)
+    },
+    // eslint-disable-next-line no-unused-vars
+    loaded: function(newVal, oldVal) {
+      if (newVal) {
+        let self = this
+        setTimeout(function() {
+          self.averageColor = self.getAverageRGB()
+          self.textColor = self.getContrastYIQ(self.averageColor)
+        }, 20)
+      }
     }
   }
 }
@@ -501,11 +533,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.35);
-}
-
-.text-difference * {
-  color: '#4D4D4D' !important;
-  mix-blend-mode: difference !important;
 }
 
 .changeable-color {
