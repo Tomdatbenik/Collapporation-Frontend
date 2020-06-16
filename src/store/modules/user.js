@@ -29,11 +29,11 @@ export default {
         .getNewToken(idToken)
         .then(res => {
           const token = res.data.split('.')[1]
-
+          const auth_token = res.data;
           // Decodes the base64 encoded string into a user object
           const user = atob(token)
           commit('SET_USER_DATA', JSON.parse(user))
-          commit('SET_AUTH_TOKEN', token)
+          commit('SET_AUTH_TOKEN', auth_token)
 
           commit('SET_ERROR', null)
         })

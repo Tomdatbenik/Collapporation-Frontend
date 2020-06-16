@@ -8,10 +8,10 @@ export default {
       title: '',
       img: '',
       smallDescription: '',
-      tags: [],
-      links: [],
+      tags: '',
+      links: '',
       description: '',
-      collapporators: []
+      collapporators: ''
     }
   },
   mutations: {
@@ -35,15 +35,18 @@ export default {
     },
     SAVE_PROJECT_TAGS(state, tags) {
       state.addProject.tags = tags
+      state.addProject.tags = ''
     },
     SAVE_PROJECT_LINKS(state, links) {
       state.addProject.links = links
+      state.addProject.links = ''
     },
     SAVE_PROJECT_DESCRIPTION(state, description) {
       state.addProject.description = description
     },
     SAVE_PROJECT_COLLAPPORATORS(state, collapporators) {
       state.addProject.collapporators = collapporators
+      state.addProject.collapporators = ''
     }
   },
   getters: {
@@ -56,7 +59,6 @@ export default {
       return projectApi
         .getProjectFeed(payload)
         .then(res => {
-          console.log(res)
           return res.data
         })
         .catch(err => {
@@ -79,10 +81,10 @@ export default {
           title: '',
           img: '',
           smallDescription: '',
-          tags: [],
-          links: [],
+          tags: '',
+          links: '',
           description: '',
-          collapporators: []
+          collapporators: ''
         }
       }
       commit('SAVE_ADDPROJECT', addProject)
