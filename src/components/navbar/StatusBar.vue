@@ -2,7 +2,11 @@
   <div
     class="d-flex ml-auto align-center font-weight-bold white--text flex-row"
   >
-    <div class="d-flex align-center mx-2" style="position: relative">
+    <div
+      class="d-flex align-center mx-2"
+      style="position: relative"
+      v-if="isAuthenticated"
+    >
       <v-icon color="white" class="icon" size="2rem">mdi-chat-outline</v-icon>
       <div
         class="notification-bubble-chat d-flex align-center justify-center"
@@ -11,7 +15,11 @@
         0
       </div>
     </div>
-    <div class="d-flex align-center mx-2" style="position: relative">
+    <div
+      class="d-flex align-center mx-2"
+      style="position: relative"
+      v-if="isAuthenticated"
+    >
       <v-icon color="white" class="icon" size="2rem">mdi-bell-outline</v-icon>
       <div
         class="notification-bubble-notifications d-flex align-center justify-center"
@@ -21,7 +29,9 @@
       </div>
     </div>
 
-    <v-menu offset-y open-on-hover>
+    <LanguageSwitch></LanguageSwitch>
+
+    <v-menu offset-y open-on-hover v-if="isAuthenticated">
       <template v-slot:activator="{ on }">
         <div
           class="d-flex align-center mx-1 profile-box pa-sm-2 pl-4"
@@ -73,9 +83,12 @@
 <script>
 import firebase from 'firebase/app'
 import { mapActions, mapMutations, mapState } from 'vuex'
+import { authComputed } from '@/store/helpers.js'
+import LanguageSwitch from './LanguageSwitch'
 
 export default {
   name: 'StatusBar',
+  components: { LanguageSwitch },
   data() {
     return {
       items: [
@@ -94,6 +107,7 @@ export default {
   },
   computed: {
     ...mapState('user', ['user']),
+    ...authComputed,
     profileLink() {
       return 'profile/' + this.user.uuid
     }

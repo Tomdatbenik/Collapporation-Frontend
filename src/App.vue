@@ -34,7 +34,6 @@ export default {
 
     let lan = localStorage.getItem('locale')
 
-    window.console.log(lan)
     // eslint-disable-next-line no-empty
     if (lan !== null) {
     } else if (navigator.languages !== undefined) {
@@ -42,7 +41,6 @@ export default {
     } else {
       lan = navigator.language
     }
-    window.console.log(lan)
 
     // eslint-disable-next-line no-empty
     if (lan === 'en' || lan === 'nl') {
@@ -50,7 +48,6 @@ export default {
       lan = 'en'
     }
 
-    window.console.log(lan)
     this.$i18n.locale = lan
   },
   computed: {

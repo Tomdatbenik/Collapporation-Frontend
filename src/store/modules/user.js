@@ -27,6 +27,7 @@ export default {
       tokenApi
         .getNewToken(idToken)
         .then(res => {
+          window.console.log(res)
           const token = res.data.split('.')[1]
 
           // Decodes the base64 encoded string into a user object
