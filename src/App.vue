@@ -31,17 +31,26 @@ export default {
   created() {
     firebase.auth().useDeviceLanguage()
     this.fetchFirebaseInformation()
-    let lan = 'en'
-    if (navigator.languages !== undefined) {
+
+    let lan = localStorage.getItem('locale')
+
+    window.console.log(lan)
+    // eslint-disable-next-line no-empty
+    if (lan !== null) {
+    } else if (navigator.languages !== undefined) {
       lan = navigator.languages[0]
     } else {
       lan = navigator.language
     }
+    window.console.log(lan)
 
-    if (lan !== 'en' || lan !== 'nl') {
+    // eslint-disable-next-line no-empty
+    if (lan === 'en' || lan === 'nl') {
+    } else {
       lan = 'en'
     }
 
+    window.console.log(lan)
     this.$i18n.locale = lan
   },
   computed: {
