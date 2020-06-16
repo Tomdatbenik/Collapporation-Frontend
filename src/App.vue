@@ -59,7 +59,7 @@ export default {
       loading: 'SET_LOADING'
     }),
     fetchFirebaseInformation() {
-      if (!localStorage.getItem('user') && !this.isAuthenticated) {
+      if (!this.isAuthenticated) {
         this.loading(true)
         firebase
           .auth()
@@ -80,11 +80,10 @@ export default {
           })
       }
     },
-    authenticateUser(idToken) {
-      this.authenticate(idToken)
+    async authenticateUser(idToken) {
+      await this.authenticate(idToken)
         .then(() => {
           this.$router.push('/home')
-          console.log('Succesfully logged in')
         })
         .catch(err => {
           console.log(err)

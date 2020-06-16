@@ -243,9 +243,10 @@
 import TagChip from '@/components/project/TagChip'
 import LikeButton from '@/components/buttons/LikeButton'
 import FollowButton from '@/components/buttons/FollowButton'
-import MarkdownItVue from '../../node_modules/markdown-it-vue/src/index'
+import MarkdownItVue from 'markdown-it-vue'
 import Collapporator from '@/components/project/Collapporator'
 import CollapLink from '@/components/project/CollapLink'
+
 export default {
   name: 'Projectview',
   components: {

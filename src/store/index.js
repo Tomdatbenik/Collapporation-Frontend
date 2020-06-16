@@ -9,7 +9,12 @@ import project from '@/store/modules/project.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      key: 'Collapporation',
+      paths: ['project', 'user']
+    })
+  ],
   modules: {
     user,
     project

@@ -1,10 +1,11 @@
 import tokenApi from '@/service/token.js'
 import userApi from '@/service/user.js'
+import router from '@/router'
 
 export default {
   namespaced: true,
   state: {
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    user: null,
     loading: null,
     error: null
   },
@@ -12,8 +13,8 @@ export default {
     SET_USER_DATA(state, userData) {
       state.user = userData
     },
-    SET_AUTH_TOKEN(state, idToken) {
-      state.user = { ...state.user, idToken }
+    SET_AUTH_TOKEN(state, token) {
+      state.user = { ...state.user, token }
     },
     SET_LOADING(state, payload) {
       state.loading = payload
@@ -23,8 +24,8 @@ export default {
     }
   },
   actions: {
-    authenticate({ commit }, idToken) {
-      tokenApi
+    async authenticate({ commit }, idToken) {
+      await tokenApi
         .getNewToken(idToken)
         .then(res => {
           window.console.log(res)
@@ -32,13 +33,8 @@ export default {
 
           // Decodes the base64 encoded string into a user object
           const user = atob(token)
-          localStorage.setItem('user', user)
           commit('SET_USER_DATA', JSON.parse(user))
-
-          // Set collapporationToken in the user object so the axios interceptor
-          // can check if bearer tokens needs to be added
           commit('SET_AUTH_TOKEN', token)
-          localStorage.setItem('user-token', token)
 
           commit('SET_ERROR', null)
         })
@@ -73,15 +69,13 @@ export default {
 
         console.log('received refresh token: ' + token)
         commit('SET_AUTH_TOKEN', token)
-        localStorage.setItem('user-token', token)
 
         return token
       })
     },
     logout({ commit }) {
-      localStorage.removeItem('user')
-      localStorage.removeItem('user-token')
-      location.reload()
+      console.log('here')
+      router.go()
       commit('SET_ERROR', null)
       commit('SET_LOADING', false)
     }
@@ -89,11 +83,7 @@ export default {
   getters: {
     loading: state => state.loading,
 
-    user: state => {
-      return state.user != null
-        ? state.user
-        : JSON.parse(localStorage.getItem('user'))
-    },
+    user: state => state.user,
 
     error: state => state.error,
 

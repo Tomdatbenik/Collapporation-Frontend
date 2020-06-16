@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import FeedItem from '../components/feed/FeedItem'
+import FeedItem from '@/components/feed/FeedItem'
 import InfiniteLoading from 'vue-infinite-loading'
 import { mapActions } from 'vuex'
 

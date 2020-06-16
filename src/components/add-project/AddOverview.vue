@@ -74,9 +74,9 @@
 </template>
 
 <script>
-import API from '@/service/api.js'
+import API from '@/service/project.js'
 import { mapGetters, mapActions } from 'vuex'
-import MarkdownItVue from '../../../node_modules/markdown-it-vue/src/index'
+import MarkdownItVue from 'markdown-it-vue'
 
 export default {
   components: {
