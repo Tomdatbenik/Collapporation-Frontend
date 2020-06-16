@@ -20,7 +20,9 @@
       </v-form>
     </div>
     <v-row class="mt-10  mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
@@ -28,7 +30,7 @@
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
@@ -44,8 +46,7 @@ export default {
       smallDescription: '',
       rules: {
         required: value => !!value || this.requiredText,
-        counter: value =>
-          (value && value.length <= 255) || this.maxText
+        counter: value => (value && value.length <= 255) || this.maxText
       }
     }
   },
