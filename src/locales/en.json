@@ -36,5 +36,16 @@
     "hot": "Hot",
     "trending": "Trending",
     "fresh": "Fresh"
+  },
+  "addProject": {
+    "addCollapporators": {},
+    "addImage": {},
+    "addLinks": {},
+    "addMarkdownDescription": {},
+    "addOverview": {},
+    "addSmallDescription": {},
+    "addTags": {},
+    "addTitle": {},
+    "addToProjectDialog": {}
   }
 }

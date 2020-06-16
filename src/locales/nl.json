@@ -36,5 +36,16 @@
     "hot": "hot",
     "trending": "Populair",
     "fresh": "Recent"
+  },
+  "addProject": {
+    "addCollapporators": {},
+    "addImage": {},
+    "addLinks": {},
+    "addMarkdownDescription": {},
+    "addOverview": {},
+    "addSmallDescription": {},
+    "addTags": {},
+    "addTitle": {},
+    "addToProjectDialog": {}
   }
 }
