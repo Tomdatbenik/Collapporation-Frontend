@@ -52,7 +52,7 @@
       "smallDescriptionInfo": "This description will be shown in the feed. Describe your project in a few lines to enthuse other collapporators."
     },
     "addTags": {
-      "tags": "Tags",
+      "addTags": "Add tag",
       "tagsInfo": "The tags will be shown in the feed. These tags describe the catagories or used techniques of the concept. Tags will also be used in filtering."
     },
     "addTitle": {

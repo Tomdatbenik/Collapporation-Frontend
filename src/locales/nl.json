@@ -51,7 +51,9 @@
       "smallDescription": "Korte beschrijving",
       "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
     },
-    "addTags": {},
+    "addTags": {
+      "addTags": "Voeg een label toe",
+      "tagsInfo": "Labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept"},
     "addTitle": {
       "title": "Titel",
       "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
