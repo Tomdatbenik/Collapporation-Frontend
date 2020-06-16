@@ -45,7 +45,7 @@ export default {
       rules: {
         required: value => !!value || this.requiredText,
         counter: value =>
-          (value && value.length <= 255) || 'Max 255 characters.'
+          (value && value.length <= 255) || this.maxText
       }
     }
   },
@@ -53,6 +53,9 @@ export default {
     ...mapGetters('project', { project: 'getAddProject' }),
     requiredText: function() {
       return this.$t('addProject.required')
+    },
+    maxText: function() {
+      return this.$t('addProject.addSmallDescription.maxChars')
     }
   },
   created() {

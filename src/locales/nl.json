@@ -47,6 +47,7 @@
     "addMarkdownDescription": {},
     "addOverview": {},
     "addSmallDescription": {
+      "maxChars": "Max 255 karakters",
       "smallDescription": "Korte beschrijving",
       "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
     },
