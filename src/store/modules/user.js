@@ -73,7 +73,7 @@ export default {
       })
     },
     logout({ commit }) {
-      localStorage.removeItem('Collaporation')
+      localStorage.removeItem('Collapporation')
       router.go()
       commit('SET_ERROR', null)
       commit('SET_LOADING', false)
