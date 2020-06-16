@@ -28,10 +28,10 @@ export default {
       await tokenApi
         .getNewToken(idToken)
         .then(res => {
-          const token = res.data.split('.')[1]
-          const auth_token = res.data;
+          const user_token = res.data.split('.')[1]
+          const auth_token = res.data
           // Decodes the base64 encoded string into a user object
-          const user = atob(token)
+          const user = atob(user_token)
           commit('SET_USER_DATA', JSON.parse(user))
           commit('SET_AUTH_TOKEN', auth_token)
 
@@ -73,7 +73,7 @@ export default {
       })
     },
     logout({ commit }) {
-      console.log('here')
+      localStorage.removeItem('Collaporation')
       router.go()
       commit('SET_ERROR', null)
       commit('SET_LOADING', false)
