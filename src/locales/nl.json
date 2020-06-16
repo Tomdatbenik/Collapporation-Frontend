@@ -46,7 +46,10 @@
     "addLinks": {},
     "addMarkdownDescription": {},
     "addOverview": {},
-    "addSmallDescription": {},
+    "addSmallDescription": {
+      "smallDescription": "Korte beschrijving",
+      "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
+    },
     "addTags": {},
     "addTitle": {
       "title": "Titel",

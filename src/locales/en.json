@@ -46,7 +46,10 @@
     "addLinks": {},
     "addMarkdownDescription": {},
     "addOverview": {},
-    "addSmallDescription": {},
+    "addSmallDescription": {
+      "smallDescription": "Small description",
+      "smallDescriptionInfo": "This description will be shown in the feed. Describe your project in a few lines to enthuse other collapporators."
+    },
     "addTags": {},
     "addTitle": {
       "title": "Title",

@@ -2,14 +2,13 @@
   <div>
     <div>
       <p class="mx-10">
-        This description will be shown in the feed. Describe your project in a
-        few lines to enthuse other collapporators.
+        {{ $t('addProject.addSmallDescription.smallDescriptionInfo') }}
       </p>
       <v-form ref="form" v-model="valid">
         <v-textarea
           autofocus
           v-model="smallDescription"
-          label="Small description"
+          :label="$t('addProject.addSmallDescription.smallDescription')"
           filled
           clearable
           no-resize
@@ -44,14 +43,17 @@ export default {
       valid: false,
       smallDescription: '',
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || this.requiredText,
         counter: value =>
           (value && value.length <= 255) || 'Max 255 characters.'
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    requiredText: function() {
+      return this.$t('addProject.required')
+    }
   },
   created() {
     this.smallDescription = this.project.smallDescription
