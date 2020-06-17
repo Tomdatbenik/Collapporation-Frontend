@@ -81,7 +81,6 @@ export default {
       this.getImage()
       this.url = this.project.img
     }
-
     this.setLocaleText()
   },
   methods: {
