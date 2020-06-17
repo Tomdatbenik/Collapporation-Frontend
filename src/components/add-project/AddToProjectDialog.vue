@@ -15,7 +15,7 @@
       </v-row>
 
       <v-row class="pb-5" no-gutters justify="center">
-        <v-btn rounded @click="cancel">CLOSE</v-btn>
+        <v-btn rounded @click="cancel">{{ $t('addProject.close') }}</v-btn>
         <slot name="buttons"></slot>
       </v-row>
     </v-card>
@@ -24,33 +24,33 @@
 
 <script>
 export default {
-  name: "AddToProjectDialog",
+  name: 'AddToProjectDialog',
   props: {
     title: String,
-    value: Boolean,
+    value: Boolean
   },
   data() {
     return {
-      object: null,
-    };
+      object: null
+    }
   },
   computed: {
     show: {
       get() {
-        return this.value;
+        return this.value
       },
       set(value) {
-        this.$emit("input", value);
-      },
-    },
+        this.$emit('input', value)
+      }
+    }
   },
   methods: {
     cancel() {
-      this.show = false;
+      this.show = false
     },
     add() {
-      this.$emit("add");
-    },
-  },
-};
+      this.$emit('add')
+    }
+  }
+}
 </script>

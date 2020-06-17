@@ -2,24 +2,22 @@
   <div>
     <v-row no-gutters
       ><p class="mx-10">
-        The tags will be shown in the feed. These tags describe the catagories
-        or used techniques of the concept. Tags will also be used in filtering.
+        {{ $t('addProject.addTags.tagsInfo') }}
       </p></v-row
     >
     <v-row no-gutters
       ><v-chip @click="showAddDialog = true" color="secondary" class="ma-2"
-        >+ ADD TAG</v-chip
+        >+ {{ $t('addProject.addTags.addTags') }}</v-chip
       >
       <AddToProjectDialog
-        title="Add Tags"
+        :title="$t('addProject.addTags.addTags')"
         v-model="showAddDialog"
-        :add="addTag"
       >
         <v-form slot="content" ref="form" v-model="valid"
           ><v-text-field
             autofocus
             v-model="tagName"
-            label="Tag name"
+            :label="$t('addProject.addTags.tagName')"
             filled
             :rules="[rules.required, rules.unique]"
             clearable
@@ -33,7 +31,7 @@
             color="teal lighten-2"
             rounded
             class="ml-3"
-            >ADD</v-btn
+            >{{ $t('addProject.add') }}</v-btn
           >
         </div>
       </AddToProjectDialog>
@@ -50,14 +48,16 @@
       </v-chip>
     </v-row>
     <v-row class="mt-10  mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         color="teal lighten-2"
         rounded
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
@@ -71,14 +71,21 @@ export default {
   components: {
     AddToProjectDialog
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   data() {
     return {
       valid: false,
       tagName: '',
       tags: [],
       showAddDialog: false,
+      requiredText: '',
+      uniqueText: '',
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || this.requiredText,
         unique: value => {
           let existing = false
           if (value) {
@@ -88,19 +95,27 @@ export default {
               }
             })
           }
-          return !existing || 'This tag already exists.'
+          return !existing || this.uniqueText
         }
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    locale: function() {
+      return this.$i18n.locale
+    }
   },
   created() {
     this.tags = this.project.tags
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectTags']),
+    setLocaleText() {
+      this.requiredText = this.$t('addProject.required')
+      this.uniqueText = this.$t('addProject.addTags.uniqueTag')
+    },
     addTag() {
       if (this.$refs.form.validate()) {
         this.tags.push(this.tagName)

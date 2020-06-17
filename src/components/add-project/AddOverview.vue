@@ -51,7 +51,9 @@
       </v-col>
 
       <v-col cols="6">
-        <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+        <v-btn @click="previous" rounded width="15vw">{{
+          $t('addProject.previous')
+        }}</v-btn>
       </v-col>
       <v-col cols="6">
         <v-btn
@@ -60,7 +62,7 @@
           width="15vw"
           class="ml-3"
           @click="finish"
-          >FINISH</v-btn
+          >{{ $t('addProject.finish') }}</v-btn
         >
       </v-col>
     </v-row>

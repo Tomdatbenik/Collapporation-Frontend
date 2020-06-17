@@ -2,14 +2,13 @@
   <div>
     <div>
       <p class="mx-10">
-        This description will be shown in the feed. Describe your project in a
-        few lines to enthuse other collapporators.
+        {{ $t('addProject.addSmallDescription.smallDescriptionInfo') }}
       </p>
       <v-form ref="form" v-model="valid">
         <v-textarea
           autofocus
           v-model="smallDescription"
-          label="Small description"
+          :label="$t('addProject.addSmallDescription.smallDescription')"
           filled
           clearable
           no-resize
@@ -21,7 +20,9 @@
       </v-form>
     </div>
     <v-row class="mt-10  mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         :disabled="!valid"
         color="teal lighten-2"
@@ -29,7 +30,7 @@
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
@@ -42,22 +43,36 @@ export default {
   data() {
     return {
       valid: false,
+      maxText: '',
+      requiredText: '',
       smallDescription: '',
       rules: {
-        required: value => !!value || 'Required.',
-        counter: value =>
-          (value && value.length <= 255) || 'Max 255 characters.'
+        required: value => !!value || this.requiredText,
+        counter: value => (value && value.length <= 255) || this.maxText
       }
     }
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    locale: function() {
+      return this.$i18n.locale
+    }
   },
   created() {
     this.smallDescription = this.project.smallDescription
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectSmallDescription']),
+    setLocaleText() {
+      this.requiredText = this.$t('addProject.required')
+      this.maxText = this.$t('addProject.addSmallDescription.maxChars')
+    },
     previous() {
       this.$emit('previous')
     },

@@ -36,5 +36,63 @@
     "hot": "Hot",
     "trending": "Trending",
     "fresh": "Fresh"
+  },
+  "addProject": {
+    "addCollapporators": {
+      "collaporatorsTitle": "Collapporators",
+      "collapporators": "Collapporators are all the users that are working on the concept or project. By adding a collapporator you will send them an invite for you concept.",
+      "addCollaporator": "+ ADD COLLAPPORATOR"
+    },
+    "addImage": {
+      "image": "Image",
+      "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible.",
+      "imageSize": "Image size should be less than 2 MB"
+    },
+    "addLinks": {
+      "links": "Links",
+      "invalidURL": "Invalid URL",
+      "uniqueURL": "This link already exists",
+      "link": "Link",
+      "addLinks": "Add link",
+      "linksInfo": "The links will be shown in your project page. Include links of your github page or additional resources."
+    },
+    "addMarkdownDescription": {
+      "MarkdownDescription": "Markdown Description",
+      "description": "Description",
+      "edit": "Edit",
+      "preview": "Preview",
+      "markdownDescriptionInfo": "The markdown description is where you put an extensive description of what your project is about. You can provide additional information on the idea behind the concept, design choices, used techniques together with images."
+    },
+    "addOverview": {
+      "overview": "Overview"
+    },
+    "addSmallDescription": {
+      "maxChars": "Max 255 characters",
+      "smallDescription": "Small description",
+      "smallDescriptionInfo": "This description will be shown in the feed. Describe your project in a few lines to enthuse other collapporators."
+    },
+    "addTags": {
+      "uniqueTag": "This tag already exists",
+      "tagName": "Tag name",
+      "tags": "Tags",
+      "addTags": "Add tag",
+      "tagsInfo": "The tags will be shown in the feed. These tags describe the categories or used techniques of the concept. Tags will also be used in filtering."
+    },
+    "addTitle": {
+      "title": "Title",
+      "titleInfo": "The title will be shown as header in the feed. Pick something that describes your project best in a few words. This title will also be used in filtering for keywords."
+    },
+    "add": "Add",
+    "required": "Required",
+    "previous": "Previous",
+    "next": "Next",
+    "cancel": "Cancel",
+    "finish": "Finish",
+    "createConcept": "Create concept",
+    "close": "Close"
+  },
+  "subNavBar": {
+    "home": "Home",
+    "addConcept": "Add concept"
   }
 }

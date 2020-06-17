@@ -2,24 +2,22 @@
   <div>
     <v-row no-gutters
       ><p class="mx-10">
-        The links will be shown in your project page. Include links of your
-        github page or additional resources.
+        {{ $t('addProject.addLinks.linksInfo') }}
       </p></v-row
     >
     <v-row no-gutters
       ><v-chip @click="showAddDialog = true" color="secondary" class="ma-2"
-        >+ ADD LINK</v-chip
+        >+ {{ $t('addProject.addLinks.addLinks') }}</v-chip
       >
       <AddToProjectDialog
-        title="Add Links"
+        :title="$t('addProject.addLinks.addLinks')"
         v-model="showAddDialog"
-        :add="addLink"
       >
         <v-form slot="content" ref="form" v-model="valid">
           <v-text-field
             autofocus
             v-model="linkName"
-            label="Link"
+            :label="$t('addProject.addLinks.link')"
             filled
             clearable
             :rules="[rules.url, rules.unique]"
@@ -33,7 +31,7 @@
             color="teal lighten-2"
             rounded
             class="ml-3"
-            >ADD</v-btn
+            >{{ $t('addProject.add') }}</v-btn
           >
         </div>
       </AddToProjectDialog>
@@ -50,14 +48,16 @@
       </v-chip>
     </v-row>
     <v-row class="mt-10 mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{
+        $t('addProject.previous')
+      }}</v-btn>
       <v-btn
         color="teal lighten-2"
         rounded
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
@@ -66,10 +66,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import AddToProjectDialog from '@/components/add-project/AddToProjectDialog.vue'
-
 export default {
   components: {
     AddToProjectDialog
+  },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
   },
   data() {
     return {
@@ -77,10 +81,12 @@ export default {
       linkName: '',
       links: [],
       showAddDialog: false,
+      urlText: '',
+      uniqueText: '',
       rules: {
         url: value => {
           const pattern = /^(https:\/\/|http:\/\/)?[w]{3}[.]([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/ //eslint-disable-line no-useless-escape
-          return pattern.test(value) || 'Invalid URL.'
+          return pattern.test(value) || this.urlText
         },
         unique: value => {
           let existing = false
@@ -91,19 +97,27 @@ export default {
               }
             })
           }
-          return !existing || 'This link already exists.'
+          return !existing || this.uniqueText
         }
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    locale: function() {
+      return this.$i18n.locale
+    }
   },
   created() {
     this.links = this.project.links
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectLinks']),
+    setLocaleText() {
+      this.urlText = this.$t('addProject.addLinks.invalidURL')
+      this.uniqueText = this.$t('addProject.addLinks.uniqueURL')
+    },
     addLink() {
       if (this.$refs.form.validate) {
         this.links.push(this.linkName.toLowerCase())

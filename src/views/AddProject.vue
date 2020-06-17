@@ -5,7 +5,7 @@
         <v-card tile>
           <v-row no-gutters justify="center">
             <v-card-title class="mt-10" color="#696969" style="width: 80%;">
-              {{ this.currentStep.title }}
+              {{ this.steps[this.currentStep - 1].title }}
               <v-divider
                 class="ml-3"
                 style="border-width: 1px; border-color: #696969"
@@ -13,38 +13,38 @@
             </v-card-title>
           </v-row>
           <v-row no-gutters justify="center">
-            <div v-if="currentStep.number === 1" style="width: 80%;">
+            <div v-if="currentStep === 1" style="width: 80%;">
               <AddTitle @next="nextStep" />
             </div>
 
-            <div v-if="currentStep.number === 2" style="width: 80%">
+            <div v-if="currentStep === 2" style="width: 80%">
               <AddImage @next="nextStep" @previous="previousStep" />
             </div>
 
-            <div v-if="currentStep.number === 3" style="width: 80%;">
+            <div v-if="currentStep === 3" style="width: 80%;">
               <AddSmallDescription @next="nextStep" @previous="previousStep" />
             </div>
 
-            <div v-if="currentStep.number === 4" style="width: 80%;">
+            <div v-if="currentStep === 4" style="width: 80%;">
               <AddTags @next="nextStep" @previous="previousStep" />
             </div>
 
-            <div v-if="currentStep.number === 5" style="width: 80%;">
+            <div v-if="currentStep === 5" style="width: 80%;">
               <AddLinks @next="nextStep" @previous="previousStep" />
             </div>
 
-            <div v-if="currentStep.number === 6" style="width: 80%;">
+            <div v-if="currentStep === 6" style="width: 80%;">
               <AddMarkdownDescription
                 @next="nextStep"
                 @previous="previousStep"
               />
             </div>
 
-            <div v-if="currentStep.number === 7" style="width: 80%;">
+            <div v-if="currentStep === 7" style="width: 80%;">
               <AddCollapporators @next="nextStep" @previous="previousStep" />
             </div>
 
-            <div v-if="currentStep.number === 8" style="width: 80%;">
+            <div v-if="currentStep === 8" style="width: 80%;">
               <AddOverview />
             </div>
           </v-row>
@@ -54,7 +54,7 @@
       <v-col sm="4" md="3" class="d-none d-sm-block">
         <v-card tile class="pb-3">
           <v-card-title color="#696969">
-            Create Concept
+            {{ $t('addProject.createConcept') }}
             <v-divider
               class="ml-3"
               style="border-width: 1px; border-color: #696969"
@@ -64,15 +64,15 @@
             no-gutters
             v-for="step in steps"
             :key="step.number"
-            @click="currentStep = step"
+            @click="currentStep = step.number"
             class="ml-6 mb-3"
           >
             <div
               :style="[
-                currentStep.number == step.number
+                currentStep == step.number
                   ? { color: 'black', 'font-weight': 'bold' }
                   : { color: 'grey' },
-                step.number < currentStep.number
+                step.number < currentStep
                   ? { 'text-decoration': 'line-through' }
                   : ''
               ]"
@@ -111,33 +111,70 @@ export default {
   data() {
     return {
       steps: [
-        { number: 1, title: 'Title' },
-        { number: 2, title: 'Image' },
-        { number: 3, title: 'Small description' },
-        { number: 4, title: 'Tags' },
-        { number: 5, title: 'Links' },
-        { number: 6, title: 'Markdown description' },
-        { number: 7, title: 'Collapporators' },
-        { number: 8, title: 'Overview' }
+        { number: 1, title: '' },
+        { number: 2, title: '' },
+        {
+          number: 3,
+          title: ''
+        },
+        { number: 4, title: '' },
+        { number: 5, title: '' },
+        {
+          number: 6,
+          title: ''
+        },
+        {
+          number: 7,
+          title: ''
+        },
+        { number: 8, title: '' }
       ],
-      currentStep: { number: 1, title: 'Title' }
+      currentStep: 1
+    }
+  },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
     }
   },
   computed: {
     ...mapGetters({
       project: 'project/getAddProject'
-    })
+    }),
+
+    locale: function() {
+      return this.$i18n.locale
+    }
   },
   created() {
     this.saveAddProject(null)
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveAddProject']),
+    setLocaleText() {
+      this.steps[0].title = this.$t('addProject.addTitle.title')
+      this.steps[1].title = this.$t('addProject.addImage.image')
+      this.steps[2].title = this.$t(
+        'addProject.addSmallDescription.smallDescription'
+      )
+      this.steps[3].title = this.$t('addProject.addTags.tags')
+      this.steps[4].title = this.$t('addProject.addLinks.links')
+      this.steps[5].title = this.$t(
+        'addProject.addMarkdownDescription.MarkdownDescription'
+      )
+      this.steps[6].title = this.$t(
+        'addProject.addCollapporators.collaporatorsTitle'
+      )
+      this.steps[7].title = this.$t('addProject.addOverview.overview')
+    },
     nextStep() {
-      this.currentStep = this.steps[this.currentStep.number]
+      // this.currentStep = this.steps[this.currentStep.number]
+      this.currentStep++
     },
     previousStep() {
-      this.currentStep = this.steps[this.currentStep.number - 2]
+      // this.currentStep = this.steps[this.currentStep.number - 2]
+      this.currentStep--
     }
   }
 }
