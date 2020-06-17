@@ -47,6 +47,7 @@
       "addLinks": "Voeg een link toe",
       "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."},
     "addMarkdownDescription": {
+      "description": "Beschrijving",
       "edit": "Bewerken",
       "preview": "Voorbeeld",
       "markdownDescriptionInfo": "De markdown beschrijving is de plaats waar je alles over je project kwijt kan. Je kan extra informatie over het idee, concept, ontwerp beslissingen, gebruikte technieken en extra afbeeldingen hier kwijt."
