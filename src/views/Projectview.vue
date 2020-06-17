@@ -50,7 +50,7 @@
                 class="pl-3 d-flex flex-wrap"
                 style="height: 100%"
               >
-                <v-col v-if="editable" cols="12">
+                <v-col v-if="editable" cols="10">
                   <v-text-field
                     class="ma-0 pa-0"
                     :color="textColor"
@@ -60,6 +60,18 @@
                     clearable
                   ></v-text-field>
                 </v-col>
+
+                <v-col v-if="editable" cols="2" class="d-flex justify-center">
+                  <v-switch
+                    :style="{ color: textColor + ' !important' }"
+                    @change="updateStatus"
+                    v-if="editable"
+                    class="text-capitalize"
+                    :label="this.project.status"
+                    :color="textColor"
+                    v-model="selected"
+                  ></v-switch>
+                </v-col>
                 <v-col
                   v-else
                   cols="11"
@@ -68,7 +80,7 @@
                 >
                   {{ this.project.title }}
                 </v-col>
-                <v-col class="d-flex justify-end" cols="1">
+                <v-col class="d-flex justify-end" v-if="isOwner" cols="1">
                   <v-btn v-if="!editable" @click="edit" icon
                     ><v-icon :style="{ color: textColor }"
                       >mdi-pencil</v-icon
@@ -280,14 +292,34 @@ export default {
       editable: false,
       textColor: '#ffffff',
       project: null,
-      tmpProject: {}
+      tmpProject: {},
+      selected: false
     }
   },
   created() {
-    this.getProjectById(this.$route.params.id).then(project => {
-      this.project = project
-      this.loaded = true
-    })
+    let self = this
+    this.getProjectById(this.$route.params.id)
+      .then(project => {
+        this.project = project
+        this.loaded = true
+        if (self.project.status === 'CONCEPT') {
+          self.selected = false
+        } else self.selected = true
+      })
+      .catch(error => {
+        if (error.response.status === 404) {
+          console.log('Retrying')
+          setTimeout(function() {
+            self.getProjectById(self.$route.params.id).then(project => {
+              self.project = project
+              self.loaded = true
+              if (self.project.status === 'CONCEPT') {
+                self.selected = false
+              } else self.selected = true
+            })
+          }, 2000)
+        }
+      })
   },
   mounted() {
     let self = this
@@ -299,6 +331,14 @@ export default {
   computed: {
     buttonText() {
       return this.selectedFile ? this.selectedFile.name : 'Upload'
+    },
+    isOwner() {
+      let token = JSON.parse(localStorage.getItem('Collapporation')).user.user
+        .token
+      console.log(token)
+      return (
+        this.project.owner.id === JSON.parse(atob(token.split('.')[1])).uuid
+      )
     }
   },
   methods: {
@@ -462,6 +502,11 @@ export default {
       reader.onerror = function(error) {
         console.log('Error: ', error)
       }
+    },
+    updateStatus() {
+      if (this.project.status === 'CONCEPT') {
+        this.project.status = 'PROJECT'
+      } else this.project.status = 'CONCEPT'
     }
   },
   watch: {
@@ -553,6 +598,10 @@ export default {
 }
 
 ::v-deep input {
+  color: inherit !important;
+}
+
+::v-deep label {
   color: inherit !important;
 }
 
