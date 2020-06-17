@@ -5,6 +5,7 @@ export default {
   state: {
     feed: [],
     addProject: {
+      status: 'CONCEPT',
       title: '',
       img: '',
       smallDescription: '',
