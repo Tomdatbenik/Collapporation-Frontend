@@ -107,8 +107,8 @@ export default {
         .then(result => {
           if (result && result.status) {
             if (result.status === 200) {
-              const id = result.data.id
-              this.$router.push({ name: 'project', params: id })
+              const returnId = result.data.id
+              this.$router.push({ name: 'project', params: { id: returnId } })
               this.saveAddProject(null)
             }
           } else {
