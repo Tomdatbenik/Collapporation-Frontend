@@ -44,6 +44,9 @@
       "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken."
     },
     "addLinks": {
+      "invalidURL": "Invalide URL",
+      "uniqueURL": "Deze link is al toegevoegd",
+      "link": "Link",
       "addLinks": "Voeg een link toe",
       "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."},
     "addMarkdownDescription": {
@@ -65,11 +68,12 @@
       "title": "Titel",
       "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
     },
-    "addToProjectDialog": {},
+    "add": "Voeg toe",
     "required": "Vereist",
     "previous": "Vorige",
     "next": "Volgende",
     "cancel": "Annuleren",
-    "finish": "Voltooien"
+    "finish": "Voltooien",
+    "close": "Sluiten"
   }
 }
