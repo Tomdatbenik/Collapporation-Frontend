@@ -193,7 +193,7 @@
       </v-container>
       <v-footer color="#f0f4f8" absolute padless class="footer">
         <v-container class="d-flex flex-row">
-          Follow Tropical Island on:
+          Follow {{ this.project.title }} on:
           <collap-link
             v-for="(item, index) in this.project.links"
             :key="index"
@@ -302,7 +302,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('project', ['getProjectById', 'updateProject']),
+    ...mapActions('project', [
+      'getProjectById',
+      'updateProject',
+      'likeProject'
+    ]),
     getContrastYIQ: function(rgba) {
       let hexcolor = this.RGBAToHexA(rgba)
       hexcolor = hexcolor.replace('#', '')
@@ -391,7 +395,9 @@ export default {
       return 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ', 0.7)'
     },
     updateLike() {
-      console.log('Liked')
+      this.likeProject(this.project.id).catch(error => {
+        console.log(error)
+      })
     },
     tagClicked(tagname) {
       if (this.editable) {
