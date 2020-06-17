@@ -54,7 +54,7 @@
       <v-col sm="4" md="3" class="d-none d-sm-block">
         <v-card tile class="pb-3">
           <v-card-title color="#696969">
-            Create Concept
+            {{ $t('addProject.createConcept') }}
             <v-divider
               class="ml-3"
               style="border-width: 1px; border-color: #696969"
@@ -113,11 +113,22 @@ export default {
       steps: [
         { number: 1, title: this.$t('addProject.addTitle.title') },
         { number: 2, title: this.$t('addProject.addImage.image') },
-        { number: 3, title: this.$t('addProject.addSmallDescription.smallDescription') },
+        {
+          number: 3,
+          title: this.$t('addProject.addSmallDescription.smallDescription')
+        },
         { number: 4, title: this.$t('addProject.addTags.tags') },
         { number: 5, title: this.$t('addProject.addLinks.links') },
-        { number: 6, title: this.$t('addProject.addMarkdownDescription.MarkdownDescription') },
-        { number: 7, title: this.$t('addProject.addCollapporators.collaporatorsTitle') },
+        {
+          number: 6,
+          title: this.$t(
+            'addProject.addMarkdownDescription.MarkdownDescription'
+          )
+        },
+        {
+          number: 7,
+          title: this.$t('addProject.addCollapporators.collaporatorsTitle')
+        },
         { number: 8, title: this.$t('addProject.addOverview.overview') }
       ],
       currentStep: { number: 1, title: this.$t('addProject.addTitle.title') }
