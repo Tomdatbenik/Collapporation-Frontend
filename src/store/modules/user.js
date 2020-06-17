@@ -1,6 +1,6 @@
 import tokenApi from '@/service/token.js'
 import userApi from '@/service/user.js'
-import router from '@/router'
+import firebase from 'firebase/app'
 
 export default {
   namespaced: true,
@@ -24,8 +24,8 @@ export default {
     }
   },
   actions: {
-    async authenticate({ commit }, idToken) {
-      await tokenApi
+    authenticate({ commit }, idToken) {
+      return tokenApi
         .getNewToken(idToken)
         .then(res => {
           const user_token = res.data.split('.')[1]
@@ -34,14 +34,14 @@ export default {
           const user = atob(user_token)
           commit('SET_USER_DATA', JSON.parse(user))
           commit('SET_AUTH_TOKEN', auth_token)
-
           commit('SET_ERROR', null)
         })
         .catch(error => {
-          // If the request fails, remove user token
-          localStorage.removeItem('user-token')
+          // If the request fails, remove user
+          commit('SET_USER_DATA', null)
           commit('SET_ERROR', error)
-          console.log(error)
+
+          throw error
         })
         .finally(() => {
           commit('SET_LOADING', false)
@@ -55,7 +55,6 @@ export default {
           return res.data
         })
         .catch(error => {
-          commit('SET_ERROR', error)
           throw error
         })
         .finally(() => {
@@ -73,10 +72,16 @@ export default {
       })
     },
     logout({ commit }) {
-      localStorage.removeItem('Collapporation')
-      router.go()
-      commit('SET_ERROR', null)
-      commit('SET_LOADING', false)
+      return firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          location.reload()
+          commit('SET_USER_DATA', null)
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
     }
   },
   getters: {

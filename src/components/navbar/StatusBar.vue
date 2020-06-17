@@ -71,7 +71,6 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
 import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
@@ -104,15 +103,7 @@ export default {
       loading: 'SET_LOADING'
     }),
     handleLogout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.logout()
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.logout()
     }
   }
 }
