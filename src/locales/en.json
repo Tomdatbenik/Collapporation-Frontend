@@ -49,6 +49,9 @@
     },
     "addLinks": {
       "links": "Links",
+      "invalidURL": "Invalid URL",
+      "uniqueURL": "This link already exists",
+      "link": "Link",
       "addLinks": "Add link",
       "linksInfo": "The links will be shown in your project page. Include links of your github page or additional resources."
     },
@@ -76,12 +79,13 @@
       "title": "Title",
       "titleInfo": "The title will be shown as header in the feed. Pick something that describes your project best in a few words. This title will also be used in filtering for keywords."
     },
-    "addToProjectDialog": {},
+    "add": "Add",
     "required": "Required",
     "previous": "Previous",
     "next": "Next",
     "cancel": "Cancel",
     "finish": "Finish",
-    "createConcept": "Create Concept"
+    "createConcept": "Create Concept",
+    "close": "Close"
   }
 }
