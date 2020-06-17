@@ -24,8 +24,8 @@ export default {
     }
   },
   actions: {
-    authenticate({ commit }, idToken) {
-      return tokenApi
+    async authenticate({ commit }, idToken) {
+      await tokenApi
         .getNewToken(idToken)
         .then(res => {
           const user_token = res.data.split('.')[1]
@@ -40,7 +40,11 @@ export default {
           // If the request fails, remove user
           commit('SET_USER_DATA', null)
           commit('SET_ERROR', error)
+
           throw error
+        })
+        .finally(() => {
+          commit('SET_LOADING', false)
         })
     },
     getProfile({ commit }, userId) {
@@ -48,13 +52,13 @@ export default {
       return userApi
         .getProfile(userId)
         .then(res => {
-          commit('SET_LOADING', false)
           return res.data
         })
         .catch(error => {
-          commit('SET_ERROR', error)
-          commit('SET_LOADING', false)
           throw error
+        })
+        .finally(() => {
+          commit('SET_LOADING', false)
         })
     },
     getRefreshToken({ commit }) {

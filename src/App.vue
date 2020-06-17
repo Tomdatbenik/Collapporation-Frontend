@@ -65,12 +65,12 @@ export default {
                 .then(idToken => {
                   this.authenticateUser(idToken)
                 })
+            } else {
+              this.loading(false)
             }
           })
           .catch(error => {
             console.log(error)
-          })
-          .finally(() => {
             this.loading(false)
           })
       }
