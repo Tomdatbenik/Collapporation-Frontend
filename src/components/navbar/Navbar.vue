@@ -98,6 +98,18 @@ export default {
       lan: {}
     }
   },
+  components: {
+    LoginDialog,
+    StatusBar
+  },
+  mounted() {
+    this.lan = this.lans.find(x => {
+      return x.lan === this.$i18n.locale
+    })
+  },
+  computed: {
+    ...authComputed
+  },
   methods: {
     setLan(lan) {
       this.$i18n.locale = lan
@@ -106,18 +118,6 @@ export default {
       })
       localStorage.setItem('locale', lan)
     }
-  },
-  components: {
-    LoginDialog,
-    StatusBar
-  },
-  computed: {
-    ...authComputed
-  },
-  mounted() {
-    this.lan = this.lans.find(x => {
-      return x.lan === this.$i18n.locale
-    })
   }
 }
 </script>
