@@ -24,8 +24,8 @@ export default {
     }
   },
   actions: {
-    async authenticate({ commit }, idToken) {
-      await tokenApi
+    authenticate({ commit }, idToken) {
+      return tokenApi
         .getNewToken(idToken)
         .then(res => {
           const user_token = res.data.split('.')[1]
