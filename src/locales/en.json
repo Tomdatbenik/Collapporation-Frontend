@@ -45,7 +45,8 @@
     },
     "addImage": {
       "image": "Image",
-      "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible."
+      "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible.",
+      "imageSize": "Image size should be less than 2 MB"
     },
     "addLinks": {
       "links": "Links",

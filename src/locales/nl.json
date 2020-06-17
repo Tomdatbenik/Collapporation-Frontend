@@ -45,7 +45,8 @@
     },
     "addImage": {
       "image": "Afbeelding",
-      "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken."
+      "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken.",
+      "imageSize": "De grootte van de afbeelding mag maximaal 2MB zijn"
     },
     "addLinks": {
       "links": "Links",

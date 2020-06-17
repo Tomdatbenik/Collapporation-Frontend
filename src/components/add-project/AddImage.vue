@@ -48,20 +48,30 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
+      imageSizeText: '',
       valid: false,
       image: null,
       url: '',
       rules: {
         required: value => !!value || this.requiredText,
-        size: value =>
-          !value || value.size <= 2e6 || 'Image size should be less than 2 MB.'
+        size: value => !value || value.size <= 2e6 || this.imageSizeText
       }
+    }
+  },
+  watch: {
+    locale: function() {
+      this.setLocaleText
     }
   },
   computed: {
     ...mapGetters({
       project: 'project/getAddProject'
     }),
+
+    locale: function() {
+      return this.$i18n.locale
+    },
+
     requiredText: function() {
       return this.$t('addProject.required')
     }
@@ -71,9 +81,14 @@ export default {
       this.getImage()
       this.url = this.project.img
     }
+
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectImage']),
+    setLocaleText() {
+      this.imageSizeText = this.$t('addProject.addImage.imageSize')
+    },
     previous() {
       this.$emit('previous')
     },
