@@ -1,22 +1,31 @@
 <template>
   <v-card tile class="mt-4">
     <v-row no-gutters>
-      <v-col cols="12" sm="3">
-        <v-img
-          height="100%"
-          class="white--text"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      <v-col cols="12" sm="3" class="img-box">
+        <v-card
+          id="img-box"
+          tile
+          elevation="0"
+          width="100%"
+          class="d-flex align-center"
         >
+          <v-card-actions class="pa-0">
+            <img id="image" class="image" :src="image" />
+          </v-card-actions>
           <div class="status-label font-weight-medium">
             {{ status }}
           </div>
-        </v-img>
+        </v-card>
       </v-col>
       <v-col cols="12" sm="9">
         <v-row no-gutters class="fill-height">
           <v-col cols="12">
             <v-card-title class="display-3 text-color-grey font-weight-medium">
-              {{ title }}
+              <router-link
+                style="text-decoration: none"
+                :to="{ name: 'project', params: { id: id } }"
+                >{{ title }}</router-link
+              >
             </v-card-title>
           </v-col>
           <v-col class="d-none d-sm-flex" sm="9">
@@ -138,5 +147,23 @@ export default {
 
 .info-label {
   font-size: 11px;
+}
+
+#img-box {
+  padding-top: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+}
+
+#image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  max-height: 100%;
+  transform: translate(-50%, -50%);
 }
 </style>
