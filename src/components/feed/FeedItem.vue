@@ -133,6 +133,7 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 15px;
+  color: white;
 }
 
 .small-description {
