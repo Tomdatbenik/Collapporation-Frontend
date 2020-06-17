@@ -38,28 +38,39 @@
     "fresh": "Recent"
   },
   "addProject": {
-    "addCollapporators": {},
+    "addCollapporators": {
+      "collaporatorsTitle": "Collapporators",
+      "collapporators": "Collapporators zijn alle gebruikers die werken aan een concept of project. Door een collapporator toe te voegen stuur je een invitatie naar de gebruiker om zich bij jou concept aan te sluiten.",
+      "addCollaporator": "+ VOEG COLLAPPORATOR TOE"
+    },
     "addImage": {
       "image": "Afbeelding",
       "imageInfo": "Deze afbeelding zal worden getoond in de feed. Kies iets moois om zoveel mogelijk collappors aan te trekken."
     },
     "addLinks": {
+      "links": "Links",
       "addLinks": "Voeg een link toe",
-      "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."},
+      "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."
+    },
     "addMarkdownDescription": {
+      "MarkdownDescription": "Markdown Beschrijving",
       "edit": "Bewerken",
       "preview": "Voorbeeld",
       "markdownDescriptionInfo": "De markdown beschrijving is de plaats waar je alles over je project kwijt kan. Je kan extra informatie over het idee, concept, ontwerp beslissingen, gebruikte technieken en extra afbeeldingen hier kwijt."
     },
-    "addOverview": {},
+    "addOverview": {
+      "overview": "Overzicht"
+    },
     "addSmallDescription": {
       "maxChars": "Max 255 karakters",
       "smallDescription": "Korte beschrijving",
       "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
     },
     "addTags": {
+      "tags": "Tags",
       "addTags": "Voeg een label toe",
-      "tagsInfo": "Labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept"},
+      "tagsInfo": "Labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept"
+    },
     "addTitle": {
       "title": "Titel",
       "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
@@ -69,6 +80,7 @@
     "previous": "Vorige",
     "next": "Volgende",
     "cancel": "Annuleren",
-    "finish": "Voltooien"
+    "finish": "Voltooien",
+    "createConcept": "Creëer Concept"
   }
 }

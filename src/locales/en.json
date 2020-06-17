@@ -38,27 +38,36 @@
     "fresh": "Fresh"
   },
   "addProject": {
-    "addCollapporators": {},
+    "addCollapporators": {
+      "collaporatorsTitle": "Collapporators",
+      "collapporators": "Collapporators are all the users that are working on the concept or project. By adding a collapporator you will send them an invite for you concept.",
+      "addCollaporator": "+ ADD COLLAPPORATOR"
+    },
     "addImage": {
       "image": "Image",
       "imageInfo": "This image will be shown in the feed. Pick something attractive to lure as many collapporators as possible."
     },
     "addLinks": {
+      "links": "Links",
       "addLinks": "Add link",
       "linksInfo": "The links will be shown in your project page. Include links of your github page or additional resources."
     },
     "addMarkdownDescription": {
+      "MarkdownDescription": "Markdown Description",
       "edit": "Edit",
       "preview": "Preview",
       "markdownDescriptionInfo": "The markdown description is where you put an extensive description of what your project is about. You can provide additional information on the idea behind the concept, design choices, used techniques together with images."
     },
-    "addOverview": {},
+    "addOverview": {
+      "overview": "Overview"
+    },
     "addSmallDescription": {
       "maxChars": "Max 255 characters",
       "smallDescription": "Small description",
       "smallDescriptionInfo": "This description will be shown in the feed. Describe your project in a few lines to enthuse other collapporators."
     },
     "addTags": {
+      "tags": "Tags",
       "addTags": "Add tag",
       "tagsInfo": "The tags will be shown in the feed. These tags describe the catagories or used techniques of the concept. Tags will also be used in filtering."
     },
@@ -71,6 +80,7 @@
     "previous": "Previous",
     "next": "Next",
     "cancel": "Cancel",
-    "finish": "Finish"
+    "finish": "Finish",
+    "createConcept": "Create Concept"
   }
 }

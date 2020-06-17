@@ -111,16 +111,16 @@ export default {
   data() {
     return {
       steps: [
-        { number: 1, title: 'Title' },
-        { number: 2, title: 'Image' },
-        { number: 3, title: 'Small description' },
-        { number: 4, title: 'Tags' },
-        { number: 5, title: 'Links' },
-        { number: 6, title: 'Markdown description' },
-        { number: 7, title: 'Collapporators' },
-        { number: 8, title: 'Overview' }
+        { number: 1, title: this.$t('addProject.addTitle.title') },
+        { number: 2, title: this.$t('addProject.addImage.image') },
+        { number: 3, title: this.$t('addProject.addSmallDescription.smallDescription') },
+        { number: 4, title: this.$t('addProject.addTags.tags') },
+        { number: 5, title: this.$t('addProject.addLinks.links') },
+        { number: 6, title: this.$t('addProject.addMarkdownDescription.MarkdownDescription') },
+        { number: 7, title: this.$t('addProject.addCollapporators.collaporatorsTitle') },
+        { number: 8, title: this.$t('addProject.addOverview.overview') }
       ],
-      currentStep: { number: 1, title: 'Title' }
+      currentStep: { number: 1, title: this.$t('addProject.addTitle.title') }
     }
   },
   computed: {

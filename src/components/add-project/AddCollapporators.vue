@@ -2,14 +2,12 @@
   <div>
     <v-row no-gutters
       ><p class="mx-10">
-        Collapporators are all the users that are working on the concept or
-        project. By adding a collapporator you will send them an invite for you
-        concept.
+        {{ $t('addProject.addCollapporators.collapporators') }}
       </p></v-row
     >
     <v-row no-gutters
       ><v-chip @click="showAddDialog = true" color="secondary" class="ma-2"
-        >+ ADD COLLAPPORATOR</v-chip
+        >{{ $t('addProject.addCollapporators.addCollaporator') }}</v-chip
       >
       <AddToProjectDialog
         title="Add Collapporators"
@@ -33,14 +31,14 @@
       </v-chip>
     </v-row>
     <v-row class="mt-10 mb-5" no-gutters justify="center">
-      <v-btn @click="previous" rounded width="15vw">PREVIOUS</v-btn>
+      <v-btn @click="previous" rounded width="15vw">{{ $t('addProject.previous') }}</v-btn>
       <v-btn
         color="teal lighten-2"
         rounded
         width="15vw"
         class="ml-3"
         @click="next"
-        >NEXT</v-btn
+        >{{ $t('addProject.next') }}</v-btn
       >
     </v-row>
   </div>
