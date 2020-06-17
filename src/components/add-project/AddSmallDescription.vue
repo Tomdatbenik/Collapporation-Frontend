@@ -43,6 +43,8 @@ export default {
   data() {
     return {
       valid: false,
+      maxText: '',
+      requiredText: '',
       smallDescription: '',
       rules: {
         required: value => !!value || this.requiredText,
@@ -50,20 +52,27 @@ export default {
       }
     }
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   computed: {
     ...mapGetters('project', { project: 'getAddProject' }),
-    requiredText: function() {
-      return this.$t('addProject.required')
-    },
-    maxText: function() {
-      return this.$t('addProject.addSmallDescription.maxChars')
+    locale: function() {
+      return this.$i18n.locale
     }
   },
   created() {
     this.smallDescription = this.project.smallDescription
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectSmallDescription']),
+    setLocaleText() {
+      this.requiredText = this.$t('addProject.required')
+      this.maxText = this.$t('addProject.addSmallDescription.maxChars')
+    },
     previous() {
       this.$emit('previous')
     },
