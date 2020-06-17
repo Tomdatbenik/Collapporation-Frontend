@@ -30,7 +30,7 @@ export default {
   },
   updateProject(data) {
     data.owner = data.owner.id
-    data.likes = null
+    delete data.likes
     return api.put('project-service/project/update', data)
   }
 }

@@ -432,7 +432,7 @@ export default {
     save() {
       this.editable = !this.editable
       this.tmpProject = {}
-      this.updateProject(this.project)
+      this.updateProject(JSON.parse(JSON.stringify(this.project)))
     },
     onButtonClick() {
       this.isSelecting = true
