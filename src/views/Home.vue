@@ -26,11 +26,11 @@
             :id="item.id"
             :title="item.title"
             :small-description="item.smallDescription"
-            :image="item.image"
+            :image="item.img"
             :created-by="item.owner.username"
             :created-at="new Date(item.created)"
             :tags="item.tags"
-            :likes="item.likes"
+            :likes="JSON.parse(item.likes).count"
             :status="item.status"
             @clicked="updateLike"
           />
