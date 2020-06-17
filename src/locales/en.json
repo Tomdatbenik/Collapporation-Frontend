@@ -75,7 +75,7 @@
       "tagName": "Tag name",
       "tags": "Tags",
       "addTags": "Add tag",
-      "tagsInfo": "The tags will be shown in the feed. These tags describe the catagories or used techniques of the concept. Tags will also be used in filtering."
+      "tagsInfo": "The tags will be shown in the feed. These tags describe the categories or used techniques of the concept. Tags will also be used in filtering."
     },
     "addTitle": {
       "title": "Title",
@@ -87,7 +87,7 @@
     "next": "Next",
     "cancel": "Cancel",
     "finish": "Finish",
-    "createConcept": "Create Concept",
+    "createConcept": "Create concept",
     "close": "Close"
   }
 }

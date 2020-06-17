@@ -2,7 +2,7 @@
   "landingPage": {
     "gettingStarted": "Beginnen",
     "slogan": "Het platform dat developers en jouw application ideeën samen brengt.",
-    "startBtn": "Start Nu"
+    "startBtn": "Start nu"
   },
   "login": {
     "login": "Inloggen",
@@ -30,17 +30,17 @@
   },
   "feed": {
     "wrong": "Oeps, er ging iets mis",
-    "retry": "Opniew proberen",
+    "retry": "Opnieuw proberen",
     "noRes": "Geen resultaten",
     "noMore": "Geen projecten meer",
-    "hot": "hot",
+    "hot": "Hot",
     "trending": "Populair",
     "fresh": "Recent"
   },
   "addProject": {
     "addCollapporators": {
       "collaporatorsTitle": "Collapporators",
-      "collapporators": "Collapporators zijn alle gebruikers die werken aan een concept of project. Door een collapporator toe te voegen stuur je een invitatie naar de gebruiker om zich bij jou concept aan te sluiten.",
+      "collapporators": "Collapporators zijn alle gebruikers die werken aan een concept of project. Door een collapporator toe te voegen stuur je een uitnodiging naar de gebruiker om zich bij jou concept aan te sluiten.",
       "addCollaporator": "+ VOEG COLLAPPORATOR TOE"
     },
     "addImage": {
@@ -49,37 +49,37 @@
     },
     "addLinks": {
       "links": "Links",
-      "invalidURL": "Invalide URL",
+      "invalidURL": "Ongeldige URL",
       "uniqueURL": "Deze link is al toegevoegd",
       "link": "Link",
       "addLinks": "Voeg een link toe",
-      "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of additionele bronnen toe."
+      "linksInfo": "De links zullen getoond worden op de project pagina. Voeg links naar GitHub of andere middelen toe."
     },
     "addMarkdownDescription": {
       "MarkdownDescription": "Markdown Beschrijving",
       "description": "Beschrijving",
       "edit": "Bewerken",
       "preview": "Voorbeeld",
-      "markdownDescriptionInfo": "De markdown beschrijving is de plaats waar je alles over je project kwijt kan. Je kan extra informatie over het idee, concept, ontwerp beslissingen, gebruikte technieken en extra afbeeldingen hier kwijt."
+      "markdownDescriptionInfo": "De markdown beschrijving is de plaats waar je alles over je project kwijt kan. Je kan hier extra informatie over het idee, concept, ontwerp beslissingen, gebruikte technieken en extra afbeeldingen kwijt."
     },
     "addOverview": {
       "overview": "Overzicht"
     },
     "addSmallDescription": {
-      "maxChars": "Max 255 karakters",
+      "maxChars": "Maximaal 255 karakters",
       "smallDescription": "Korte beschrijving",
       "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
     },
     "addTags": {
       "uniqueTag": "Dit label is al toegevoegd",
       "tagName": "Label naam",
-      "tags": "Tags",
+      "tags": "Labels",
       "addTags": "Voeg een label toe",
-      "tagsInfo": "Labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept"
+      "tagsInfo": "De labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept. Labels worden ook gebruikt bij het filteren van concepten/projecten."
     },
     "addTitle": {
       "title": "Titel",
-      "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project met enkele woorden het beste beschrijft. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
+      "titleInfo": "De titel zal worden weergegeven als een kop in de feed. Kies iets wat het jouw project het beste beschrijft in enkele woorden. De titel zal ook worden gebruikt voor het zoeken naar sleutelwoorden."
     },
     "add": "Voeg toe",
     "required": "Vereist",
@@ -87,7 +87,7 @@
     "next": "Volgende",
     "cancel": "Annuleren",
     "finish": "Voltooien",
-    "createConcept": "Creëer Concept",
+    "createConcept": "Creëer concept",
     "close": "Sluiten"
   }
 }
