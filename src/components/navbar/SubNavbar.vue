@@ -14,7 +14,7 @@
           style="border: 0px"
         >
           <v-icon color="teal lighten-2" class="mr-2">{{ item.icon }}</v-icon>
-          {{ item.name }}
+          {{ item.value }}
         </v-btn>
       </v-container>
     </v-toolbar>
@@ -25,20 +25,41 @@
 <script>
 export default {
   name: 'SubNavbar',
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
+  computed: {
+    locale: function() {
+      return this.$i18n.locale
+    }
+  },
   data() {
     return {
       listItems: [
         {
           name: 'Home',
           link: '/home',
-          icon: 'mdi-home-outline'
+          icon: 'mdi-home-outline',
+          value: ''
         },
         {
           name: 'Add Concept',
           link: '/add-project',
-          icon: 'mdi-text-box-plus-outline'
+          icon: 'mdi-text-box-plus-outline',
+          value: ''
         }
       ]
+    }
+  },
+  created() {
+    this.setLocaleText()
+  },
+  methods: {
+    setLocaleText() {
+      this.listItems[0].value = this.$t('subNavBar.home')
+      this.listItems[1].value = this.$t('subNavBar.addConcept')
     }
   }
 }

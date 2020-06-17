@@ -90,5 +90,9 @@
     "finish": "Voltooien",
     "createConcept": "Creëer concept",
     "close": "Sluiten"
+  },
+  "subNavBar": {
+    "home": "Home",
+    "addConcept": "Creeër concept"
   }
 }

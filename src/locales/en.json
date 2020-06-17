@@ -90,5 +90,9 @@
     "finish": "Finish",
     "createConcept": "Create concept",
     "close": "Close"
+  },
+  "subNavBar": {
+    "home": "Home",
+    "addConcept": "Add concept"
   }
 }
