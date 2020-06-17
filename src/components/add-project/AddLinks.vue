@@ -70,12 +70,19 @@ export default {
   components: {
     AddToProjectDialog
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   data() {
     return {
       valid: false,
       linkName: '',
       links: [],
       showAddDialog: false,
+      urlText: '',
+      uniqueText: '',
       rules: {
         url: value => {
           const pattern = /^(https:\/\/|http:\/\/)?[w]{3}[.]([0-9A-Za-z-\\@:%_\+~#=]+)+[.]+([0-9A-Za-z-\\.@/&:$%_\+~#=]+){2,}$/ //eslint-disable-line no-useless-escape
@@ -97,18 +104,20 @@ export default {
   },
   computed: {
     ...mapGetters('project', { project: 'getAddProject' }),
-    urlText: function() {
-      return this.$t('addProject.addLinks.invalidURL')
-    },
-    uniqueText: function() {
-      return this.$t('addProject.addLinks.uniqueURL')
+    locale: function() {
+      return this.$i18n.locale
     }
   },
   created() {
     this.links = this.project.links
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectLinks']),
+    setLocaleText() {
+      this.urlText = this.$t('addProject.addLinks.invalidURL')
+      this.uniqueText = this.$t('addProject.addLinks.uniqueURL')
+    },
     addLink() {
       if (this.$refs.form.validate) {
         this.links.push(this.linkName.toLowerCase())

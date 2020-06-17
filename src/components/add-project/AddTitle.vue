@@ -41,22 +41,32 @@ export default {
     return {
       valid: false,
       title: '',
+      requiredText: '',
       rules: {
         required: value => !!value || this.requiredText
       }
     }
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   computed: {
     ...mapGetters('project', { project: 'getAddProject' }),
-    requiredText: function() {
-      return this.$t('addProject.required')
+    locale: function() {
+      return this.$i18n.locale
     }
   },
   created() {
     this.title = this.project.title
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectTitle']),
+    setLocaleText() {
+      this.requiredText = this.$t('addProject.required')
+    },
     next() {
       this.$emit('next')
     },

@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       imageSizeText: '',
+      requiredText: '',
       valid: false,
       image: null,
       url: '',
@@ -60,7 +61,7 @@ export default {
   },
   watch: {
     locale: function() {
-      this.setLocaleText
+      this.setLocaleText()
     }
   },
   computed: {
@@ -70,10 +71,6 @@ export default {
 
     locale: function() {
       return this.$i18n.locale
-    },
-
-    requiredText: function() {
-      return this.$t('addProject.required')
     }
   },
   created() {
@@ -87,6 +84,7 @@ export default {
     ...mapActions('project', ['saveProjectImage']),
     setLocaleText() {
       this.imageSizeText = this.$t('addProject.addImage.imageSize')
+      this.requiredText = this.$t('addProject.required')
     },
     previous() {
       this.$emit('previous')

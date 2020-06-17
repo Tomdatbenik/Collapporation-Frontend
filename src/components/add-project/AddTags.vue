@@ -71,12 +71,19 @@ export default {
   components: {
     AddToProjectDialog
   },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
+  },
   data() {
     return {
       valid: false,
       tagName: '',
       tags: [],
       showAddDialog: false,
+      requiredText: '',
+      uniqueText: '',
       rules: {
         required: value => !!value || this.requiredText,
         unique: value => {
@@ -95,18 +102,20 @@ export default {
   },
   computed: {
     ...mapGetters('project', { project: 'getAddProject' }),
-    requiredText: function() {
-      return this.$t('addProject.required')
-    },
-    uniqueText: function() {
-      return this.$t('addProject.addTags.uniqueTag')
+    locale: function() {
+      return this.$i18n.locale
     }
   },
   created() {
     this.tags = this.project.tags
+    this.setLocaleText()
   },
   methods: {
     ...mapActions('project', ['saveProjectTags']),
+    setLocaleText() {
+      this.requiredText = this.$t('addProject.required')
+      this.uniqueText = this.$t('addProject.addTags.uniqueTag')
+    },
     addTag() {
       if (this.$refs.form.validate()) {
         this.tags.push(this.tagName)
