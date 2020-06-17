@@ -10,15 +10,14 @@
         >+ {{ $t('addProject.addTags.addTags') }}</v-chip
       >
       <AddToProjectDialog
-        title="Add Tags"
+        :title="$t('addProject.addTags.addTags')"
         v-model="showAddDialog"
-        :add="addTag"
       >
         <v-form slot="content" ref="form" v-model="valid"
           ><v-text-field
             autofocus
             v-model="tagName"
-            label="Tag name"
+            :label="$t('addProject.addTags.tagName')"
             filled
             :rules="[rules.required, rules.unique]"
             clearable
@@ -32,7 +31,7 @@
             color="teal lighten-2"
             rounded
             class="ml-3"
-            >ADD</v-btn
+            >{{ $t('addProject.add') }}</v-btn
           >
         </div>
       </AddToProjectDialog>
@@ -79,7 +78,7 @@ export default {
       tags: [],
       showAddDialog: false,
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || this.requiredText,
         unique: value => {
           let existing = false
           if (value) {
@@ -89,13 +88,19 @@ export default {
               }
             })
           }
-          return !existing || 'This tag already exists.'
+          return !existing || this.uniqueText()
         }
       }
     }
   },
   computed: {
-    ...mapGetters('project', { project: 'getAddProject' })
+    ...mapGetters('project', { project: 'getAddProject' }),
+    requiredText: function() {
+      return this.$t('addProject.required')
+    },
+    uniqueText: function() {
+      return this.$t('addProject.addTags.uniqueTag')
+    }
   },
   created() {
     this.tags = this.project.tags

@@ -71,6 +71,8 @@
       "smallDescriptionInfo": "Deze beschrijving zal worden getoond in de feed. Beschrijf je project in enkele regels om andere collapporators enthousiast te maken."
     },
     "addTags": {
+      "uniqueTag": "Dit label is al toegevoegd",
+      "tagName": "Label naam",
       "tags": "Tags",
       "addTags": "Voeg een label toe",
       "tagsInfo": "Labels zullen worden getoond in de feed. Deze labels beschrijven de categorieën of gebruikte technieken in dit concept"
