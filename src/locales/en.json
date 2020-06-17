@@ -54,6 +54,7 @@
     },
     "addMarkdownDescription": {
       "MarkdownDescription": "Markdown Description",
+      "description": "Description",
       "edit": "Edit",
       "preview": "Preview",
       "markdownDescriptionInfo": "The markdown description is where you put an extensive description of what your project is about. You can provide additional information on the idea behind the concept, design choices, used techniques together with images."

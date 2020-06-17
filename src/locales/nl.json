@@ -54,6 +54,7 @@
     },
     "addMarkdownDescription": {
       "MarkdownDescription": "Markdown Beschrijving",
+      "description": "Beschrijving",
       "edit": "Bewerken",
       "preview": "Voorbeeld",
       "markdownDescriptionInfo": "De markdown beschrijving is de plaats waar je alles over je project kwijt kan. Je kan extra informatie over het idee, concept, ontwerp beslissingen, gebruikte technieken en extra afbeeldingen hier kwijt."
