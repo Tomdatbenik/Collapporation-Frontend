@@ -88,7 +88,7 @@ export default {
               }
             })
           }
-          return !existing || this.uniqueText()
+          return !existing || this.uniqueText
         }
       }
     }
