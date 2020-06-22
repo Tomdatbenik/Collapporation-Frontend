@@ -19,6 +19,8 @@
     "createdAt": "Aangemaakt op"
   },
   "profile": {
+    "ownProjects": "Eigen projecten",
+    "collapporations": "Collapporations",
     "skills": "Vaardigheden",
     "socials": "Social media"
   },
@@ -94,5 +96,17 @@
   "subNavBar": {
     "home": "Home",
     "addConcept": "Creeër concept"
+  },
+  "projectPage": {
+    "overview": "Overzicht",
+    "collapporators": "collapporators",
+    "followOn": {
+      "pre": "Volg ",
+      "post": " op:"
+    },
+    "unsavedChanges": "Je hebt niet opgeslagen bewerkingen",
+    "proceed": "Wilt u de bewerkingen weggooien of opslaan?",
+    "save": "Opslaan",
+    "discard": "weggooien"
   }
 }

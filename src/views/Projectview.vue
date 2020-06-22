@@ -144,11 +144,12 @@
         <v-tabs color="#2680C2" class="d-flex" v-model="tab">
           <v-row class="d-flex" no-gutters>
             <v-tab class="text-capitalize"
-              ><v-icon class="mr-2">mdi-crop-square</v-icon>Overview</v-tab
+              ><v-icon class="mr-2">mdi-crop-square</v-icon
+              >{{ $t('projectPage.overview') }}</v-tab
             >
             <v-tab class="text-capitalize"
               ><v-icon class="mr-2">mdi-account-multiple-outline</v-icon
-              >Collapporators</v-tab
+              >{{ $t('projectPage.collapporators') }}</v-tab
             >
           </v-row>
           <v-row class="d-flex align-center justify-end" no-gutters>
@@ -205,7 +206,8 @@
       </v-container>
       <v-footer color="#f0f4f8" absolute padless class="footer">
         <v-container class="d-flex flex-row">
-          Follow {{ this.project.title }} on:
+          {{ $t('projectPage.followOn.pre') }}{{ this.project.title
+          }}{{ $t('projectPage.followOn.post') }}
           <collap-link
             v-for="(item, index) in this.project.links"
             :key="index"
@@ -221,10 +223,10 @@
       <v-card color="#F0F4F8" tile>
         <v-card-title>
           <v-icon class="mr-2" color="#003E6B">mdi-information-outline</v-icon>
-          <div class="popup-title">You have unsaved changes</div>
+          <div class="popup-title">{{ $t('projectPage.unsavedChanges') }}</div>
         </v-card-title>
         <v-card-actions class="popup-body">
-          Do you wish to save the changes or discard them?
+          {{ $t('projectPage.proceed') }}
         </v-card-actions>
         <v-card-actions class="d-flex justify-end">
           <v-btn
@@ -234,7 +236,7 @@
             class="white--text"
             height="35px"
           >
-            Save
+            {{ $t('projectPage.save') }}
           </v-btn>
           <v-btn
             tile
@@ -243,7 +245,7 @@
             height="35px"
             @click="discard"
           >
-            Discard
+            {{ $t('projectPage.discard') }}
           </v-btn>
         </v-card-actions>
       </v-card>

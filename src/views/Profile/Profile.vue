@@ -159,7 +159,7 @@ export default {
       tab: null,
       items: [
         {
-          name: 'Own projects',
+          name: this.$t('profile.ownProjects'),
           icon: 'mdi-account',
           projects: [
             {
@@ -171,7 +171,7 @@ export default {
           ]
         },
         {
-          name: 'Collaporations',
+          name: this.$t('profile.collapperations'),
           icon: 'mdi-account-group',
           projects: [
             {
