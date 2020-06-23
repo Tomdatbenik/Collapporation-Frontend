@@ -159,7 +159,7 @@ export default {
       tab: null,
       items: [
         {
-          name: this.$t('profile.ownProjects'),
+          name: '',
           icon: 'mdi-account',
           projects: [
             {
@@ -171,7 +171,7 @@ export default {
           ]
         },
         {
-          name: this.$t('profile.collapperations'),
+          name: '',
           icon: 'mdi-account-group',
           projects: [
             {
@@ -200,9 +200,24 @@ export default {
         this.$router.push('/home')
         console.log(err)
       })
+    this.setLocaleText()
   },
   methods: {
-    ...mapActions('user', ['getProfile'])
+    ...mapActions('user', ['getProfile']),
+    setLocaleText() {
+      this.items[0].name = this.$t('profile.ownProjects')
+      this.items[1].name = this.$t('profile.collapporations')
+    }
+  },
+  computed: {
+    locale: function() {
+      return this.$i18n.locale
+    }
+  },
+  watch: {
+    locale: function() {
+      this.setLocaleText()
+    }
   }
 }
 </script>
