@@ -18,9 +18,9 @@
               >{{ $t('landingPage.startBtn') }}
             </v-btn>
           </div>
-          <!-- <div class="pa-3 flex-fill hidden-sm-and-down">
-                      <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
-                    </div> -->
+          <div class="pa-3 flex-fill hidden-sm-and-down">
+            <v-img :src="require('@/assets/landingpage_image.svg')"></v-img>
+          </div>
         </div>
       </div>
     </v-container>
