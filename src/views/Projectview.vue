@@ -260,7 +260,7 @@
       :size="100"
       :width="5"
     >
-      Loading...
+      {{ $t('projectPage.loading') }}
     </v-progress-circular>
   </v-container>
 </template>

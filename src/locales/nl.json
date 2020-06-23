@@ -107,6 +107,7 @@
     "unsavedChanges": "Je hebt niet opgeslagen bewerkingen",
     "proceed": "Wilt u de bewerkingen weggooien of opslaan?",
     "save": "Opslaan",
-    "discard": "weggooien"
+    "discard": "weggooien",
+    "loading": "Laden..."
   }
 }

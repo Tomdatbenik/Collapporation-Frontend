@@ -107,6 +107,7 @@
     "unsavedChanges": "You have unsaved changes",
     "proceed": "Do you wish to save the changes or discard them?",
     "save": "Save",
-    "discard": "discard"
+    "discard": "discard",
+    "loading": "Loading..."
   }
 }
